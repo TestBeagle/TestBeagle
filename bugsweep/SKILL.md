@@ -13,17 +13,7 @@ Run `preflight` (or reuse its report). Get: targets, run commands, readiness met
 
 ## Phase 1 — Route map + approval gate (MANDATORY — stop here)
 
-Build the full route map and present it; **launch/seed/capture nothing until the user approves.** The map lists, for every path from signup/login onward:
-
-- **경로 + 상태**: logged-out/in, empty/populated.
-- **변형**: dark mode, locales — whatever the app supports.
-- **드라이버** per route (`../drivers-web.md` / `../drivers-mobile.md`).
-- **검증 불가 예정** + 이유 (e.g. simctl can't tap; no browser MCP → capture-only).
-- **필요 권한** (dev servers, simulator/emulator, adb) and **보고서 언어·출력 위치** (`../capture-output.md`).
-
-Gate wording, keyed on runtime capability so it works identically everywhere:
-- If the runtime has a **plan mode** (e.g. Claude Code): present the route map as the plan and request approval through it.
-- Otherwise (e.g. **Codex CLI**): post the route map as a message ending exactly with `이 QA 계획대로 진행할까요? (수정/제외할 경로가 있으면 알려주세요)` and wait. Proceed only on explicit approval; apply requested edits to the map first.
+Build the full route map: for every path from signup/login onward — **경로 + 상태** (logged-out/in, empty/populated), **변형** (dark mode, locales), **드라이버** per route (`../drivers-web.md` / `../drivers-mobile.md`), and **검증 불가 예정** + 이유 (e.g. simctl can't tap; no browser MCP → capture-only). Then present it and stop per the shared gate in **`../approval-gate.md`** — nothing launches, seeds, or captures until the user approves.
 
 ## Phase 2 — Launch
 
@@ -32,8 +22,9 @@ Start services with the discovered commands. Confirm readiness by **evidence** (
 ## Phase 3 — Capture & QA every route
 
 - Static screens: prefer the repo's native capture scripts / review-mode deep links; else drive the real UI.
-- Flows: actually perform signup, login, navigation, CRUD.
-- Web: after **every** route, check `list_console_messages` and `list_network_requests` — errors are findings.
+- Flows: actually perform signup, login, navigation, CRUD — **where the driver supports interaction**. With capture-only fallback (no browser MCP and no repo E2E tool), you get screenshots but not driven flows: put those flows in 검증 불가.
+- Web with a browser MCP (Driver A): after **every** route check console and network (`list_console_messages` / `list_network_requests`) — errors are findings. Without a browser MCP, console/network aren't captured — record that as 검증 불가 unless the repo's own tooling provides them.
+- API targets (no UI): don't screenshot — hit each endpoint (curl/httpie), check status, schema, and error handling; report coverage as an endpoint table.
 - Capture every screen × state × variant in the approved map (screenshots, and video for flows where useful).
 
 ## Phase 4 — Report

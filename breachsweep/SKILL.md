@@ -11,7 +11,8 @@ Plan-gated, non-destructive security testing of an app **you own or are authoriz
 
 - **Scope**: only apps the user owns or is explicitly authorized to test. If ownership/authorization is unclear, ask and stop.
 - **Local only**: test a local instance. Never production, never third-party services.
-- **Non-destructive by default**: no data deletion or mutation, no DoS, no mass/automated request floods. Read and detect. Any destructive check needs explicit user approval and an isolated, restorable environment (re-seedable DB).
+- **Isolated**: before probing, confirm the local instance's external integrations (email, payment, storage, webhooks, push) are sandboxed or disconnected from production/third parties. If you can't confirm, treat those paths as out of scope.
+- **Non-destructive by default**: no deletion, no mutation of existing or other-user data, no DoS, no request floods. Read and detect. (Provisioning your own test accounts through the app's normal signup/seed flow is setup, not an attack — that's allowed.) Any state-changing check needs explicit user approval and an isolated, re-seedable environment.
 - **Report to fix, not to weaponize**: give the minimum reproduction plus the remediation. Do not write a full weaponized exploit chain.
 - **Unverified ≠ safe**: what you couldn't test is "미검증", never "안전".
 
@@ -21,7 +22,12 @@ Run/reuse `preflight`. Additionally map: routes/endpoints, the auth middleware, 
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present, and stop until approved: target scope (endpoints/screens), test categories to run, an **explicit authorization confirmation**, the non-destructive guarantee, and what's out of scope. Gate wording is the same capability-keyed form as bugsweep (plan mode → plan; Codex → post the plan and wait for explicit approval).
+Present, and stop per the shared gate in `../approval-gate.md`, a plan that states:
+- **Authorized targets**: exact host(s)/base URL(s) — a local instance only.
+- **Allowed methods and account/data scope**, plus a **request-rate ceiling** (no floods).
+- **Test categories** to run and what's **out of scope**.
+- The **non-destructive guarantee**.
+- **Authorization**: the user must personally confirm they own or are authorized to test these targets. Do not proceed on an agent-written assumption — the user affirms it, or you stop.
 
 ## Phase 2 — Launch
 
@@ -29,7 +35,7 @@ Local instance only. Seed multiple accounts (A/B) so authorization isolation can
 
 ## Phase 3 — Non-destructive checks
 
-- **AuthZ / IDOR**: with accounts A and B, try to read/act on B's objects by id/reference as A.
+- **AuthZ / IDOR**: with accounts A and B, try to **read** B's objects by id/reference as A (read-only by default). A state-changing authz check (write/delete as the wrong user) runs only if separately approved, against re-seedable data.
 - **AuthN**: hit protected endpoints with no/expired/reused session or token.
 - **Input validation**: probe SQLi / XSS / path-traversal with **safe, non-destructive** payloads; observe reflection, errors, and error verbosity.
 - **Secret exposure**: secrets in responses, source maps, verbose error pages, debug endpoints.

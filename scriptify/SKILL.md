@@ -7,13 +7,13 @@ description: Use when asked to turn a QA or capture flow into a reusable static 
 
 Freeze a flow the agent already worked out into a committed, repo-native `.sh` runner, so the maintainer can re-run it with no agent and no token cost. This is the mechanism the other skills call in their "offer a runner" step.
 
-## Phase 0 — Discover (reuse preflight)
+## Phase 0 — Discover (reuse preflight, read-only)
 
-Run/reuse `preflight` to get the exact launch, seed, and capture commands and the output location. If the flow to script wasn't actually run and verified (by you now, or by a prior bugsweep/a11ysweep/perfsweep run), run it first — a runner is a recording of a working flow, not a guess.
+Run/reuse `preflight` to get the exact launch, seed, and capture commands and the output location. A runner must be a recording of a **verified** flow — either one a prior approved bugsweep/a11ysweep/perfsweep run already executed, or one this skill verifies after the gate (Phase 3). Do not run the flow during discovery.
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present what the script will do (targets, steps, output path, where the file lands) and stop until approved. Same capability-keyed gate as bugsweep (plan mode → plan; Codex → post plan, wait).
+Present what the script will do (targets, steps, output path, where the file lands) and whether verifying it will execute the flow, then stop per the shared gate in `../approval-gate.md`.
 
 ## Phase 2 — Emit
 

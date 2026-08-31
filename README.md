@@ -46,7 +46,7 @@ cd shakeout
 ```bash
 SHAKEOUT_DIR="$(pwd)"
 SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep scriptify"
-SHARED="drivers-web.md drivers-mobile.md capture-output.md report-base.md emit-runner.md"
+SHARED="drivers-web.md drivers-mobile.md capture-output.md report-base.md emit-runner.md approval-gate.md"
 for dir in ~/.claude/skills ~/.codex/skills ~/.agents/skills; do
   mkdir -p "$dir"
   for s in $SKILLS; do ln -sfn "$SHAKEOUT_DIR/$s"  "$dir/$s"; done

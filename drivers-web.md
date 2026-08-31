@@ -29,8 +29,10 @@ When no browser MCP is connected (common in Codex). Deterministic screenshots, b
 
 ```bash
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"   # macOS; else `google-chrome`/`chromium`
+mkdir -p OUT
 "$CHROME" --headless=new --disable-gpu --hide-scrollbars \
   --window-size=1280,800 --screenshot="OUT/route-name.png" "http://localhost:PORT/route"
+test -s OUT/route-name.png || echo "WARN: screenshot missing/empty for route-name"   # a failed capture is otherwise silent
 # HTML for scraping/secret checks:
 "$CHROME" --headless=new --dump-dom "http://localhost:PORT/route" > OUT/route-name.html
 ```

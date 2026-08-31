@@ -13,15 +13,17 @@ Run/reuse `preflight` for targets, run commands, drivers, output location. Reuse
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present the screens/routes to audit and the checks per platform; stop until approved. Same capability-keyed gate as bugsweep (plan mode → plan; Codex → post plan, wait).
+Present the screens/routes to audit and the checks per platform, then stop per the shared gate in `../approval-gate.md`.
 
 ## Phase 2 — Audit
 
-**Web** (`../drivers-web.md`):
+**Web** (`../drivers-web.md`) — with a browser MCP:
 - Inject **axe-core** via `evaluate_script`, run `axe.run` per route, collect violations.
 - Contrast: read computed colors, flag body text below WCAG AA (4.5:1; 3:1 for large text).
 - Keyboard: walk focus order with repeated Tab; flag traps, invisible focus, unreachable controls.
 - Labels: inputs/buttons/icons without an accessible name.
+
+Without a browser MCP: run axe from the CLI against the running URL for violations and contrast (`npx @axe-core/cli http://localhost:PORT/route`); keyboard/focus needs interaction, so mark it 검증 불가 unless the repo ships an E2E tool to drive it.
 
 **Mobile** (`../drivers-mobile.md`):
 - Tap targets below the platform minimum (iOS 44pt, Android 48dp) — reuse the repo's touch-target check if present.

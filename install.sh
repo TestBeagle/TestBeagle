@@ -7,7 +7,7 @@ set -euo pipefail
 
 SHAKEOUT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep scriptify"
-SHARED="drivers-web.md drivers-mobile.md capture-output.md report-base.md emit-runner.md"
+SHARED="drivers-web.md drivers-mobile.md capture-output.md report-base.md emit-runner.md approval-gate.md"
 
 targets=("$@")
 if [ ${#targets[@]} -eq 0 ]; then
