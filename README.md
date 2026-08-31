@@ -6,6 +6,8 @@
 
 shakeout is a set of portable agent **skills**. Point any of them at a repo you can run locally (web, iOS, Android, API, or a monorepo) and the agent discovers how it runs, gets your approval on a route map, then launches it, captures every screen, exercises the flows, and reports what it found — with an explicit list of what it could *not* verify. It never invents a pass.
 
+> The name is a metaphor — put your app through a shakeout run before you ship. In scope it's broader than a classic smoke/shakeout test: it spans full functional QA, security, accessibility, and performance, not just a shallow "did the build survive" pass.
+
 ## Skills
 
 | Skill | What it does | Say something like |
