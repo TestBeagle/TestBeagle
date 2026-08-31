@@ -6,7 +6,7 @@
 set -euo pipefail
 
 SHAKEOUT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep scriptify"
+SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep casewright scriptify"
 SHARED="drivers-web.md drivers-mobile.md capture-output.md report-base.md emit-runner.md approval-gate.md"
 
 targets=("$@")
@@ -18,5 +18,5 @@ for dir in "${targets[@]}"; do
   mkdir -p "$dir"
   for s in $SKILLS; do ln -sfn "$SHAKEOUT_DIR/$s" "$dir/$s"; done
   for f in $SHARED; do ln -sfn "$SHAKEOUT_DIR/$f" "$dir/$f"; done
-  echo "installed 6 shakeout skills → $dir"
+  echo "installed shakeout skills → $dir"
 done

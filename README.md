@@ -17,6 +17,7 @@ shakeout is a set of portable agent **skills**. Point any of them at a repo you 
 | **breachsweep** | Security testing of an app **you own**: authz/IDOR, injection, secret exposure, headers, cookies/CORS. Local, non-destructive. | "보안 점검", "pentest my app" |
 | **a11ysweep** | Accessibility & UX: contrast, tap-target size, ARIA/labels, keyboard nav, locale parity, AI UI slop. | "접근성 점검", "a11y audit" |
 | **perfsweep** | Performance: Lighthouse, load time, jank, bundle size, low-power/energy use. | "성능 점검", "Lighthouse" |
+| **casewright** | Turns flows and verified findings into reusable automated test cases in the repo's own test framework (e2e/integration/regression). | "테스트 케이스 만들어줘", "write test cases" |
 | **scriptify** | Turns a discovered flow into a committed, repo-native static `.sh` runner so it re-runs **without an agent**. | "정적 스크립트로 만들어줘", "make a capture script" |
 
 Every run is **plan-gated**: the agent shows you the route map and waits for approval before it launches, seeds, or captures anything. In Claude Code this uses plan mode; in Codex it posts the plan and waits for your explicit OK. Reports default to Korean and land in the repo (e.g. `docs/qa/`), reusing the project's own conventions where they exist.
@@ -45,7 +46,7 @@ cd shakeout
 
 ```bash
 SHAKEOUT_DIR="$(pwd)"
-SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep scriptify"
+SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep casewright scriptify"
 SHARED="drivers-web.md drivers-mobile.md capture-output.md report-base.md emit-runner.md approval-gate.md"
 for dir in ~/.claude/skills ~/.codex/skills ~/.agents/skills; do
   mkdir -p "$dir"
