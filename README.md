@@ -32,15 +32,19 @@ Every run is **plan-gated**: the agent shows you the route map and waits for app
 
 ## Install
 
-Clone anywhere, then symlink the skills into whichever agent runtime(s) you use. Re-running is safe.
+Clone anywhere, then run the installer (symlinks the skills into whichever agent runtime(s) you use — re-running is safe):
 
 ```bash
-# 1) Clone
 git clone https://github.com/ted-plab/shakeout.git
 cd shakeout
-SHAKEOUT_DIR="$(pwd)"
+./install.sh                    # Claude Code + Codex + ~/.agents
+# or target one runtime: ./install.sh ~/.claude/skills
+```
 
-# 2) Symlink into your runtime(s)
+<details><summary>What the installer does (manual equivalent)</summary>
+
+```bash
+SHAKEOUT_DIR="$(pwd)"
 SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep scriptify"
 SHARED="drivers-web.md drivers-mobile.md capture-output.md report-base.md emit-runner.md"
 for dir in ~/.claude/skills ~/.codex/skills ~/.agents/skills; do
@@ -49,6 +53,7 @@ for dir in ~/.claude/skills ~/.codex/skills ~/.agents/skills; do
   for f in $SHARED; do ln -sfn "$SHAKEOUT_DIR/$f"  "$dir/$f"; done
 done
 ```
+</details>
 
 - `~/.claude/skills` — Claude Code
 - `~/.codex/skills` — Codex CLI (`$CODEX_HOME/skills`)
