@@ -1,14 +1,14 @@
-# testbeagle
+# TestBeagle
 
 <p align="center">
-  <img src="docs/testbeagle.png" alt="testbeagle — a beagle sniffing out bugs along a QA trail" width="640">
+  <img src="docs/testbeagle.png" alt="TestBeagle — a beagle sniffing out bugs along a QA trail" width="640">
 </p>
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 
 **Your friendly QA beagle: an agent-driven, plan-gated test suite that runs a project locally, sniffs out bugs across every user path, and writes an evidence-based report — the same way in Claude Code and Codex CLI.**
 
-testbeagle is a set of portable agent **skills**. Point any of them at a repo you can run locally (web, iOS, Android, API, or a monorepo) and the agent discovers how it runs, gets your approval on a route map, then launches it, captures every screen, exercises the flows, and reports what it found — with an explicit list of what it could *not* verify. It never invents a pass.
+TestBeagle is a set of portable agent **skills**. Point any of them at a repo you can run locally (web, iOS, Android, API, or a monorepo) and the agent discovers how it runs, gets your approval on a route map, then launches it, captures every screen, exercises the flows, and reports what it found — with an explicit list of what it could *not* verify. It never invents a pass.
 
 > Like a beagle on a scent, it works the whole trail — functional QA, security, accessibility, and performance — not just a shallow "did the build survive" smoke check.
 
@@ -37,45 +37,76 @@ Every run is **plan-gated**: the agent shows you the route map and waits for app
 
 ## Install
 
-Clone anywhere, then run the installer (symlinks the skills into whichever agent runtime(s) you use — re-running is safe):
+Pick your runtime — all methods install the same 7 skills. Re-running is safe.
+
+### Claude Code — plugin (recommended)
+
+Add this repo as a plugin marketplace, then install the plugin:
+
+```
+/plugin marketplace add testbeagle/testbeagle
+/plugin install testbeagle@testbeagle
+```
+
+The whole suite installs as one plugin, so the skills' shared references stay intact. (Restart Claude Code if the skills don't show up right away.)
+
+### Codex CLI — plugin
+
+```bash
+codex plugin marketplace add testbeagle/testbeagle
+codex plugin add testbeagle@testbeagle
+```
+
+Or wire it up by hand in `~/.codex/config.toml`:
+
+```toml
+[marketplaces.testbeagle]
+source = "testbeagle/testbeagle"
+source_type = "github"
+
+[plugins."testbeagle@testbeagle"]
+enabled = true
+```
+
+### Any runtime — clone + `install.sh` (symlink)
+
+Installs into Claude Code, Codex, **and** the cross-runtime `~/.agents/skills` (read by Copilot CLI, Gemini CLI, …) in one shot. Great for local development — edit the repo and every runtime sees the change, no reinstall.
 
 ```bash
 git clone https://github.com/testbeagle/testbeagle.git
 cd testbeagle
-./install.sh                    # Claude Code + Codex + ~/.agents
-# or target one runtime: ./install.sh ~/.claude/skills
+./install.sh                     # ~/.claude, ~/.codex, ~/.agents
+# or one runtime: ./install.sh ~/.claude/skills
 ```
 
-<details><summary>What the installer does (manual equivalent)</summary>
+It symlinks each `skills/<name>/` folder **and** the shared `skills/*.md` refs into the target dir, so every skill's `../<shared>.md` reference resolves.
+
+### A single skill — `npx skills`
+
+The [`skills`](https://github.com/vercel-labs/skills) CLI (which manages `~/.agents/skills`) installs individual skills:
 
 ```bash
-TESTBEAGLE_DIR="$(pwd)"
-SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep casewright scriptify"
-SHARED="drivers-web.md drivers-mobile.md capture-output.md report-base.md emit-runner.md approval-gate.md"
-for dir in ~/.claude/skills ~/.codex/skills ~/.agents/skills; do
-  mkdir -p "$dir"
-  for s in $SKILLS; do ln -sfn "$TESTBEAGLE_DIR/$s"  "$dir/$s"; done
-  for f in $SHARED; do ln -sfn "$TESTBEAGLE_DIR/$f"  "$dir/$f"; done
-done
+npx skills add testbeagle/testbeagle              # all skills
+npx skills add testbeagle/testbeagle -s preflight,bugsweep
 ```
-</details>
 
-- `~/.claude/skills` — Claude Code
-- `~/.codex/skills` — Codex CLI (`$CODEX_HOME/skills`)
-- `~/.agents/skills` — cross-runtime alias read by Codex, Copilot CLI, and Gemini CLI
+> ⚠️ `npx skills` copies each skill folder on its own and does **not** carry the shared driver/report references with it, so a skill pulled this way loses its `../<shared>.md` content. For the full working suite use the **plugin** or **`install.sh`**; reach for `npx skills` when you want one skill standalone.
 
-The `SHARED` files are symlinked next to the skill folders so each skill's `../<shared>.md` reference resolves under a symlinked install. They carry no `SKILL.md`, so runtimes don't treat them as skills.
+## Talking to the AI
 
-## Usage
+TestBeagle skills are triggered by **what you say to your coding agent** (Claude Code, Codex, …) while it's open in the repo you want to test. Ask in plain language — English or Korean — and the agent matches your request to a skill and follows it.
 
-Open your agent in the repo you want to test and ask, in plain language:
+| Want to… | Say something like |
+|----------|--------------------|
+| Check it can even be tested locally | "이 레포 테스트 가능한 환경인지 봐줘" · "preflight this repo" |
+| Full QA + screenshots of every screen | "전수 QA 하고 모든 화면 캡쳐해줘" · "run a full QA pass on the web app" |
+| Security check (your own app) | "보안 점검해줘" · "security-check my API" |
+| Accessibility / UX | "접근성 점검해줘" · "audit accessibility" |
+| Performance | "성능 점검해줘" · "run a Lighthouse pass" |
+| Generate test cases | "테스트 케이스 만들어줘" · "write e2e tests for the login flow" |
+| Freeze it into a re-runnable script | "정적 스크립트로 만들어줘" · "make a capture script" |
 
-- `preflight this repo` — is it runnable/testable locally, and how?
-- `run a full QA pass on the web app` — bugsweep walks every route and reports.
-- `security-check my API` — breachsweep, after you confirm scope and authorization.
-- `make a static capture script` — scriptify emits a `.sh` you can re-run yourself.
-
-Each skill presents its plan and waits for your approval before doing anything to the app.
+**Every run stops for your approval first.** The skill discovers how your app runs, shows you a plan — which screens/routes, what it will capture, what it can't verify, where the report goes — and waits. In Claude Code this is plan mode; in Codex it posts the plan and waits for your go-ahead. Nothing launches, installs, seeds, or captures until you approve. Reports are written in Korean by default, into the repo (e.g. `docs/qa/`), reusing the project's own conventions where they exist.
 
 ## Safety
 

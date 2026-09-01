@@ -1,0 +1,27 @@
+{
+  "name": "testbeagle",
+  "version": "0.1.0",
+  "description": "Your friendly QA beagle: plan-gated agent skills that run an app locally and sniff out bugs across functional QA, security, accessibility, and performance.",
+  "author": {
+    "name": "Ted Lee",
+    "url": "https://github.com/testbeagle"
+  },
+  "homepage": "https://github.com/testbeagle/testbeagle",
+  "repository": "https://github.com/testbeagle/testbeagle",
+  "license": "Apache-2.0",
+  "keywords": [
+    "qa",
+    "testing",
+    "security",
+    "accessibility",
+    "performance",
+    "skills"
+  ],
+  "skills": "./skills/",
+  "hooks": {},
+  "interface": {
+    "displayName": "TestBeagle",
+    "shortDescription": "Plan-gated QA/security/a11y/perf skills that run your app locally and sniff out bugs.",
+    "category": "Developer Tools"
+  }
+}

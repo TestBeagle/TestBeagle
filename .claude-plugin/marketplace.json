@@ -1,0 +1,21 @@
+{
+  "name": "testbeagle",
+  "description": "The testbeagle QA skill suite marketplace.",
+  "owner": {
+    "name": "Ted Lee",
+    "url": "https://github.com/testbeagle"
+  },
+  "plugins": [
+    {
+      "name": "testbeagle",
+      "displayName": "TestBeagle",
+      "source": "./",
+      "description": "Your friendly QA beagle: plan-gated agent skills that run an app locally and sniff out bugs across functional QA, security, accessibility, and performance.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Ted Lee",
+        "url": "https://github.com/testbeagle"
+      }
+    }
+  ]
+}
