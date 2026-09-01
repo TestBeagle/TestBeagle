@@ -7,7 +7,7 @@
 <p align="center">
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-166BFC?style=flat-square" alt="License: Apache 2.0"></a>
   <img src="https://img.shields.io/badge/version-0.1.0-166BFC?style=flat-square" alt="Version 0.1.0">
-  <img src="https://img.shields.io/badge/skills-7-166BFC?style=flat-square" alt="7 skills">
+  <img src="https://img.shields.io/badge/skills-9-166BFC?style=flat-square" alt="9 skills">
   <img src="https://img.shields.io/badge/plan--gated-yes-166BFC?style=flat-square" alt="Plan-gated">
   <img src="https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20~%2F.agents-166BFC?style=flat-square" alt="Runtimes: Claude Code, Codex, ~/.agents">
 </p>
@@ -29,6 +29,8 @@ TestBeagle is a set of portable agent **skills**. Point any of them at a repo yo
 | **perfsweep** | Performance: Lighthouse, load time, jank, bundle size, low-power/energy use. | "성능 점검", "Lighthouse" |
 | **casewright** | Turns flows and verified findings into reusable automated test cases in the repo's own test framework (e2e/integration/regression). | "테스트 케이스 만들어줘", "write test cases" |
 | **scriptify** | Turns a discovered flow into a committed, repo-native static `.sh` runner so it re-runs **without an agent**. | "정적 스크립트로 만들어줘", "make a capture script" |
+| **snap** | Screenshots of every screen saved as image files — capture-only, no analysis. | "스크린샷 다 찍어줘", "capture all screens" |
+| **repro** | Records a video that reproduces a flow or a bug, and saves the clip. | "오류 영상으로 남겨줘", "record a repro video" |
 
 Every run is **plan-gated**: the agent shows you the route map and waits for approval before it launches, seeds, or captures anything. In Claude Code this uses plan mode; in Codex it posts the plan and waits for your explicit OK. Reports default to Korean and land in the repo (e.g. `docs/qa/`), reusing the project's own conventions where they exist.
 
@@ -102,6 +104,8 @@ npx skills add TestBeagle/TestBeagle -s preflight,bugsweep
 
 TestBeagle skills are triggered by **what you say to your coding agent** (Claude Code, Codex, …) while it's open in the repo you want to test. Ask in plain language — English or Korean — and the agent matches your request to a skill and follows it.
 
+In Claude Code you can also type the **`/beagle`** command to start directly: `/beagle` (full QA), or `/beagle security` · `/beagle a11y` · `/beagle perf` · `/beagle tests` · `/beagle snap` · `/beagle repro` · `/beagle script`.
+
 | Want to… | Say something like |
 |----------|--------------------|
 | Check it can even be tested locally | "이 레포 테스트 가능한 환경인지 봐줘" · "preflight this repo" |
@@ -111,6 +115,8 @@ TestBeagle skills are triggered by **what you say to your coding agent** (Claude
 | Performance | "성능 점검해줘" · "run a Lighthouse pass" |
 | Generate test cases | "테스트 케이스 만들어줘" · "write e2e tests for the login flow" |
 | Freeze it into a re-runnable script | "정적 스크립트로 만들어줘" · "make a capture script" |
+| Just get screenshots of every screen | "스크린샷 다 찍어줘" · "capture all screens" |
+| Record a video of a bug / flow | "오류 영상으로 남겨줘" · "record a repro video" |
 
 **Every run stops for your approval first.** The skill discovers how your app runs, shows you a plan — which screens/routes, what it will capture, what it can't verify, where the report goes — and waits. In Claude Code this is plan mode; in Codex it posts the plan and waits for your go-ahead. Nothing launches, installs, seeds, or captures until you approve. Reports are written in Korean by default, into the repo (e.g. `docs/qa/`), reusing the project's own conventions where they exist.
 

@@ -19,5 +19,6 @@
     "performance",
     "skills"
   ],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "commands": "./commands/"
 }
