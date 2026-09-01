@@ -1,12 +1,16 @@
-# shakeout
+# testbeagle
+
+<p align="center">
+  <img src="docs/testbeagle.png" alt="testbeagle — a beagle sniffing out bugs along a QA trail" width="640">
+</p>
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 
-**Give your app the shakeout: an agent-driven, plan-gated test suite that runs a project locally, walks every user path, and writes an evidence-based report — the same way in Claude Code and Codex CLI.**
+**Your friendly QA beagle: an agent-driven, plan-gated test suite that runs a project locally, sniffs out bugs across every user path, and writes an evidence-based report — the same way in Claude Code and Codex CLI.**
 
-shakeout is a set of portable agent **skills**. Point any of them at a repo you can run locally (web, iOS, Android, API, or a monorepo) and the agent discovers how it runs, gets your approval on a route map, then launches it, captures every screen, exercises the flows, and reports what it found — with an explicit list of what it could *not* verify. It never invents a pass.
+testbeagle is a set of portable agent **skills**. Point any of them at a repo you can run locally (web, iOS, Android, API, or a monorepo) and the agent discovers how it runs, gets your approval on a route map, then launches it, captures every screen, exercises the flows, and reports what it found — with an explicit list of what it could *not* verify. It never invents a pass.
 
-> The name is a metaphor — put your app through a shakeout run before you ship. In scope it's broader than a classic smoke/shakeout test: it spans full functional QA, security, accessibility, and performance, not just a shallow "did the build survive" pass.
+> Like a beagle on a scent, it works the whole trail — functional QA, security, accessibility, and performance — not just a shallow "did the build survive" smoke check.
 
 ## Skills
 
@@ -36,8 +40,8 @@ Every run is **plan-gated**: the agent shows you the route map and waits for app
 Clone anywhere, then run the installer (symlinks the skills into whichever agent runtime(s) you use — re-running is safe):
 
 ```bash
-git clone https://github.com/ted-plab/shakeout.git
-cd shakeout
+git clone https://github.com/testbeagle/testbeagle.git
+cd testbeagle
 ./install.sh                    # Claude Code + Codex + ~/.agents
 # or target one runtime: ./install.sh ~/.claude/skills
 ```
@@ -45,13 +49,13 @@ cd shakeout
 <details><summary>What the installer does (manual equivalent)</summary>
 
 ```bash
-SHAKEOUT_DIR="$(pwd)"
+TESTBEAGLE_DIR="$(pwd)"
 SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep casewright scriptify"
 SHARED="drivers-web.md drivers-mobile.md capture-output.md report-base.md emit-runner.md approval-gate.md"
 for dir in ~/.claude/skills ~/.codex/skills ~/.agents/skills; do
   mkdir -p "$dir"
-  for s in $SKILLS; do ln -sfn "$SHAKEOUT_DIR/$s"  "$dir/$s"; done
-  for f in $SHARED; do ln -sfn "$SHAKEOUT_DIR/$f"  "$dir/$f"; done
+  for s in $SKILLS; do ln -sfn "$TESTBEAGLE_DIR/$s"  "$dir/$s"; done
+  for f in $SHARED; do ln -sfn "$TESTBEAGLE_DIR/$f"  "$dir/$f"; done
 done
 ```
 </details>

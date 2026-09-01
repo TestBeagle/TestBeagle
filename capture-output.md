@@ -6,7 +6,7 @@ Shared by every skill that writes artifacts. Reuse the repo's own convention bef
 
 1. **Existing screenshot/media dir** in the repo — check for `docs/screenshots/`, `docs/qa/`, `screenshots/`, `__snapshots__/`, `e2e/screenshots/`, `fastlane/screenshots/`, or any dir referenced by an existing capture script. Match its sub-structure too (e.g. `docs/screenshots/{light,dark}`, `-ko` locale suffix).
 2. **Existing QA/report location** — if the repo already has prior reports (e.g. `docs/qa/*.md`, `docs/*triage*.md`), put the new report beside them and reuse their naming.
-3. **shakeout default** (nothing found): propose
+3. **testbeagle default** (nothing found): propose
    - screenshots → `docs/qa/screenshots/<YYYY-MM-DD>/`
    - video → `docs/qa/media/<YYYY-MM-DD>/`
    - report → `docs/qa/<skill>-<YYYY-MM-DD>.md`
