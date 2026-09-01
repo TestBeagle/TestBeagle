@@ -5,7 +5,7 @@
 #   ./install.sh ~/.claude/skills     # install into specific dir(s) only
 set -euo pipefail
 
-TESTBEAGLE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/skills"
 SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep casewright scriptify"
 SHARED="drivers-web.md drivers-mobile.md capture-output.md report-base.md emit-runner.md approval-gate.md"
 
@@ -16,7 +16,7 @@ fi
 
 for dir in "${targets[@]}"; do
   mkdir -p "$dir"
-  for s in $SKILLS; do ln -sfn "$TESTBEAGLE_DIR/$s" "$dir/$s"; done
-  for f in $SHARED; do ln -sfn "$TESTBEAGLE_DIR/$f" "$dir/$f"; done
+  for s in $SKILLS; do ln -sfn "$SRC/$s" "$dir/$s"; done
+  for f in $SHARED; do ln -sfn "$SRC/$f" "$dir/$f"; done
   echo "installed testbeagle skills → $dir"
 done
