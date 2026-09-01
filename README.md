@@ -4,7 +4,13 @@
   <img src="docs/testbeagle.png" alt="TestBeagle — a beagle sniffing out bugs along a QA trail" width="640">
 </p>
 
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
+<p align="center">
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-166BFC?style=flat-square" alt="License: Apache 2.0"></a>
+  <img src="https://img.shields.io/badge/version-0.1.0-166BFC?style=flat-square" alt="Version 0.1.0">
+  <img src="https://img.shields.io/badge/skills-7-166BFC?style=flat-square" alt="7 skills">
+  <img src="https://img.shields.io/badge/plan--gated-yes-166BFC?style=flat-square" alt="Plan-gated">
+  <img src="https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20~%2F.agents-166BFC?style=flat-square" alt="Runtimes: Claude Code, Codex, ~/.agents">
+</p>
 
 **Your friendly QA beagle: an agent-driven, plan-gated test suite that runs a project locally, sniffs out bugs across every user path, and writes an evidence-based report — the same way in Claude Code and Codex CLI.**
 

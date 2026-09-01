@@ -5,7 +5,7 @@ description: Use when starting any app QA or test run, to check whether a repo c
 
 # preflight
 
-The foundation for every TestBeagle skill: read-only discovery that answers "can this repo be run and tested locally, and how?" before anyone launches, seeds, or captures anything. The other skills (bugsweep, breachsweep, a11ysweep, perfsweep, scriptify) start by reusing preflight's findings and stop if the repo isn't locally testable.
+The foundation for every TestBeagle skill: read-only discovery that answers "can this repo be run and tested locally, and how?" before anyone launches, seeds, or captures anything. The other skills (bugsweep, breachsweep, a11ysweep, perfsweep, casewright, scriptify) start by reusing preflight's findings and stop if the repo isn't locally testable.
 
 ## When to use
 
