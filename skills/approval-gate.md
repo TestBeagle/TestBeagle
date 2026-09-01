@@ -1,6 +1,6 @@
 # approval-gate — the mandatory stop before any skill acts
 
-Every testbeagle skill presents its plan and **STOPS here**. Do not launch, install, seed, capture, probe, or write anything until the user approves. This file is the single source for the gate — each skill references it so the behavior is identical in every runtime.
+Every TestBeagle skill presents its plan and **STOPS here**. Do not launch, install, seed, capture, probe, or write anything until the user approves. This file is the single source for the gate — each skill references it so the behavior is identical in every runtime.
 
 ## The plan must include
 

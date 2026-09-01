@@ -70,4 +70,4 @@ adb shell input keyevent KEYCODE_BACK
 
 ## Output
 
-Write captures to the location `capture-output.md` resolves for this repo (repo convention first, e.g. `docs/screenshots/{light,dark}`; else the testbeagle default). Name files by `screen[-state]-<locale>-<appearance>` so the report index is scannable.
+Write captures to the location `capture-output.md` resolves for this repo (repo convention first, e.g. `docs/screenshots/{light,dark}`; else the TestBeagle default). Name files by `screen[-state]-<locale>-<appearance>` so the report index is scannable.

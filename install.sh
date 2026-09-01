@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Symlink the testbeagle skills into your agent runtime skill dirs.
+# Symlink the TestBeagle skills into your agent runtime skill dirs.
 # Usage:
 #   ./install.sh                      # install into Claude Code, Codex, and ~/.agents
 #   ./install.sh ~/.claude/skills     # install into specific dir(s) only
@@ -18,5 +18,5 @@ for dir in "${targets[@]}"; do
   mkdir -p "$dir"
   for s in $SKILLS; do ln -sfn "$SRC/$s" "$dir/$s"; done
   for f in $SHARED; do ln -sfn "$SRC/$f" "$dir/$f"; done
-  echo "installed testbeagle skills → $dir"
+  echo "installed TestBeagle skills → $dir"
 done

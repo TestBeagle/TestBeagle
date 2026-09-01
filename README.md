@@ -44,8 +44,8 @@ Pick your runtime — all methods install the same 7 skills. Re-running is safe.
 Add this repo as a plugin marketplace, then install the plugin:
 
 ```
-/plugin marketplace add testbeagle/testbeagle
-/plugin install testbeagle@testbeagle
+/plugin marketplace add TestBeagle/TestBeagle
+/plugin install TestBeagle@TestBeagle
 ```
 
 The whole suite installs as one plugin, so the skills' shared references stay intact. (Restart Claude Code if the skills don't show up right away.)
@@ -53,18 +53,18 @@ The whole suite installs as one plugin, so the skills' shared references stay in
 ### Codex CLI — plugin
 
 ```bash
-codex plugin marketplace add testbeagle/testbeagle
-codex plugin add testbeagle@testbeagle
+codex plugin marketplace add TestBeagle/TestBeagle
+codex plugin add TestBeagle@TestBeagle
 ```
 
 Or wire it up by hand in `~/.codex/config.toml`:
 
 ```toml
-[marketplaces.testbeagle]
-source = "testbeagle/testbeagle"
+[marketplaces.TestBeagle]
+source = "TestBeagle/TestBeagle"
 source_type = "github"
 
-[plugins."testbeagle@testbeagle"]
+[plugins."TestBeagle@TestBeagle"]
 enabled = true
 ```
 
@@ -73,8 +73,8 @@ enabled = true
 Installs into Claude Code, Codex, **and** the cross-runtime `~/.agents/skills` (read by Copilot CLI, Gemini CLI, …) in one shot. Great for local development — edit the repo and every runtime sees the change, no reinstall.
 
 ```bash
-git clone https://github.com/testbeagle/testbeagle.git
-cd testbeagle
+git clone https://github.com/TestBeagle/TestBeagle.git
+cd TestBeagle
 ./install.sh                     # ~/.claude, ~/.codex, ~/.agents
 # or one runtime: ./install.sh ~/.claude/skills
 ```
@@ -86,8 +86,8 @@ It symlinks each `skills/<name>/` folder **and** the shared `skills/*.md` refs i
 The [`skills`](https://github.com/vercel-labs/skills) CLI (which manages `~/.agents/skills`) installs individual skills:
 
 ```bash
-npx skills add testbeagle/testbeagle              # all skills
-npx skills add testbeagle/testbeagle -s preflight,bugsweep
+npx skills add TestBeagle/TestBeagle              # all skills
+npx skills add TestBeagle/TestBeagle -s preflight,bugsweep
 ```
 
 > ⚠️ `npx skills` copies each skill folder on its own and does **not** carry the shared driver/report references with it, so a skill pulled this way loses its `../<shared>.md` content. For the full working suite use the **plugin** or **`install.sh`**; reach for `npx skills` when you want one skill standalone.
