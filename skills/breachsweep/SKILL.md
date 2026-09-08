@@ -22,7 +22,7 @@ Run/reuse `preflight`. Additionally map: routes/endpoints, the auth middleware, 
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present, and stop per the shared gate in `../approval-gate.md`, a plan that states:
+Present, and stop per the shared gate in `../beagle-approval-gate/SKILL.md`, a plan that states:
 - **Authorized targets**: exact host(s)/base URL(s) — a local instance only.
 - **Allowed methods and account/data scope**, plus a **request-rate ceiling** (no floods).
 - **Test categories** to run and what's **out of scope**.
@@ -45,6 +45,6 @@ Local instance only. Seed multiple accounts (A/B) so authorization isolation can
 
 ## Phase 4 — Report
 
-Write per `../report-base.md` (Korean default, anti-slop). Header includes **테스트 범위 및 인가**. Per finding: 취약점 유형 · 위치(엔드포인트/파일) · 재현(요청·응답 증거) · 영향 · 수정 제안 · 확신(확실/추정). Close with 미검증/범위 외.
+Write per `../beagle-report/SKILL.md` (Korean default, anti-slop). Header includes **테스트 범위 및 인가**. Per finding: 취약점 유형 · 위치(엔드포인트/파일) · 재현(요청·응답 증거) · 영향 · 수정 제안 · 확신(확실/추정). Close with 미검증/범위 외.
 
-Optionally offer a static re-check runner via `../emit-runner.md`.
+Optionally offer a static re-check runner via `../beagle-runner/SKILL.md`.

@@ -1,4 +1,9 @@
-# approval-gate — the mandatory stop before any skill acts
+---
+name: beagle-approval-gate
+description: Internal reference for TestBeagle skills: the mandatory approval gate every skill stops at before launching, seeding, capturing, or probing. Loaded by every TestBeagle skill; not meant to be invoked on its own.
+---
+
+# beagle-approval-gate — the mandatory stop before any skill acts
 
 Every TestBeagle skill presents its plan and **STOPS here**. Do not launch, install, seed, capture, probe, or write anything until the user approves. This file is the single source for the gate — each skill references it so the behavior is identical in every runtime.
 
@@ -6,8 +11,8 @@ Every TestBeagle skill presents its plan and **STOPS here**. Do not launch, inst
 
 - **Targets** and what you will do to each.
 - **Required permissions**: dev servers, simulator/emulator, `adb` — and call out every **destructive** step explicitly (e.g. an Android reinstall that erases app data, or any state-changing security probe).
-- **Report language + output location** (`../capture-output.md`).
-- **What you will NOT be able to verify**, with the reason (e.g. no browser MCP → capture-only; simctl can't tap).
+- **Report language + output location** (`../beagle-capture-output/SKILL.md`).
+- **What you will NOT be able to verify**, with the reason (e.g. no interactive web driver → capture-only; simctl can't tap).
 
 ## Gate on runtime capability (identical outcome everywhere)
 

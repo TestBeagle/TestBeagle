@@ -1,4 +1,9 @@
-# report-base — shared report skeleton & anti-slop rules
+---
+name: beagle-report
+description: Internal reference for TestBeagle skills: the shared report skeleton and anti-slop rules (evidence per claim, 검증 불가 table, confidence labels, Korean default). Loaded by every TestBeagle skill that writes a report; not meant to be invoked on its own.
+---
+
+# beagle-report — shared report skeleton & anti-slop rules
 
 Every TestBeagle skill writes its report on this skeleton. Reports default to Korean (the maintainer's language); write English only if the user or the repo's docs are English-first. Each skill adds its own finding fields (see its SKILL.md); everything else here is common.
 
