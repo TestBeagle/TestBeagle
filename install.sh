@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Symlink the TestBeagle skills into your agent runtime skill dirs.
+# Symlink the TestBeagle skills (and their shared references) into your agent runtime skill dirs.
 # Usage:
 #   ./install.sh                      # install into Claude Code, Codex, and ~/.agents
 #   ./install.sh ~/.claude/skills     # install into specific dir(s) only
@@ -8,7 +8,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC="$ROOT/skills"
 SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep casewright scriptify snap repro"
-SHARED="drivers-web.md drivers-mobile.md capture-output.md report-base.md emit-runner.md approval-gate.md"
+REFS="beagle-shared"   # one folder of shared references the skills read via ../beagle-shared/<file>.md
 
 targets=("$@")
 default=0
@@ -19,8 +19,7 @@ fi
 
 for dir in "${targets[@]}"; do
   mkdir -p "$dir"
-  for s in $SKILLS; do ln -sfn "$SRC/$s" "$dir/$s"; done
-  for f in $SHARED; do ln -sfn "$SRC/$f" "$dir/$f"; done
+  for s in $SKILLS $REFS; do ln -sfn "$SRC/$s" "$dir/$s"; done
   echo "installed TestBeagle skills → $dir"
 done
 

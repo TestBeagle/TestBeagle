@@ -18,6 +18,14 @@ TestBeagle is a set of portable agent **skills**. Point any of them at a repo yo
 
 > Like a beagle on a scent, it works the whole trail — functional QA, security, accessibility, and performance — not just a shallow "did the build survive" smoke check.
 
+## See it run
+
+![TestBeagle running against OWASP Juice Shop](docs/demo.gif)
+
+A complete run against [OWASP Juice Shop](https://github.com/juice-shop/juice-shop) — every route captured, a real login flow, and three evidence-based reports — is checked in at **[docs/examples/juice-shop](docs/examples/juice-shop/)**. It surfaced a `/ftp` directory-listing exposure and a critical missing-label accessibility issue, and it left SQL injection, XSS, and IDOR in the *unverified* column rather than claim them on an app that's vulnerable by design. **That last part is the whole point: it never counts an unexercised path as a pass.**
+
+**Works with** the richest driver present, and says in the report which one it used: your repo's own Playwright/Cypress → [agent-browser](https://github.com/vercel-labs/agent-browser) → the `chrome-devtools` / `claude-in-chrome` MCP → headless Chrome. No browser MCP required for real interaction.
+
 ## Skills
 
 | Skill | What it does | Say something like |
@@ -37,7 +45,7 @@ Every run is **plan-gated**: the agent shows you the route map and waits for app
 ## Requirements
 
 - `git` and `bash` (all skills).
-- **Web** targets: Google Chrome. Interaction/console/network capture is best with the [chrome-devtools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp); without it, skills fall back to capture-only headless Chrome.
+- **Web** targets: Google Chrome. For real interaction plus console/network capture, TestBeagle uses the first of these it finds — the repo's own Playwright/Cypress, [`agent-browser`](https://github.com/vercel-labs/agent-browser) (`brew install agent-browser`), or the [chrome-devtools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp) / claude-in-chrome. With none of them, it falls back to capture-only headless Chrome and reports every flow it couldn't drive as unverified.
 - **iOS** targets: Xcode + `xcrun simctl` (macOS).
 - **Android** targets: Android SDK platform-tools (`adb`).
 
@@ -87,18 +95,18 @@ cd TestBeagle
 # or one runtime: ./install.sh ~/.claude/skills
 ```
 
-It symlinks each `skills/<name>/` folder **and** the shared `skills/*.md` refs into the target dir, so every skill's `../<shared>.md` reference resolves.
+It symlinks each skill folder — the 9 skills **and** the shared `beagle-shared` reference folder — into the target dir, so every skill's `../beagle-shared/<file>.md` reference resolves.
 
-### A single skill — `npx skills`
+### `npx skills`
 
-The [`skills`](https://github.com/vercel-labs/skills) CLI (which manages `~/.agents/skills`) installs individual skills:
+The [`skills`](https://github.com/vercel-labs/skills) CLI (which manages `~/.agents/skills`) installs from this repo:
 
 ```bash
-npx skills add TestBeagle/TestBeagle              # all skills
-npx skills add TestBeagle/TestBeagle -s preflight,bugsweep
+npx skills add TestBeagle/TestBeagle --all        # all skills + shared references
+npx skills add TestBeagle/TestBeagle -s preflight,bugsweep   # just these skills
 ```
 
-> ⚠️ `npx skills` copies each skill folder on its own and does **not** carry the shared driver/report references with it, so a skill pulled this way loses its `../<shared>.md` content. For the full working suite use the **plugin** or **`install.sh`**; reach for `npx skills` when you want one skill standalone.
+The shared driver/report logic lives in a `beagle-shared` folder, so `--all` carries the whole working suite. A single-skill `-s` install pulls only that one folder and will be missing the `beagle-shared` references it points to — use `--all`, the **plugin**, or **`install.sh`** for the full suite.
 
 ## Talking to the AI
 

@@ -1,4 +1,4 @@
-# report-base — shared report skeleton & anti-slop rules
+# beagle-report — shared report skeleton & anti-slop rules
 
 Every TestBeagle skill writes its report on this skeleton. Reports default to Korean (the maintainer's language); write English only if the user or the repo's docs are English-first. Each skill adds its own finding fields (see its SKILL.md); everything else here is common.
 

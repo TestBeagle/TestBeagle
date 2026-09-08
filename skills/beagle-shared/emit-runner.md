@@ -1,11 +1,11 @@
-# emit-runner — generate a static, repo-native `.sh` runner
+# beagle-runner — generate a static, repo-native `.sh` runner
 
 Shared by scriptify and by each dimension skill's optional "emit a runner" step. Goal: freeze a flow the agent already figured out into a script the maintainer can re-run with no agent.
 
 ## Rules
 
 1. **Reuse the repo's own style first.** If the repo already has capture/run scripts (found in preflight), match their shape, flags, and location — don't introduce a second convention. Extend, don't replace.
-2. **Only script what you actually ran and verified.** A runner is a recording of a working flow, not a guess. Don't emit steps you couldn't execute.
+2. **Only script what you actually ran and verified.** A runner is a recording of a working flow, not a guess. Don't emit steps you couldn't execute. Flows driven with agent-browser freeze verbatim (they are shell commands); open a named session at the top (`export AGENT_BROWSER_SESSION="$(agent-browser session id --scope worktree --prefix runner)"`) and `agent-browser close` at the end. MCP-driven flows can't be frozen — re-drive them with agent-browser first or leave them out.
 3. **Portable bash** when there's no existing template:
    ```bash
    #!/usr/bin/env bash
@@ -21,6 +21,6 @@ Shared by scriptify and by each dimension skill's optional "emit a runner" step.
 4. **Carry the hard rules into the generated script** (they must survive without the agent):
    - Android: `am start -n …`, never `monkey`; `adb uninstall` before `adb install`.
    - iOS: after building, grep the log for `BUILD SUCCEEDED` and exit non-zero on `BUILD FAILED` (build wrappers can exit 0 on failure).
-5. **Write location**: the repo's existing `scripts/` (or wherever its current scripts live); else what `capture-output.md` resolves. `chmod +x` it.
+5. **Write location**: the repo's existing `scripts/` (or wherever its current scripts live); else what `../beagle-shared/capture-output.md` resolves. `chmod +x` it.
 6. **Verify before handing over**: run the emitted script once and confirm it produces the expected artifacts. A runner that wasn't run is unverified — say so and don't claim it works.
 7. **Offer, don't auto-commit.** Present the script + a one-line usage note; let the maintainer commit it.

@@ -13,7 +13,7 @@ Run/reuse `preflight`. Additionally detect the repo's **existing test framework 
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present what you'll generate: which flows/routes/findings become test cases, the framework and file locations, and whether any new dev dependency is unavoidable (call it out — it needs approval). Then stop per the shared gate in `../approval-gate.md`.
+Present what you'll generate: which flows/routes/findings become test cases, the framework and file locations, and whether any new dev dependency is unavoidable (call it out — it needs approval). Then stop per the shared gate in `../beagle-shared/approval-gate.md`.
 
 ## Phase 2 — Generate
 
@@ -26,4 +26,4 @@ Present what you'll generate: which flows/routes/findings become test cases, the
 
 Run the generated tests and report real results. Green tests prove they at least execute and pass; for a regression test, show it **fails on the current bug** (before the fix) so it actually guards something — a test that passes whether or not the bug exists guards nothing. A test you didn't run is unverified; say so. Don't assert flaky/time-dependent state. Offer the tests + how to run them; let the maintainer commit them (don't auto-commit).
 
-Report per `../report-base.md` (Korean default, anti-slop): what was generated, where, what it covers, what ran green/red, and what's still uncovered (검증 불가 / 미커버).
+Report per `../beagle-shared/report-base.md` (Korean default, anti-slop): what was generated, where, what it covers, what ran green/red, and what's still uncovered (검증 불가 / 미커버).

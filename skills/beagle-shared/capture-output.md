@@ -1,4 +1,4 @@
-# capture-output — where screenshots, video, and reports go
+# beagle-capture-output — where screenshots, video, and reports go
 
 Shared by every skill that writes artifacts. Reuse the repo's own convention before inventing one; confirm the location in the approval gate.
 
