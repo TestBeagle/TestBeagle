@@ -15,20 +15,20 @@ The foundation for every TestBeagle skill: read-only discovery that answers "can
 ## Workflow (read-only — make no changes)
 
 1. **Detect targets.** Classify each runnable surface: web (Vite/Next/webpack, `index.html`), iOS (`*.xcodeproj`/`*.xcworkspace`), android (`build.gradle*` + `AndroidManifest.xml`), api (server framework + health route, no UI), cli (bin/TUI entry). A monorepo yields several — enumerate all.
-2. **Toolchain doctor.** For each target, check the tools it needs exist and their versions: node/pnpm/npm, Xcode + `xcrun simctl`, Android SDK `adb`, docker/compose, plus any repo-declared version pins. For web targets also resolve the driver per `../beagle-web-driver/SKILL.md`: the repo's own E2E runner, `agent-browser --version`, a connected browser MCP, or only headless Chrome (capture-only). Record what's missing with the install command to fix it (e.g. `brew install agent-browser`).
+2. **Toolchain doctor.** For each target, check the tools it needs exist and their versions: node/pnpm/npm, Xcode + `xcrun simctl`, Android SDK `adb`, docker/compose, plus any repo-declared version pins. For web targets also resolve the driver per `../beagle-shared/drivers-web.md`: the repo's own E2E runner, `agent-browser --version`, a connected browser MCP, or only headless Chrome (capture-only). Record what's missing with the install command to fix it (e.g. `brew install agent-browser`).
 3. **Discover how it runs.** Read `README`, `AGENTS.md`, `CLAUDE.md`, `package.json` scripts, `scripts/`, `Makefile`, `docker-compose*`. Extract the exact local-run command per target and the env it needs (API base URL, ports, `.env`).
 4. **Readiness method.** Find how to know it's up by evidence: a health/ready endpoint to poll, a build-success marker to grep (never trust an exit code — some build wrappers exit 0 on failure). Note any documented gotchas.
 5. **Existing tooling to reuse.** Inventory seed scripts, deep-link/"review" capture modes, existing capture scripts, and prior QA reports. Downstream skills must reuse these, not reinvent them.
-6. **Output location.** Resolve where screenshots/video/reports should go via `../beagle-capture-output/SKILL.md` and propose it.
+6. **Output location.** Resolve where screenshots/video/reports should go via `../beagle-shared/capture-output.md` and propose it.
 
 ## Output — testability report
 
-Report, in Korean by default, using the header/anti-slop conventions in `../beagle-report/SKILL.md`:
+Report, in Korean by default, using the header/anti-slop conventions in `../beagle-shared/report-base.md`:
 
 - **판정**: 각 타깃별 로컬 테스트 가능 / 불가(부족한 것 + 설치 명령).
 - **실행 계획**: 타깃별 실행 명령 · 필요한 env · readiness 확인법.
 - **재사용 자산**: 발견한 시드/review-mode/캡쳐 스크립트/기존 보고서 경로.
 - **제안 출력 위치**: 스크린샷·영상·리포트 경로.
-- **드라이버**: 각 타깃에 쓸 드라이버(`../beagle-web-driver/SKILL.md` / `../beagle-mobile-driver/SKILL.md`)와 그 한계(예: simctl 탭 불가, agent-browser·브라우저 MCP 둘 다 없으면 캡쳐 전용).
+- **드라이버**: 각 타깃에 쓸 드라이버(`../beagle-shared/drivers-web.md` / `../beagle-shared/drivers-mobile.md`)와 그 한계(예: simctl 탭 불가, agent-browser·브라우저 MCP 둘 다 없으면 캡쳐 전용).
 
 Downstream skills read this report and gate on it: if a target is "테스트 불가", say so and don't pretend to test it.

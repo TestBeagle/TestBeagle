@@ -13,7 +13,7 @@ Run `preflight` (or reuse its report). Get: targets, run commands, readiness met
 
 ## Phase 1 — Route map + approval gate (MANDATORY — stop here)
 
-Build the full route map: for every path from signup/login onward — **경로 + 상태** (logged-out/in, empty/populated), **변형** (dark mode, locales), **드라이버** per route (`../beagle-web-driver/SKILL.md` / `../beagle-mobile-driver/SKILL.md`), and **검증 불가 예정** + 이유 (e.g. simctl can't tap; no interactive web driver → capture-only). Then present it and stop per the shared gate in **`../beagle-approval-gate/SKILL.md`** — nothing launches, seeds, or captures until the user approves.
+Build the full route map: for every path from signup/login onward — **경로 + 상태** (logged-out/in, empty/populated), **변형** (dark mode, locales), **드라이버** per route (`../beagle-shared/drivers-web.md` / `../beagle-shared/drivers-mobile.md`), and **검증 불가 예정** + 이유 (e.g. simctl can't tap; no interactive web driver → capture-only). Then present it and stop per the shared gate in **`../beagle-shared/approval-gate.md`** — nothing launches, seeds, or captures until the user approves.
 
 ## Phase 2 — Launch
 
@@ -29,11 +29,11 @@ Start services with the discovered commands. Confirm readiness by **evidence** (
 
 ## Phase 4 — Report
 
-Write per `../beagle-report/SKILL.md` (Korean default, anti-slop rules enforced). Finding fields: the common block plus, per finding, the exact reproduction and the console/network/screenshot evidence. Everything you couldn't exercise goes in 검증 불가.
+Write per `../beagle-shared/report-base.md` (Korean default, anti-slop rules enforced). Finding fields: the common block plus, per finding, the exact reproduction and the console/network/screenshot evidence. Everything you couldn't exercise goes in 검증 불가.
 
 ## Phase 5 — Offer a static runner
 
-Offer to freeze the capture flow into a repo-native `.sh` (via `../beagle-runner/SKILL.md`, the `scriptify` mechanism) so future runs need no agent. Don't auto-commit — offer it.
+Offer to freeze the capture flow into a repo-native `.sh` (via `../beagle-shared/emit-runner.md`, the `scriptify` mechanism) so future runs need no agent. Don't auto-commit — offer it.
 
 ## Hard rules
 

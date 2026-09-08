@@ -13,11 +13,11 @@ Run/reuse `preflight` for targets, run commands, drivers, and the output locatio
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present the shot list — screens/routes × states (logged-out/in, empty/populated) × variants (dark mode, locales) — and the output folder (`../beagle-capture-output/SKILL.md`). Then stop per the shared gate in `../beagle-approval-gate/SKILL.md`.
+Present the shot list — screens/routes × states (logged-out/in, empty/populated) × variants (dark mode, locales) — and the output folder (`../beagle-shared/capture-output.md`). Then stop per the shared gate in `../beagle-shared/approval-gate.md`.
 
 ## Phase 2 — Launch & capture
 
-Start the app (readiness by evidence; seed if a script exists). Capture every screen × state × variant with the driver's screenshot commands (`../beagle-web-driver/SKILL.md` / `../beagle-mobile-driver/SKILL.md`). Name files `route[-state][-locale][-appearance].png` so the set is scannable and re-runs diff cleanly.
+Start the app (readiness by evidence; seed if a script exists). Capture every screen × state × variant with the driver's screenshot commands (`../beagle-shared/drivers-web.md` / `../beagle-shared/drivers-mobile.md`). Name files `route[-state][-locale][-appearance].png` so the set is scannable and re-runs diff cleanly.
 
 ## Phase 3 — Hand over
 

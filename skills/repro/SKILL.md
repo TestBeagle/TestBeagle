@@ -13,15 +13,15 @@ Run/reuse `preflight` for targets, run commands, drivers, and the output locatio
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present the repro: the target, the step-by-step you'll perform, and where the clip lands (`../beagle-capture-output/SKILL.md`). Then stop per the shared gate in `../beagle-approval-gate/SKILL.md`.
+Present the repro: the target, the step-by-step you'll perform, and where the clip lands (`../beagle-shared/capture-output.md`). Then stop per the shared gate in `../beagle-shared/approval-gate.md`.
 
 ## Phase 2 — Record
 
 Start recording, perform the steps, stop recording.
 
-- **iOS**: `xcrun simctl io booted recordVideo clip.mov` (`../beagle-mobile-driver/SKILL.md`).
-- **Android**: `adb shell screenrecord …` → pull → clean up (`../beagle-mobile-driver/SKILL.md`).
-- **Web**: `agent-browser record start OUT/repro.webm` → perform the steps → `agent-browser record stop` (real video; `.mp4` also works; needs ffmpeg on PATH — see `../beagle-web-driver/SKILL.md`). Without agent-browser, claude-in-chrome `gif_creator` produces an animated GIF. Say which you produced (video vs GIF) — don't imply video if it's a GIF.
+- **iOS**: `xcrun simctl io booted recordVideo clip.mov` (`../beagle-shared/drivers-mobile.md`).
+- **Android**: `adb shell screenrecord …` → pull → clean up (`../beagle-shared/drivers-mobile.md`).
+- **Web**: `agent-browser record start OUT/repro.webm` → perform the steps → `agent-browser record stop` (real video; `.mp4` also works; needs ffmpeg on PATH — see `../beagle-shared/drivers-web.md`). Without agent-browser, claude-in-chrome `gif_creator` produces an animated GIF. Say which you produced (video vs GIF) — don't imply video if it's a GIF.
 
 Capture a couple of extra frames before and after the trigger so the clip reads clearly.
 

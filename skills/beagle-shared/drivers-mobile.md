@@ -1,8 +1,3 @@
----
-name: beagle-mobile-driver
-description: Internal reference for TestBeagle skills: iOS Simulator (simctl) and Android (adb) capture, interaction, and performance recipes, with the hard rules. Loaded by bugsweep, a11ysweep, perfsweep, snap, repro, scriptify; not meant to be invoked on its own.
----
-
 # beagle-mobile-driver — iOS & Android capture recipes
 
 Shared by bugsweep, a11ysweep, perfsweep, scriptify. **When a repo targets both iOS and Android, test both** — never cover one and silently skip the other; if an OS API makes a check possible on one platform only, say so. A single-platform repo is tested on the platform it has.
@@ -75,4 +70,4 @@ adb shell input keyevent KEYCODE_BACK
 
 ## Output
 
-Write captures to the location `../beagle-capture-output/SKILL.md` resolves for this repo (repo convention first, e.g. `docs/screenshots/{light,dark}`; else the TestBeagle default). Name files by `screen[-state]-<locale>-<appearance>` so the report index is scannable.
+Write captures to the location `../beagle-shared/capture-output.md` resolves for this repo (repo convention first, e.g. `docs/screenshots/{light,dark}`; else the TestBeagle default). Name files by `screen[-state]-<locale>-<appearance>` so the report index is scannable.

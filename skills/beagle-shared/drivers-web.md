@@ -1,8 +1,3 @@
----
-name: beagle-web-driver
-description: Internal reference for TestBeagle skills: web capture and interaction recipes (agent-browser CLI, chrome-devtools / claude-in-chrome MCP, headless Chrome fallback). Loaded by bugsweep, a11ysweep, perfsweep, snap, repro, scriptify; not meant to be invoked on its own.
----
-
 # beagle-web-driver — web capture & interaction recipes
 
 Shared by bugsweep, breachsweep, a11ysweep, perfsweep, snap, repro, scriptify. Pick the richest driver the runtime actually has, in this order, and state in the plan which one you're using and what it can't do. Put the driver name and version on the report's 드라이버 line.
@@ -53,7 +48,7 @@ agent-browser trace start && ...interact... && agent-browser trace stop OUT/trac
 agent-browser close                                # always, when the run ends
 ```
 
-Because every step is a shell command, a flow verified with agent-browser can be frozen verbatim into a static runner (`../beagle-runner/SKILL.md`) — something an MCP-driven flow can't do.
+Because every step is a shell command, a flow verified with agent-browser can be frozen verbatim into a static runner (`../beagle-shared/emit-runner.md`) — something an MCP-driven flow can't do.
 
 ## Driver 3 — browser MCP
 
@@ -86,4 +81,4 @@ Dark mode: `--force-dark-mode` (best-effort; say so in the report if the app doe
 
 ## Output
 
-Write captures to the location `../beagle-capture-output/SKILL.md` resolves for this repo. Name files by `route[-state][-variant]` (e.g. `settings-loggedin-dark.png`) so the report index is scannable.
+Write captures to the location `../beagle-shared/capture-output.md` resolves for this repo. Name files by `route[-state][-variant]` (e.g. `settings-loggedin-dark.png`) so the report index is scannable.

@@ -13,11 +13,11 @@ Run/reuse `preflight` to get the exact launch, seed, and capture commands and th
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present what the script will do (targets, steps, output path, where the file lands) and whether verifying it will execute the flow, then stop per the shared gate in `../beagle-approval-gate/SKILL.md`.
+Present what the script will do (targets, steps, output path, where the file lands) and whether verifying it will execute the flow, then stop per the shared gate in `../beagle-shared/approval-gate.md`.
 
 ## Phase 2 — Emit
 
-Generate the script per `../beagle-runner/SKILL.md`:
+Generate the script per `../beagle-shared/emit-runner.md`:
 - Reuse the repo's existing script style/location if it has one; else portable bash (`set -euo pipefail`, env-parameterized, idempotent, reads bundle id/package from build output, echoes every artifact path).
 - Carry the hard rules into the script so they survive without the agent: Android `am start -n` (never `monkey`), uninstall-before-install; iOS verify `BUILD SUCCEEDED` in the log.
 - Write it to the repo's `scripts/` (or wherever its current scripts live), `chmod +x`.

@@ -13,17 +13,17 @@ Run/reuse `preflight` for targets, run commands, drivers, output location. Reuse
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present the screens/routes to audit and the checks per platform, then stop per the shared gate in `../beagle-approval-gate/SKILL.md`.
+Present the screens/routes to audit and the checks per platform, then stop per the shared gate in `../beagle-shared/approval-gate.md`.
 
 ## Phase 2 — Audit
 
-**Web** (`../beagle-web-driver/SKILL.md`):
+**Web** (`../beagle-shared/drivers-web.md`):
 - axe violations + contrast per route: `npx @axe-core/cli http://localhost:PORT/route` (any driver; needs Chrome). With chrome-devtools MCP you may instead inject axe-core via `evaluate_script` and run `axe.run`.
 - Contrast: confirm axe's contrast results against computed colors; flag body text below WCAG AA (4.5:1; 3:1 for large text).
 - Keyboard (interactive driver required): walk focus order with `agent-browser press Tab` + `snapshot` (or the MCP's `press_key`); flag traps, invisible focus, unreachable controls. Capture-only driver → 검증 불가.
 - Labels: inputs/buttons/icons without an accessible name — `agent-browser snapshot` shows the accessible tree; unnamed controls stand out.
 
-**Mobile** (`../beagle-mobile-driver/SKILL.md`):
+**Mobile** (`../beagle-shared/drivers-mobile.md`):
 - Tap targets below the platform minimum (iOS 44pt, Android 48dp) — reuse the repo's touch-target check if present.
 - Missing accessibility labels (`accessibilityLabel` / `contentDescription`).
 - Locale parity: strings present in one language but not another (reuse the repo's localization-parity lint) — capture the same screen in each locale.
@@ -36,6 +36,6 @@ Present the screens/routes to audit and the checks per platform, then stop per t
 
 ## Phase 3 — Report
 
-Write per `../beagle-report/SKILL.md` (Korean default, anti-slop). Per finding: WCAG 기준(있으면) · 위치 · 왜(검증: axe rule / 측정값 / 스크린샷) · 수정 제안 · 확신. Unaudited screens → 검증 불가.
+Write per `../beagle-shared/report-base.md` (Korean default, anti-slop). Per finding: WCAG 기준(있으면) · 위치 · 왜(검증: axe rule / 측정값 / 스크린샷) · 수정 제안 · 확신. Unaudited screens → 검증 불가.
 
-Optionally offer a static re-check runner via `../beagle-runner/SKILL.md`.
+Optionally offer a static re-check runner via `../beagle-shared/emit-runner.md`.

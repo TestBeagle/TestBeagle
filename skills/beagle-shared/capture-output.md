@@ -1,8 +1,3 @@
----
-name: beagle-capture-output
-description: Internal reference for TestBeagle skills: where screenshots, video, and reports go (repo convention first, TestBeagle default otherwise). Loaded by every TestBeagle skill; not meant to be invoked on its own.
----
-
 # beagle-capture-output — where screenshots, video, and reports go
 
 Shared by every skill that writes artifacts. Reuse the repo's own convention before inventing one; confirm the location in the approval gate.
