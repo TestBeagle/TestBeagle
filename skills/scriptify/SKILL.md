@@ -19,7 +19,7 @@ Present what the script will do (targets, steps, output path, where the file lan
 
 Generate the script per `../beagle-shared/emit-runner.md`:
 - Reuse the repo's existing script style/location if it has one; else portable bash (`set -euo pipefail`, env-parameterized, idempotent, reads bundle id/package from build output, echoes every artifact path).
-- Carry the hard rules into the script so they survive without the agent: Android `am start -n` (never `monkey`), uninstall-before-install; iOS verify `BUILD SUCCEEDED` in the log.
+- Carry the hard rules into the script so they survive without the agent: Android `am start -n` (never `monkey`), uninstall only within the approved data-reset scope (`install -r` for upgrade flows); iOS verify `BUILD SUCCEEDED` in the log.
 - Write it to the repo's `scripts/` (or wherever its current scripts live), `chmod +x`.
 
 ## Phase 3 — Verify, then hand over

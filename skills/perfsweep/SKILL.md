@@ -32,6 +32,6 @@ Present the routes/scenarios to measure and the metrics per platform, then stop 
 
 ## Phase 3 — Report
 
-Write per `../beagle-shared/report-base.md` (Korean default, anti-slop). Per finding: 지표 · 측정값(+기준선/버짓 대비) · 위치 · 왜(검증: trace/Lighthouse 증거) · 수정 제안 · 확신. Measure before recommending — no "optimize X" without a number showing X is the cost. Without a repo budget use: LCP ≤2.5 s good / >4 s poor; CLS ≤0.1 / >0.25; INP ≤200 ms / >500 ms; lab TBT ≤200 ms / >600 ms. Poor on a core route = High; needs-improvement = Medium. Trace each cost to its cause: long task / heavy script → URL → source map or bundle-analyzer module; slow request → handler `file:line`. Unmeasured scenarios → 검증 불가.
+Write per `../beagle-shared/report-base.md` (Korean default, anti-slop). Per finding: 지표 · 측정값(+기준선/버짓 대비) · 위치 · 왜(검증: trace/Lighthouse 증거) · 수정 제안 · 확신. Measure before recommending — no "optimize X" without a number showing X is the cost. Without a repo budget use: LCP ≤2.5 s good / >4 s poor; CLS ≤0.1 / >0.25; INP ≤200 ms / >500 ms; lab TBT ≤200 ms / >600 ms. Record the poor/needs-improvement class next to the number; assign severity by `../beagle-shared/report-base.md` rule 9 (slow but working is degraded, not broken). Trace each cost to its cause: long task / heavy script → URL → source map or bundle-analyzer module; slow request → handler `file:line`. Unmeasured scenarios → 검증 불가.
 
 Optionally offer a static re-measure runner via `../beagle-shared/emit-runner.md`.

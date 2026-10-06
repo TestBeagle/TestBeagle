@@ -14,7 +14,7 @@ Every TestBeagle skill presents its plan and **STOPS here**. Do not launch, inst
 
 ## Gate on runtime capability (identical outcome everywhere)
 
-- **A plan-approval mode is active** (Claude Code plan mode, Codex Plan mode): present the plan there and act only after the user approves it / leaves plan mode.
+- **A plan-approval mode is active** (Claude Code plan mode, Codex Plan mode): present the plan there and act only after the user explicitly approves this plan; leaving plan mode alone is not approval.
 - **Otherwise** (interactive chat): post the plan as a normal message whose last line is exactly this plain text, no backticks:
 
   이 계획대로 진행할까요? (수정/제외할 항목이 있으면 알려주세요)

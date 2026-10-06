@@ -29,25 +29,25 @@
 - Suggested fix: give the search input `aria-label="Search products"`. When collapsed, remove it from the DOM or exclude it from the focus order entirely (it is `tabindex="-1"` today, but axe's accessibility tree still sees an unnamed control).
 
 ### [MODERATE] Page content sits outside landmarks (axe `region`)
-- WCAG: 1.3.1 (best practice) · confidence: confirmed
+- Classification: axe best practice, no WCAG criterion · confidence: confirmed
 - Location: `/#/login` ×13, `/#/register` ×16, `/#/search` ×3. Representative targets `.search-area`, notification cards (`.accent-notification .mdc-card .notificationMessage`)
 - Why (verification): `axe.run(...runOnly:['region'])` flagged content blocks that are not contained by a landmark such as `main`/`nav`. Screen-reader landmark navigation cannot skip to them, forcing linear traversal.
 - Suggested fix: wrap the main content in `<main>` and give the notification area an appropriate role.
 
 ### [MODERATE] Nested / duplicate landmarks (axe `landmark-complementary-is-top-level`, `landmark-unique`)
-- WCAG: 1.3.1 (best practice) · confidence: confirmed
+- Classification: axe best practice, no WCAG criterion · confidence: confirmed
 - Location: `/#/search` — `landmark-complementary-is-top-level` ×2, `landmark-unique` ×1
 - Why (verification): axe reported that an `aside` (complementary) is nested inside another landmark, and that same-role landmarks are duplicated without an accessible name.
 - Suggested fix: raise the complementary landmark to the top level, and give duplicate landmarks unique `aria-label`s.
 
 ### [MINOR] Image alt text duplicates adjacent text (axe `image-redundant-alt`)
-- WCAG: 1.1.1 (best practice) · confidence: confirmed
+- Classification: axe best practice, no WCAG criterion · confidence: confirmed
 - Location: `/#/search` ×16 (product card images), `/#/login` ×1, `/#/register` ×1
 - Why (verification): axe flagged image `alt` repeating the neighboring text (product name, etc.). A screen reader reads the same phrase twice.
 - Suggested fix: empty the `alt` (`alt=""`) on decorative/duplicate images, or keep only information the text does not carry.
 
 ### [MINOR] Element has an ARIA role not allowed for it (axe `aria-allowed-role`)
-- WCAG: 4.1.2 (best practice) · confidence: confirmed
+- Classification: axe best practice, no WCAG criterion · confidence: confirmed
 - Location: `/#/search` ×15
 - Why (verification): axe reported a role assigned to an element type that does not allow it.
 - Suggested fix: adjust the flagged elements' roles to match their semantics, or remove them.

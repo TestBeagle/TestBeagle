@@ -27,25 +27,25 @@
 - 수정 제안: 검색 입력에 `aria-label="Search products"` 부여. 접힘 상태에서는 DOM에서 제거하거나 포커스 대상에서 완전히 제외(현재는 `tabindex="-1"`이지만 axe 접근성 트리에는 이름 없는 컨트롤로 남음).
 
 ### [MODERATE] 페이지 콘텐츠가 랜드마크 밖에 위치 (axe `region`)
-- WCAG 기준: 1.3.1 (best practice) · 확신: 확실
+- 분류: axe best practice, WCAG 기준 미부여 · 확신: 확실
 - 위치: `/#/login` ×13, `/#/register` ×16, `/#/search` ×3. 대표 타깃 `.search-area`, 알림 카드(`.accent-notification .mdc-card .notificationMessage`)
 - 왜(검증): `axe.run(...runOnly:['region'])`가 콘텐츠 블록이 `main`/`nav` 등 랜드마크에 담기지 않았다고 지적. 스크린리더의 랜드마크 내비게이션으로 건너뛸 수 없어 선형 탐색을 강요.
 - 수정 제안: 주요 콘텐츠를 `<main>`으로 감싸고, 알림 영역에 적절한 role 부여.
 
 ### [MODERATE] 랜드마크 중첩·중복 (axe `landmark-complementary-is-top-level`, `landmark-unique`)
-- WCAG 기준: 1.3.1 (best practice) · 확신: 확실
+- 분류: axe best practice, WCAG 기준 미부여 · 확신: 확실
 - 위치: `/#/search` — `landmark-complementary-is-top-level` ×2, `landmark-unique` ×1
 - 왜(검증): axe가 `aside`(complementary)가 다른 랜드마크 안에 중첩되어 있고, 동일 role 랜드마크가 접근명 없이 중복된다고 반환.
 - 수정 제안: complementary 랜드마크를 최상위로 올리고, 중복 랜드마크에 고유 `aria-label` 부여.
 
 ### [MINOR] 이미지 대체 텍스트가 인접 텍스트와 중복 (axe `image-redundant-alt`)
-- WCAG 기준: 1.1.1 (best practice) · 확신: 확실
+- 분류: axe best practice, WCAG 기준 미부여 · 확신: 확실
 - 위치: `/#/search` ×16(상품 카드 이미지), `/#/login` ×1, `/#/register` ×1
 - 왜(검증): axe가 이미지 `alt`가 바로 옆 텍스트(상품명 등)를 그대로 반복한다고 지적. 스크린리더가 같은 문구를 두 번 읽음.
 - 수정 제안: 장식·중복 이미지의 `alt`를 비우거나(`alt=""`) 텍스트와 다른 정보만 남김.
 
 ### [MINOR] 요소에 부적절한 ARIA role (axe `aria-allowed-role`)
-- WCAG 기준: 4.1.2 (best practice) · 확신: 확실
+- 분류: axe best practice, WCAG 기준 미부여 · 확신: 확실
 - 위치: `/#/search` ×15
 - 왜(검증): axe가 해당 요소 타입에 허용되지 않는 role이 지정되었다고 반환.
 - 수정 제안: 지적된 요소의 role을 요소 시맨틱에 맞게 조정하거나 제거.

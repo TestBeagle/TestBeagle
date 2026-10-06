@@ -22,7 +22,7 @@ TestBeagle is a set of portable agent **skills**. Point any of them at a repo yo
 
 ![TestBeagle running against OWASP Juice Shop](docs/demo.gif)
 
-A complete run against [OWASP Juice Shop](https://github.com/juice-shop/juice-shop) — every route captured, a real login flow, and three evidence-based reports — is checked in at **[docs/examples/juice-shop](docs/examples/juice-shop/)**. It surfaced a `/ftp` directory-listing exposure and a critical missing-label accessibility issue, and it left SQL injection, XSS, and IDOR in the *unverified* column rather than claim them on an app that's vulnerable by design. **That last part is the whole point: it never counts an unexercised path as a pass.**
+A complete run against [OWASP Juice Shop](https://github.com/juice-shop/juice-shop) — representative routes captured, a real login flow, and three evidence-based reports — is checked in at **[docs/examples/juice-shop](docs/examples/juice-shop/)**. It surfaced a `/ftp` directory-listing exposure and a critical missing-label accessibility issue, and it left SQL injection, XSS, and IDOR in the *unverified* column rather than claim them on an app that's vulnerable by design. **That last part is the whole point: it never counts an unexercised path as a pass.**
 
 <p align="center">
   <img src="docs/examples/juice-shop/report-card-en.png" alt="A breachsweep report excerpt: the /ftp HIGH finding with its reproduction command, and the Unverified table leaving SQL injection, XSS, and IDOR unclaimed" width="760">
@@ -98,7 +98,7 @@ The [`skills`](https://github.com/vercel-labs/skills) CLI (which manages `~/.age
 
 ```bash
 npx skills add TestBeagle/TestBeagle --all        # all skills + shared references
-npx skills add TestBeagle/TestBeagle -s preflight,bugsweep   # just these skills
+npx skills add TestBeagle/TestBeagle -s preflight bugsweep   # just these skills
 ```
 
 The shared driver/report logic lives in a `beagle-shared` folder, so `--all` carries the whole working suite. A single-skill `-s` install pulls only that one folder and will be missing the `beagle-shared` references it points to (the skill still stops for your approval, but loses the shared report and driver rules) — use `--all`, the **plugin**, or **`install.sh`** for the full suite.
