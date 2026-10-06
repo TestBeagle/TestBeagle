@@ -28,10 +28,10 @@ agent-browser find text "Log in" click             # semantic locator when a ref
 agent-browser get url; agent-browser get title     # assert where you landed
 agent-browser eval "document.querySelectorAll('.item').length"
 
-# after EVERY route — an entry here is a finding, not noise
+# after EVERY route — capture these as evidence, then judge against what's expected
 agent-browser console                              # console.* output
 agent-browser errors                               # uncaught page errors
-agent-browser network requests                     # flag non-2xx/3xx, failed, slow
+agent-browser network requests                     # non-2xx/3xx, failed, slow
 
 # capture
 agent-browser screenshot OUT/route-state.png       # viewport
@@ -48,11 +48,13 @@ agent-browser trace start && ...interact... && agent-browser trace stop OUT/trac
 agent-browser close                                # always, when the run ends
 ```
 
-Because every step is a shell command, a flow verified with agent-browser can be frozen verbatim into a static runner (`../beagle-shared/emit-runner.md`) — something an MCP-driven flow can't do.
+Console, page-error, and network output are **evidence candidates, not automatic findings**. Report only what deviates from the expected result for that step — a negative test's 401, an intentional validation error, or a known third-party beacon is expected, not a bug. Correlate each signal to the action that triggered it, and deduplicate repeats across routes into one finding.
+
+Because every step is a shell command, a flow verified with agent-browser can be **frozen into a static runner** (`../beagle-shared/emit-runner.md`) — but rewrite any `@eN` snapshot refs as stable semantic locators (`find role|text|label|testid`) first, since a ref is only valid for the snapshot that produced it. An MCP-driven flow can't be frozen this way.
 
 ## Driver 3 — browser MCP
 
-Use when connected; tool names below are the actual ones.
+Use when connected. Before relying on any driver or CLI, confirm it actually exists and note its version (an exposed MCP tool, `agent-browser --version`, `google-chrome`/`chromium`, `chromedriver`, `ffmpeg`, the audit packages) — declare anything missing in the plan rather than discovering it mid-run. Tool names below are the actual ones.
 
 - **chrome-devtools**: `new_page` / `navigate_page`, `take_screenshot`, `take_snapshot`, `click`, `fill`, `fill_form`, `hover`, `press_key`, `type_text`, `drag`, `wait_for`, `evaluate_script`, `list_console_messages`, `list_network_requests`, `emulate` (color scheme, device, throttling), `resize_page`, `performance_start_trace` → interact → `performance_stop_trace` → `performance_analyze_insight`, `lighthouse_audit`.
 - **claude-in-chrome**: `tabs_create_mcp` + `navigate`, `computer` (screenshot/click/type/scroll), `read_page`, `find`, `form_input`, `read_console_messages`, `read_network_requests`, `resize_window`, `javascript_tool`, `gif_creator` (GIF, not video). Note: this extension talks to a visible Chrome and may refuse `localhost` targets — if it does, fall back to agent-browser rather than losing interaction.
@@ -66,9 +68,10 @@ CHROME="$(command -v google-chrome || command -v chromium || command -v chromium
 [ -z "$CHROME" ] && [ -x "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ] && CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 [ -z "$CHROME" ] && echo "no Chrome found" && exit 1
 mkdir -p OUT
+rm -f OUT/route-name.png   # fresh path, so a stale file from a prior run can't pass as this capture
 "$CHROME" --headless=new --disable-gpu --hide-scrollbars --virtual-time-budget=4000 \
   --window-size=1280,800 --screenshot="OUT/route-name.png" "http://localhost:PORT/route"
-test -s OUT/route-name.png || echo "WARN: screenshot missing/empty for route-name"   # a failed capture is otherwise silent
+test -s OUT/route-name.png || { echo "FAIL: screenshot missing/empty for route-name" >&2; exit 1; }   # fail hard; a bad capture is otherwise silent
 "$CHROME" --headless=new --dump-dom "http://localhost:PORT/route" > OUT/route-name.html   # HTML for scraping/secret checks
 ```
 
@@ -76,8 +79,9 @@ Dark mode: `--force-dark-mode` (best-effort; say so in the report if the app doe
 
 ## Accessibility and performance CLIs (any driver)
 
-- axe violations + contrast: `npx @axe-core/cli http://localhost:PORT/route` (needs Chrome). Keyboard/focus order needs an interactive driver: `agent-browser press Tab` repeatedly, `snapshot` to read the focused element, screenshot the focus ring.
+- axe violations + contrast: `npx @axe-core/cli http://localhost:PORT/route` (needs Chrome **and a matching chromedriver** — if it's missing, say so and inject axe into the live page instead, as the a11y example did). Keyboard/focus order needs an interactive driver: `agent-browser press Tab` repeatedly, `snapshot` to read the focused element, screenshot the focus ring.
 - Lighthouse: `npx lighthouse http://localhost:PORT/route --only-categories=performance --output=json --quiet --chrome-flags="--headless=new"`.
+- **These CLIs load the URL in a fresh, logged-out browser — they do not carry your session.** For an authenticated screen, inject axe into the already-authenticated page (agent-browser/MCP) or transfer the session, and **verify the account and final URL before auditing** so a login redirect isn't audited as the target. Keep credentials, tokens, and session/state files out of the captured artifacts.
 
 ## Output
 

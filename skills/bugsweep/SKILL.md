@@ -13,7 +13,7 @@ Run `preflight` (or reuse its report). Get: targets, run commands, readiness met
 
 ## Phase 1 — Route map + approval gate (MANDATORY — stop here)
 
-Build the full route map: for every path from signup/login onward — **경로 + 상태** (logged-out/in, empty/populated), **변형** (dark mode, locales), **드라이버** per route (`../beagle-shared/drivers-web.md` / `../beagle-shared/drivers-mobile.md`), and **검증 불가 예정** + 이유 (e.g. simctl can't tap; no interactive web driver → capture-only). Then present it and stop per the shared gate in **`../beagle-shared/approval-gate.md`** — nothing launches, seeds, or captures until the user approves.
+Build the full route map: for every path from signup/login onward — **경로 + 상태** (logged-out/in, empty/populated), **변형** (dark mode, locales), **드라이버** per route (`../beagle-shared/drivers-web.md` / `../beagle-shared/drivers-mobile.md`), and **검증 불가 예정** + 이유 (e.g. simctl can't tap; no interactive web driver → capture-only). Build the inventory by reconciling the app's **declared** routes/API (router config, OpenAPI, nav) with what you actually observe while navigating — don't trust a single source. Give each row a scenario id, the role/precondition, the action, and the **expected** outcome you will check against; a screen that merely rendered is covered for *capture*, not for *behavior*, so keep those separate and list what you deliberately exclude. Then present it and stop per the shared gate in **`../beagle-shared/approval-gate.md`** — nothing launches, seeds, or captures until the user approves.
 
 ## Phase 2 — Launch
 
@@ -23,7 +23,7 @@ Start services with the discovered commands. Confirm readiness by **evidence** (
 
 - Static screens: prefer the repo's native capture scripts / review-mode deep links; else drive the real UI.
 - Flows: actually perform signup, login, navigation, CRUD — **where the driver supports interaction**. With capture-only headless Chrome (no agent-browser, no browser MCP, no repo E2E tool), you get screenshots but not driven flows: put those flows in 검증 불가.
-- Web with an interactive driver: after **every** route check console, page errors, and network (`agent-browser console` / `errors` / `network requests`, or the MCP's `list_console_messages` / `list_network_requests`) — errors are findings. With capture-only headless Chrome, console/network aren't captured — record that as 검증 불가 unless the repo's own tooling provides them.
+- Web with an interactive driver: after **every** route check console, page errors, and network (`agent-browser console` / `errors` / `network requests`, or the MCP's `list_console_messages` / `list_network_requests`) — each entry is an evidence candidate, not automatically a finding: report only deviations from the expected result for that step, correlate to the triggering action, and deduplicate. With capture-only headless Chrome, console/network aren't captured — record that as 검증 불가 unless the repo's own tooling provides them.
 - API targets (no UI): don't screenshot — hit each endpoint (curl/httpie), check status, schema, and error handling; report coverage as an endpoint table.
 - Capture every screen × state × variant in the approved map (screenshots, and video for flows where useful).
 
@@ -37,6 +37,6 @@ Offer to freeze the capture flow into a repo-native `.sh` (via `../beagle-shared
 
 ## Hard rules
 
-- Android: launch with `am start -n`, **never `adb monkey`** (it clears the rotation lock). Uninstall before install — never `install -r` (stale build).
+- Android: launch with `am start -n`, **never `adb monkey`** (it clears the rotation lock). Prefer a clean install (`adb uninstall` then `adb install`) for clean-state QA — the risk is stale app **data**, not a stale build — and use `install -r` only for an upgrade / data-retention case; verify the installed build identity, and erase data only within the approved reset scope (see `../beagle-shared/drivers-mobile.md`).
 - iOS: a build wrapper's exit 0 is meaningless — confirm `BUILD SUCCEEDED` in the log.
 - Any tap/flow/state you can't verify goes in 검증 불가 with the reason. Never silently skip, never fake a pass.

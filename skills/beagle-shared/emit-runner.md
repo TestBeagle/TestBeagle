@@ -5,7 +5,7 @@ Shared by scriptify and by each dimension skill's optional "emit a runner" step.
 ## Rules
 
 1. **Reuse the repo's own style first.** If the repo already has capture/run scripts (found in preflight), match their shape, flags, and location — don't introduce a second convention. Extend, don't replace.
-2. **Only script what you actually ran and verified.** A runner is a recording of a working flow, not a guess. Don't emit steps you couldn't execute. Flows driven with agent-browser freeze verbatim (they are shell commands); open a named session at the top (`export AGENT_BROWSER_SESSION="$(agent-browser session id --scope worktree --prefix runner)"`) and `agent-browser close` at the end. MCP-driven flows can't be frozen — re-drive them with agent-browser first or leave them out.
+2. **Only script what you actually ran and verified.** A runner is a recording of a working flow, not a guess. Don't emit steps you couldn't execute. Flows driven with agent-browser port straight into a runner (they are shell commands), but replace per-snapshot `@eN` refs with stable semantic locators (`agent-browser find role|text|label|testid …`) and bounded readiness (`wait --load networkidle`, `wait <sel>`) — a raw `@eN` ref is only valid for the snapshot that produced it and will break on replay. Open a named session at the top (`export AGENT_BROWSER_SESSION="$(agent-browser session id --scope worktree --prefix runner)"`), add a cleanup trap and `agent-browser close` at the end, and verify the script twice from a fresh seeded state. MCP-driven flows can't be frozen — re-drive them with agent-browser first or leave them out.
 3. **Portable bash** when there's no existing template:
    ```bash
    #!/usr/bin/env bash
