@@ -24,6 +24,6 @@ Present what you'll generate: which flows/routes/findings become test cases, the
 
 ## Phase 3 — Run, then hand over
 
-Run the generated tests and report real results. Green tests prove they at least execute and pass; for a regression test, show it **fails on the current bug** (before the fix) so it actually guards something — a test that passes whether or not the bug exists guards nothing. A test you didn't run is unverified; say so. Don't assert flaky/time-dependent state. Offer the tests + how to run them; let the maintainer commit them (don't auto-commit).
+Run the generated tests and report real results. Green tests prove they at least execute and pass; for a regression test, show it **fails on the current bug** (before the fix) so it actually guards something — a test that passes whether or not the bug exists guards nothing. A test you didn't run is unverified; say so. Don't assert flaky/time-dependent state. If a result changes across runs, treat it as **flaky, not passed**: keep the first-failure evidence, reset fixtures and retry at most twice, and separate a product bug from an infrastructure or test-harness failure before reporting. Offer the tests + how to run them; let the maintainer commit them (don't auto-commit).
 
 Report per `../beagle-shared/report-base.md` (Korean default, anti-slop): what was generated, where, what it covers, what ran green/red, and what's still uncovered (검증 불가 / 미커버).

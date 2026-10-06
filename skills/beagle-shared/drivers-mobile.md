@@ -63,7 +63,7 @@ adb shell input keyevent KEYCODE_BACK
 
 ## Performance (perfsweep)
 
-- **Cold-start (Android)**: `adb shell am start -W -n <pkg>/<activity>` → read `TotalTime` (ms).
+- **Cold-start (Android)**: `adb shell am force-stop <pkg>` first, then `adb shell am start -W -n <pkg>/<activity>` → read `TotalTime` (ms). Repeat several trials and report **median + spread**, not one number; a launch without the force-stop is a warm start measuring something else — label it as such.
 - **Frames / jank (Android)**: `adb shell dumpsys gfxinfo <pkg>` → janky-frame % and 90/95/99th percentile frame times.
 - **CPU / energy (Android)**: `adb shell top -n 1 | grep <pkg>`; `adb shell dumpsys batterystats <pkg>`.
 - **iOS**: startup and energy via `xcrun xctrace record` / Instruments where available. If that tooling isn't at hand, mark the metric 검증 불가 rather than guessing.
