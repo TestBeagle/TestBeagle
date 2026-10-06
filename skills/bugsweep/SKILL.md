@@ -9,15 +9,15 @@ Plan-gated, full-path functional QA: run the app locally, walk every user path f
 
 ## Phase 0 — Discover (reuse preflight)
 
-Run `preflight` (or reuse its report). Get: targets, run commands, readiness method, seed/review tooling, output location, drivers. If a target isn't locally testable, say so and don't fake it.
+Run `../preflight/SKILL.md` (or reuse its saved report). Get: targets, run commands, readiness method, seed/review tooling, output location, drivers. If a target isn't locally testable, say so and don't fake it.
 
 ## Phase 1 — Route map + approval gate (MANDATORY — stop here)
 
-Build the full route map: for every path from signup/login onward — **경로 + 상태** (logged-out/in, empty/populated), **변형** (dark mode, locales), **드라이버** per route (`../beagle-shared/drivers-web.md` / `../beagle-shared/drivers-mobile.md`), and **검증 불가 예정** + 이유 (e.g. simctl can't tap; no interactive web driver → capture-only). Build the inventory by reconciling the app's **declared** routes/API (router config, OpenAPI, nav) with what you actually observe while navigating — don't trust a single source. Give each row a scenario id, the role/precondition, the action, and the **expected** outcome you will check against; a screen that merely rendered is covered for *capture*, not for *behavior*, so keep those separate and list what you deliberately exclude. Then present it and stop per the shared gate in **`../beagle-shared/approval-gate.md`** — nothing launches, seeds, or captures until the user approves.
+Build the full route map: for every path from signup/login onward — **경로 + 상태** (logged-out/in, empty/populated), **변형** (dark mode, locales), **드라이버** per route (`../beagle-shared/drivers-web.md` / `../beagle-shared/drivers-mobile.md`), and **검증 불가 예정** + 이유 (e.g. simctl can't tap; no interactive web driver → capture-only). Before the gate, build the inventory from **declared** sources only (router config, OpenAPI, nav, source) — don't launch the app to discover routes. In Phase 3, reconcile with what you actually observe and report extra routes as additions. Give each row a scenario id, the role/precondition, the action, and the **expected** outcome you will check against; a screen that merely rendered is covered for *capture*, not for *behavior*, so keep those separate and list what you deliberately exclude. Then present it and stop per the shared gate in **`../beagle-shared/approval-gate.md`** (if that file is missing, still stop and wait for the user's explicit approval) — nothing launches, seeds, or captures until the user approves.
 
 ## Phase 2 — Launch
 
-Start services with the discovered commands. Confirm readiness by **evidence** (poll the health endpoint; grep the build log for the success marker) — never by exit code alone. Run the seed script if one exists.
+Start services with the discovered commands. Confirm readiness by **evidence** (poll the health endpoint; grep the build log for the success marker) — never by exit code alone. Seed only if the approved plan names it.
 
 ## Phase 3 — Capture & QA every route
 
@@ -29,7 +29,7 @@ Start services with the discovered commands. Confirm readiness by **evidence** (
 
 ## Phase 4 — Report
 
-Write per `../beagle-shared/report-base.md` (Korean default, anti-slop rules enforced). Finding fields: the common block plus, per finding, the exact reproduction and the console/network/screenshot evidence. Everything you couldn't exercise goes in 검증 불가.
+Write per `../beagle-shared/report-base.md` (Korean default, anti-slop rules enforced). Finding fields: the common block plus, per finding, the exact reproduction and the console/network/screenshot evidence. Trace each to its cause: failing request → route registration (grep the path) → handler; console error → stack trace → source map → `file:line`. Everything you couldn't exercise goes in 검증 불가.
 
 ## Phase 5 — Offer a static runner
 

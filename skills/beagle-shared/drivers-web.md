@@ -16,8 +16,8 @@ Driver 1 beats 2 only for flows the repo already scripts; use 2 for everything e
 Verified against agent-browser 0.37.0. Full guide ships with the CLI: `agent-browser skills get core` (read it once per session; it is version-matched, this file only pins what TestBeagle relies on). Not installed? Preflight reports it with the fix: `brew install agent-browser` or `npm i -g agent-browser && agent-browser install` (the latter downloads Chrome for Testing — an install, so it needs approval).
 
 ```bash
-# one named session per run — the unnamed default is shared with every other agent on the machine
-export AGENT_BROWSER_SESSION="$(agent-browser session id --scope worktree --prefix beagle)"
+# one unique session per run — the unnamed default is shared with every other agent on the machine
+export AGENT_BROWSER_SESSION="beagle-$(date +%s)-$$"
 
 agent-browser open "http://localhost:PORT/route"
 agent-browser wait --load networkidle              # readiness by evidence, not sleep
@@ -39,7 +39,7 @@ agent-browser screenshot --full OUT/route-state-full.png
 agent-browser set media dark                       # then capture the dark variant (`set media light` to restore)
 agent-browser set viewport 390 844                 # mobile viewport variant
 
-# video (repro): real .webm/.mp4, needs ffmpeg on PATH
+# video (repro): real .webm/.mp4, needs ffmpeg with libvpx/libx264 on PATH
 agent-browser record start OUT/repro.webm && ...steps... && agent-browser record stop
 
 # perf (perfsweep): Chrome DevTools trace around an interaction
@@ -48,7 +48,7 @@ agent-browser trace start && ...interact... && agent-browser trace stop OUT/trac
 agent-browser close                                # always, when the run ends
 ```
 
-Console, page-error, and network output are **evidence candidates, not automatic findings**. Report only what deviates from the expected result for that step — a negative test's 401, an intentional validation error, or a known third-party beacon is expected, not a bug. Correlate each signal to the action that triggered it, and deduplicate repeats across routes into one finding.
+Console, page-error, and network output are **evidence candidates, not automatic findings**. Report only what deviates from the expected result for that step — a negative test's 401, an intentional validation error, or a known third-party beacon is expected, not a bug. Correlate each signal to the action that triggered it and, if the source is available, to the code that emitted it, and deduplicate repeats across routes into one finding.
 
 Because every step is a shell command, a flow verified with agent-browser can be **frozen into a static runner** (`../beagle-shared/emit-runner.md`) — but rewrite any `@eN` snapshot refs as stable semantic locators (`find role|text|label|testid`) first, since a ref is only valid for the snapshot that produced it. An MCP-driven flow can't be frozen this way.
 
@@ -79,10 +79,11 @@ Dark mode: `--force-dark-mode` (best-effort; say so in the report if the app doe
 
 ## Accessibility and performance CLIs (any driver)
 
-- axe violations + contrast: `npx @axe-core/cli http://localhost:PORT/route` (needs Chrome **and a matching chromedriver** — if it's missing, say so and inject axe into the live page instead, as the a11y example did). Keyboard/focus order needs an interactive driver: `agent-browser press Tab` repeatedly, `snapshot` to read the focused element, screenshot the focus ring.
-- Lighthouse: `npx lighthouse http://localhost:PORT/route --only-categories=performance --output=json --quiet --chrome-flags="--headless=new"`.
-- **These CLIs load the URL in a fresh, logged-out browser — they do not carry your session.** For an authenticated screen, inject axe into the already-authenticated page (agent-browser/MCP) or transfer the session, and **verify the account and final URL before auditing** so a login redirect isn't audited as the target. Keep credentials, tokens, and session/state files out of the captured artifacts.
+- axe violations + contrast: `agent-browser a11y --tags wcag2a,wcag2aa,wcag21a,wcag21aa,wcag22aa --json` on the live page (bundled axe-core, works logged in). Fallback: `npx @axe-core/cli http://localhost:PORT/route` (needs Chrome **and a matching chromedriver**, logged-out only). Keyboard/focus order needs an interactive driver: `agent-browser press Tab` repeatedly, `snapshot` to read the focused element, screenshot the focus ring.
+- Core Web Vitals on a live/logged-in page: `agent-browser vitals --json`.
+- Lighthouse (≥3 runs, report the median): `npx lighthouse http://localhost:PORT/route --only-categories=performance --output=json --quiet --chrome-flags="--headless=new"`.
+- **`@axe-core/cli` and the Lighthouse CLI load the URL in a fresh, logged-out browser — they do not carry your session** (`agent-browser a11y`/`vitals` run on the current page and do). For an authenticated screen, inject axe into the already-authenticated page (agent-browser/MCP) or transfer the session, and **verify the account and final URL before auditing** so a login redirect isn't audited as the target. Keep credentials, tokens, and session/state files out of the captured artifacts.
 
 ## Output
 
-Write captures to the location `../beagle-shared/capture-output.md` resolves for this repo. Name files by `route[-state][-variant]` (e.g. `settings-loggedin-dark.png`) so the report index is scannable.
+Write captures to the location `../beagle-shared/capture-output.md` resolves for this repo. Name files per `../beagle-shared/capture-output.md` (e.g. `settings-loggedin-dark.png`).

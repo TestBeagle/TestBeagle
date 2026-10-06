@@ -16,7 +16,7 @@ Prefer the repo's own capture scripts / deep-link "review" modes when they exist
 ```bash
 xcrun simctl list devices booted                    # already booted? (commands below use the `booted` alias)
 # boot one if none — resolve a UDID so a duplicated device name isn't ambiguous:
-UDID=$(xcrun simctl list devices available | grep -m1 'iPhone 16 (' | grep -oE '[0-9A-F-]{36}')
+UDID=$(xcrun simctl list devices available | grep -m1 'iPhone' | grep -oE '[0-9A-F-]{36}')   # first available iPhone; pin a model if the repo needs one
 xcrun simctl boot "$UDID"; xcrun simctl bootstatus "$UDID" -b   # wait until booted
 xcrun simctl ui booted appearance dark               # or: light
 xcrun simctl status_bar booted override --time 9:41 --batteryLevel 100 --cellularBars 4
@@ -70,4 +70,4 @@ adb shell input keyevent KEYCODE_BACK
 
 ## Output
 
-Write captures to the location `../beagle-shared/capture-output.md` resolves for this repo (repo convention first, e.g. `docs/screenshots/{light,dark}`; else the TestBeagle default). Name files by `screen[-state]-<locale>-<appearance>` so the report index is scannable.
+Write captures to the location `../beagle-shared/capture-output.md` resolves for this repo (repo convention first, e.g. `docs/screenshots/{light,dark}`; else the TestBeagle default). Name files per `../beagle-shared/capture-output.md`.

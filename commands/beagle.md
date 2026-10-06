@@ -1,6 +1,6 @@
 ---
 description: Start a TestBeagle QA run on this repo — preflight, functional QA, security, a11y, performance, test generation, or a static runner.
-argument-hint: [preflight|qa|security|a11y|perf|tests|script]
+argument-hint: "[preflight|qa|security|a11y|perf|tests|snap|repro|script]"
 ---
 
 # /beagle
@@ -11,7 +11,7 @@ Let the QA beagle loose on this repo. The user invoked `/beagle` with:
 $ARGUMENTS
 ```
 
-Pick the matching TestBeagle skill and follow its `SKILL.md` exactly. **Every skill is plan-gated** — discover, present the plan, and wait for the user's approval before launching, seeding, capturing, or probing anything (see the `beagle-approval-gate` reference).
+Pick the matching TestBeagle skill and follow its `SKILL.md` exactly. **Every skill is plan-gated** — discover, present the plan, and wait for the user's approval before launching, seeding, capturing, or probing anything (see `../beagle-shared/approval-gate.md`, relative to the chosen skill's `SKILL.md`).
 
 Route by the argument (case-insensitive):
 
@@ -25,4 +25,4 @@ Route by the argument (case-insensitive):
 - `snap`, `screenshots`, `shots` → **snap** (screenshot every screen → images, no analysis).
 - `repro`, `video`, `record` → **repro** (record a video reproducing a flow or error).
 
-If the argument doesn't match, run **preflight**, then show what TestBeagle can test on this repo and ask which to run. Reuse the repo's existing tooling; report in Korean by default per `beagle-report`.
+If the argument doesn't match, run **preflight**, then show what TestBeagle can test on this repo and ask which to run. Reuse the repo's existing tooling; report in Korean by default per `../beagle-shared/report-base.md` (relative to the skill's `SKILL.md`).

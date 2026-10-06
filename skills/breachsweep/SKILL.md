@@ -18,11 +18,11 @@ Plan-gated, non-destructive security testing of an app **you own or are authoriz
 
 ## Phase 0 — Discover (reuse preflight)
 
-Run/reuse `preflight`. Additionally map: routes/endpoints, the auth middleware, session/token handling, and secret handling. Reuse the repo's own `npm audit` / security CI if present.
+Run/reuse `../preflight/SKILL.md`. Additionally map: routes/endpoints, the auth middleware, session/token handling, and secret handling. Reuse the repo's own `npm audit` / security CI if present.
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present, and stop per the shared gate in `../beagle-shared/approval-gate.md`, a plan that states:
+Present, and stop per the shared gate in `../beagle-shared/approval-gate.md` (if that file is missing, still stop and wait for the user's explicit approval), a plan that states:
 - **Authorized targets**: exact host(s)/base URL(s) — a local instance only.
 - **Allowed methods and account/data scope**, plus a **request-rate ceiling** (no floods).
 - **Test categories** to run and what's **out of scope**.
@@ -37,7 +37,7 @@ Local instance only. Seed multiple accounts (A/B) so authorization isolation can
 
 - **AuthZ / IDOR**: with accounts A and B, try to **read** B's objects by id/reference as A (read-only by default). A state-changing authz check (write/delete as the wrong user) runs only if separately approved, against re-seedable data.
 - **AuthN**: hit protected endpoints with no/expired/reused session or token.
-- **Input validation**: probe SQLi / XSS / path-traversal with **safe, non-destructive** payloads; observe reflection, errors, and error verbosity.
+- **Input validation**: climb this ladder and stop at the first step that proves the issue: (1) read-only GET/HEAD; (2) a single quote or a true/false pair on read endpoints, looking for SQL error leakage or differing responses — no UNION, no data extraction; (3) an inert unique marker for reflection — no stored payloads in shared data; (4) read-only cross-account reads with seeded accounts A and B; (5) path traversal only toward a known harmless file. Auth bypass, writes, or anything that changes state each need their own line in the approved plan.
 - **Secret exposure**: secrets in responses, source maps, verbose error pages, debug endpoints.
 - **Headers / transport**: CSP, HSTS, cookie flags (HttpOnly/Secure/SameSite), CORS misconfiguration.
 - **Client**: hardcoded secrets in web JS / mobile bundles; insecure local storage.
@@ -45,6 +45,6 @@ Local instance only. Seed multiple accounts (A/B) so authorization isolation can
 
 ## Phase 4 — Report
 
-Write per `../beagle-shared/report-base.md` (Korean default, anti-slop). Header includes **테스트 범위 및 인가**. Per finding: 취약점 유형 · 위치(엔드포인트/파일) · 재현(요청·응답 증거) · 영향 · 수정 제안 · 확신(확실/추정). Separate an **observed configuration** from a **demonstrated impact**: a missing header, wildcard CORS, or a listing you can see is an observation (확실 as *observed*) — don't state production impact you didn't prove (e.g. local HTTP can't establish a production HSTS gap, and wildcard CORS alone isn't sensitive-data exfiltration). Put anything requiring an actual exploit in 미검증/범위 외. Close with 미검증/범위 외.
+Write per `../beagle-shared/report-base.md` (Korean default, anti-slop). Header includes **테스트 범위 및 인가**. Per finding: 취약점 유형 · 증상 위치(엔드포인트) · 원인 위치(middleware / route registration `file:line`, or the dependency's manifest line) · 재현(요청·응답 증거) · 영향 · 수정 제안 · 확신(확실/추정). Separate an **observed configuration** from a **demonstrated impact**: a missing header, wildcard CORS, or a listing you can see is an observation (확실 as *observed*) — don't state production impact you didn't prove (e.g. local HTTP can't establish a production HSTS gap, and wildcard CORS alone isn't sensitive-data exfiltration). Put anything requiring an actual exploit in 미검증/범위 외. Close with 미검증/범위 외.
 
 Optionally offer a static re-check runner via `../beagle-shared/emit-runner.md`.

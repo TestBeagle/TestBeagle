@@ -1,6 +1,8 @@
 ---
 name: beagle-shared
 description: Internal shared references for the TestBeagle skills (web/mobile drivers, capture-output locations, report skeleton + anti-slop rules, runner emitter, approval gate). Loaded by preflight, bugsweep, breachsweep, a11ysweep, perfsweep, casewright, scriptify, snap, and repro via ../beagle-shared/<file>.md. Not a standalone skill — do not invoke it directly.
+user-invocable: false
+disable-model-invocation: true
 ---
 
 # beagle-shared — shared references for the TestBeagle suite

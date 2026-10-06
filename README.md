@@ -22,7 +22,7 @@ TestBeagle is a set of portable agent **skills**. Point any of them at a repo yo
 
 ![TestBeagle running against OWASP Juice Shop](docs/demo.gif)
 
-A complete run against [OWASP Juice Shop](https://github.com/juice-shop/juice-shop) — every route captured, a real login flow, and three evidence-based reports — is checked in at **[docs/examples/juice-shop](docs/examples/juice-shop/)**. It surfaced a `/ftp` directory-listing exposure and a critical missing-label accessibility issue, and it left SQL injection, XSS, and IDOR in the *unverified* column rather than claim them on an app that's vulnerable by design. **That last part is the whole point: it never counts an unexercised path as a pass.**
+A complete run against [OWASP Juice Shop](https://github.com/juice-shop/juice-shop) — representative routes captured, a real login flow, and three evidence-based reports — is checked in at **[docs/examples/juice-shop](docs/examples/juice-shop/)**. It surfaced a `/ftp` directory-listing exposure and a critical missing-label accessibility issue, and it left SQL injection, XSS, and IDOR in the *unverified* column rather than claim them on an app that's vulnerable by design. **That last part is the whole point: it never counts an unexercised path as a pass.**
 
 <p align="center">
   <img src="docs/examples/juice-shop/report-card-en.png" alt="A breachsweep report excerpt: the /ftp HIGH finding with its reproduction command, and the Unverified table leaving SQL injection, XSS, and IDOR unclaimed" width="760">
@@ -46,7 +46,7 @@ Reports come out in **Korean by default, English (or another language) on reques
 | **snap** | Screenshots of every screen saved as image files — capture-only, no analysis. | "스크린샷 다 찍어줘", "capture all screens" |
 | **repro** | Records a video that reproduces a flow or a bug, and saves the clip. | "오류 영상으로 남겨줘", "record a repro video" |
 
-Every run is **plan-gated**: the agent shows you the route map and waits for approval before it launches, seeds, or captures anything. In Claude Code this uses plan mode; in Codex it posts the plan and waits for your explicit OK. Reports default to Korean and land in the repo (e.g. `docs/qa/`), reusing the project's own conventions where they exist.
+Every run is **plan-gated**: the agent shows you the route map and waits for approval before it launches, seeds, or captures anything. In plan mode (Claude Code or Codex) the plan comes through it; otherwise the agent posts it and waits for your explicit OK. Reports default to Korean and land in the repo (e.g. `docs/qa/`), reusing the project's own conventions where they exist.
 
 ## Requirements
 
@@ -55,11 +55,11 @@ Every run is **plan-gated**: the agent shows you the route map and waits for app
 - **iOS** targets: Xcode + `xcrun simctl` (macOS).
 - **Android** targets: Android SDK platform-tools (`adb`).
 
-> Codex CLI: to give the web driver full interaction, enable the chrome-devtools MCP in `~/.codex/config.toml` (`[mcp_servers.chrome-devtools] command="npx" args=["chrome-devtools-mcp@latest"]`). Otherwise web QA degrades to capture-only and reports the gap honestly.
+> Codex CLI: agent-browser works in Codex, so the chrome-devtools MCP is optional. Codex's `workspace-write` sandbox has no network and can't write outside the workspace, so launching the app, `agent-browser` (state in `~/.agent-browser`), `curl localhost`, `docker`, and `npx` need sandbox escalation — the plan lists each one before you approve.
 
 ## Install
 
-Pick your runtime — all methods install the same 7 skills. Re-running is safe.
+Pick your runtime — all methods install the same 9 skills. Re-running is safe.
 
 ### Claude Code — plugin (recommended)
 
@@ -79,17 +79,6 @@ codex plugin marketplace add TestBeagle/TestBeagle
 codex plugin add TestBeagle@TestBeagle
 ```
 
-Or wire it up by hand in `~/.codex/config.toml`:
-
-```toml
-[marketplaces.TestBeagle]
-source = "TestBeagle/TestBeagle"
-source_type = "github"
-
-[plugins."TestBeagle@TestBeagle"]
-enabled = true
-```
-
 ### Any runtime — clone + `install.sh` (symlink)
 
 Installs into Claude Code, Codex, **and** the cross-runtime `~/.agents/skills` (read by Copilot CLI, Gemini CLI, …) in one shot. Great for local development — edit the repo and every runtime sees the change, no reinstall.
@@ -101,7 +90,7 @@ cd TestBeagle
 # or one runtime: ./install.sh ~/.claude/skills
 ```
 
-It symlinks each skill folder — the 9 skills **and** the shared `beagle-shared` reference folder — into the target dir, so every skill's `../beagle-shared/<file>.md` reference resolves.
+It symlinks each skill folder — the 9 skills **and** the shared `beagle-shared` reference folder — into the target dir, so every skill's `../beagle-shared/<file>.md` reference resolves. After a `git pull`, re-run `./install.sh` so new folders get linked and stale links are removed.
 
 ### `npx skills`
 
@@ -109,16 +98,16 @@ The [`skills`](https://github.com/vercel-labs/skills) CLI (which manages `~/.age
 
 ```bash
 npx skills add TestBeagle/TestBeagle --all        # all skills + shared references
-npx skills add TestBeagle/TestBeagle -s preflight,bugsweep   # just these skills
+npx skills add TestBeagle/TestBeagle -s preflight bugsweep   # just these skills
 ```
 
-The shared driver/report logic lives in a `beagle-shared` folder, so `--all` carries the whole working suite. A single-skill `-s` install pulls only that one folder and will be missing the `beagle-shared` references it points to — use `--all`, the **plugin**, or **`install.sh`** for the full suite.
+The shared driver/report logic lives in a `beagle-shared` folder, so `--all` carries the whole working suite. A single-skill `-s` install pulls only that one folder and will be missing the `beagle-shared` references it points to (the skill still stops for your approval, but loses the shared report and driver rules) — use `--all`, the **plugin**, or **`install.sh`** for the full suite.
 
 ## Talking to the AI
 
 TestBeagle skills are triggered by **what you say to your coding agent** (Claude Code, Codex, …) while it's open in the repo you want to test. Ask in plain language — English or Korean — and the agent matches your request to a skill and follows it.
 
-In Claude Code you can also type the **`/beagle`** command to start directly: `/beagle` (full QA), or `/beagle security` · `/beagle a11y` · `/beagle perf` · `/beagle tests` · `/beagle snap` · `/beagle repro` · `/beagle script`.
+In Claude Code you can also type the **`/beagle`** command to start directly: `/beagle` (full QA), or `/beagle security` · `/beagle a11y` · `/beagle perf` · `/beagle tests` · `/beagle snap` · `/beagle repro` · `/beagle script`. In Codex, mention the skill, e.g. `$bugsweep 전수 QA 해줘`, or just describe the task.
 
 | Want to… | Say something like |
 |----------|--------------------|
@@ -132,7 +121,7 @@ In Claude Code you can also type the **`/beagle`** command to start directly: `/
 | Just get screenshots of every screen | "스크린샷 다 찍어줘" · "capture all screens" |
 | Record a video of a bug / flow | "오류 영상으로 남겨줘" · "record a repro video" |
 
-**Every run stops for your approval first.** The skill discovers how your app runs, shows you a plan — which screens/routes, what it will capture, what it can't verify, where the report goes — and waits. In Claude Code this is plan mode; in Codex it posts the plan and waits for your go-ahead. Nothing launches, installs, seeds, or captures until you approve. Reports are written in Korean by default, into the repo (e.g. `docs/qa/`), reusing the project's own conventions where they exist.
+**Every run stops for your approval first.** The skill discovers how your app runs, shows you a plan — which screens/routes, what it will capture, what it can't verify, where the report goes — and waits. In plan mode (Claude Code or Codex) it comes through plan mode; otherwise the agent posts the plan and waits for your go-ahead. Nothing launches, installs, seeds, or captures until you approve. Reports are written in Korean by default, into the repo (e.g. `docs/qa/`), reusing the project's own conventions where they exist.
 
 ## Safety
 

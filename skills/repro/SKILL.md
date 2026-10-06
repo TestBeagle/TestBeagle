@@ -9,11 +9,11 @@ Record a **video** of a flow or a bug reproduction and save the clip, so the pro
 
 ## Phase 0 — Discover (reuse preflight, read-only)
 
-Run/reuse `preflight` for targets, run commands, drivers, and the output location. Nail down the exact steps that trigger the flow/error before recording — a repro video is only useful if it actually shows the problem.
+Run/reuse `../preflight/SKILL.md` for targets, run commands, drivers, and the output location. Take the steps from the user or the source report. If they must be found by trying, put a dry run into the Phase 1 plan — don't drive the app before approval. A repro video is only useful if it actually shows the problem.
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present the repro: the target, the step-by-step you'll perform, and where the clip lands (`../beagle-shared/capture-output.md`). Then stop per the shared gate in `../beagle-shared/approval-gate.md`.
+Present the repro: the target, the step-by-step you'll perform, and where the clip lands (`../beagle-shared/capture-output.md`). Then stop per the shared gate in `../beagle-shared/approval-gate.md` (if that file is missing, still stop and wait for the user's explicit approval).
 
 ## Phase 2 — Record
 
@@ -27,4 +27,4 @@ Capture a couple of extra frames before and after the trigger so the clip reads 
 
 ## Phase 3 — Hand over
 
-Save the clip to the output location and write the reproduction steps beside it (what state, what actions, expected vs actual). If the driver couldn't record on a given platform, say so (검증 불가) rather than faking it. Offer the clip + steps; don't auto-commit.
+Save `<clip>` to the output location with `<clip>.md` beside it: environment (commit or image revision, driver + version), starting state, numbered steps with the exact commands, expected vs actual, evidence at the trigger, 원인 위치 (per `../beagle-shared/report-base.md` rule 8), and format + duration (`ffprobe`). Watch or probe the clip before handing it over — a clip you didn't check is not evidence. If the driver couldn't record on a given platform, say so (검증 불가) rather than faking it. Offer the clip + steps; don't auto-commit.

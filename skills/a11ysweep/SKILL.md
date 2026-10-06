@@ -9,16 +9,16 @@ Plan-gated accessibility and UX audit of a locally running app: contrast, tap ta
 
 ## Phase 0 — Discover (reuse preflight)
 
-Run/reuse `preflight` for targets, run commands, drivers, output location. Reuse any repo a11y tooling found (e.g. touch-target or localization-parity lint scripts).
+Run/reuse `../preflight/SKILL.md` for targets, run commands, drivers, output location. Reuse any repo a11y tooling found (e.g. touch-target or localization-parity lint scripts).
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present the screens/routes to audit and the checks per platform, then stop per the shared gate in `../beagle-shared/approval-gate.md`.
+Present the screens/routes to audit and the checks per platform, then stop per the shared gate in `../beagle-shared/approval-gate.md` (if that file is missing, still stop and wait for the user's explicit approval).
 
 ## Phase 2 — Audit
 
 **Web** (`../beagle-shared/drivers-web.md`):
-- axe violations + contrast per route: `npx @axe-core/cli http://localhost:PORT/route` (any driver; needs Chrome). With chrome-devtools MCP you may instead inject axe-core via `evaluate_script` and run `axe.run`.
+- axe per route, on the live page (logged-in pages included): `agent-browser a11y --tags wcag2a,wcag2aa,wcag21a,wcag21aa,wcag22aa --json`. Run `--tags best-practice` separately and never attach a WCAG criterion to those. Fallbacks: chrome-devtools MCP injecting axe-core via `evaluate_script` + `axe.run`, or `npx @axe-core/cli` (logged-out only, needs a matching chromedriver). Record the axe version. axe `incomplete` results go under 검증 불가, never pass. Quote axe's raw impact, but assign severity by `../beagle-shared/report-base.md` rule 9 (what the barrier does to the user), not by the impact label.
 - Contrast: confirm axe's contrast results against computed colors; flag body text below WCAG AA (4.5:1; 3:1 for large text).
 - Keyboard (interactive driver required): walk focus order with `agent-browser press Tab` + `snapshot` (or the MCP's `press_key`); flag traps, invisible focus, unreachable controls. Capture-only driver → 검증 불가.
 - Labels: inputs/buttons/icons without an accessible name — `agent-browser snapshot` shows the accessible tree; unnamed controls stand out.
@@ -26,7 +26,8 @@ Present the screens/routes to audit and the checks per platform, then stop per t
 **Mobile** (`../beagle-shared/drivers-mobile.md`):
 - Tap targets below the platform minimum (iOS 44pt, Android 48dp) — reuse the repo's touch-target check if present.
 - Missing accessibility labels (`accessibilityLabel` / `contentDescription`).
-- Locale parity: strings present in one language but not another (reuse the repo's localization-parity lint) — capture the same screen in each locale.
+
+**Both**: locale parity — strings present in one language but not another (reuse the repo's localization-parity lint); capture the same screen in each locale.
 
 **UI slop** (review prompts, not absolute bans — keep intentional, justified design):
 - Korean body text below ~14px.
@@ -36,6 +37,6 @@ Present the screens/routes to audit and the checks per platform, then stop per t
 
 ## Phase 3 — Report
 
-Write per `../beagle-shared/report-base.md` (Korean default, anti-slop). Per finding: WCAG 기준(있으면) · 위치 · 왜(검증: axe rule / 측정값 / 스크린샷) · 수정 제안 · 확신. Unaudited screens → 검증 불가.
+Write per `../beagle-shared/report-base.md` (Korean default, anti-slop). Per finding: WCAG 기준(있으면) · 증상 위치 · 원인 위치(axe target selector → component template: grep a distinctive attribute, class, or text) · 왜(검증: axe rule / 측정값 / 스크린샷) · 수정 제안 · 확신. Unaudited screens → 검증 불가.
 
 Optionally offer a static re-check runner via `../beagle-shared/emit-runner.md`.
