@@ -1,4 +1,4 @@
-# beagle-capture-output — where screenshots, video, and reports go
+# capture-output — where screenshots, video, and reports go
 
 Shared by every skill that writes artifacts. Reuse the repo's own convention before inventing one; confirm the location in the approval gate.
 
@@ -14,6 +14,6 @@ Shared by every skill that writes artifacts. Reuse the repo's own convention bef
 ## Rules
 
 - **Propose, then confirm.** State the chosen location in the plan and let the user override before any file is written.
-- **Never write outside the target repo** (no `/tmp` as a final home — capture to `/tmp` when a tool requires it, then move the file into the repo path).
+- **Write inside the target repo** (no `/tmp` as a final home — capture to `/tmp` when a tool requires it, then move the file into the repo path). For a target with no repo (e.g. an image only), propose a location and confirm it.
 - **Keep names scannable and stable**: `route[-state][-locale][-appearance].png`. Stable names let a re-run diff cleanly against the last run.
 - **Don't commit blindly.** Offer the artifacts + report as a change; let the user decide what gets committed (large media may belong in the report as links, not in git).

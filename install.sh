@@ -20,6 +20,10 @@ fi
 for dir in "${targets[@]}"; do
   mkdir -p "$dir"
   for s in $SKILLS $REFS; do ln -sfn "$SRC/$s" "$dir/$s"; done
+  # links left by the pre-beagle-shared layout dangle after a pull
+  for old in approval-gate.md capture-output.md drivers-mobile.md drivers-web.md emit-runner.md report-base.md; do
+    [ -L "$dir/$old" ] && rm "$dir/$old"
+  done
   echo "installed TestBeagle skills → $dir"
 done
 

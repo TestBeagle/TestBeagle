@@ -1,4 +1,4 @@
-# beagle-runner — generate a static, repo-native `.sh` runner
+# emit-runner — generate a static, repo-native `.sh` runner
 
 Shared by scriptify and by each dimension skill's optional "emit a runner" step. Goal: freeze a flow the agent already figured out into a script the maintainer can re-run with no agent.
 
@@ -22,5 +22,5 @@ Shared by scriptify and by each dimension skill's optional "emit a runner" step.
    - Android: `am start -n …`, never `monkey`; `adb uninstall` before `adb install`.
    - iOS: after building, grep the log for `BUILD SUCCEEDED` and exit non-zero on `BUILD FAILED` (build wrappers can exit 0 on failure).
 5. **Write location**: the repo's existing `scripts/` (or wherever its current scripts live); else what `../beagle-shared/capture-output.md` resolves. `chmod +x` it.
-6. **Verify before handing over**: run the emitted script once and confirm it produces the expected artifacts. A runner that wasn't run is unverified — say so and don't claim it works.
+6. **Verify before handing over**: run the emitted script twice from a fresh seeded state and confirm it produces the expected artifacts. A runner that wasn't run is unverified — say so and don't claim it works.
 7. **Offer, don't auto-commit.** Present the script + a one-line usage note; let the maintainer commit it.

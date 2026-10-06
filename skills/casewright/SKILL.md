@@ -9,16 +9,16 @@ Turn flows and findings into **reusable automated test cases** in the repo's own
 
 ## Phase 0 — Discover (reuse preflight, read-only)
 
-Run/reuse `preflight`. Additionally detect the repo's **existing test framework and conventions** — e.g. Vitest/Jest, Playwright/Cypress/WebdriverIO, XCUITest, Espresso, pytest, Go `testing` — and its test directory, naming, fixtures, and run command. **Reuse what's there; never introduce a new framework or dependency** unless the user explicitly asks. If the repo has no test setup, plan to emit a structured test-case spec (see Phase 2) rather than inventing a stack.
+Run/reuse `../preflight/SKILL.md`. Additionally detect the repo's **existing test framework and conventions** — e.g. Vitest/Jest, Playwright/Cypress/WebdriverIO, XCUITest, Espresso, pytest, Go `testing` — and its test directory, naming, fixtures, and run command. **Reuse what's there; never introduce a new framework or dependency** unless the user explicitly asks. If the repo has no test setup, plan to emit a structured test-case spec (see Phase 2) rather than inventing a stack.
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present what you'll generate: which flows/routes/findings become test cases, the framework and file locations, and whether any new dev dependency is unavoidable (call it out — it needs approval). Then stop per the shared gate in `../beagle-shared/approval-gate.md`.
+Present what you'll generate: which flows/routes/findings become test cases, the framework and file locations, and whether any new dev dependency is unavoidable (call it out — it needs approval). Then stop per the shared gate in `../beagle-shared/approval-gate.md` (if that file is missing, still stop and wait for the user's explicit approval).
 
 ## Phase 2 — Generate
 
 - Write test cases in the repo's framework, matching its existing patterns (fixtures, helpers, selectors, naming). One clear case per behavior; assert on stable, observable outcomes — not on flaky timing or incidental DOM.
-- **Prefer regression tests from verified findings**: each confirmed bugsweep/breachsweep/a11y bug becomes a test that fails on the bug and passes once fixed.
+- **Prefer regression tests from verified findings**: each confirmed bugsweep/breachsweep/a11y bug becomes a test that fails on the bug and passes once fixed; put the finding's 원인 위치 in a comment in the test.
 - Cover the approved flows: happy path plus the meaningful edge/error cases, not just one smoke case per screen.
 - **No test framework in the repo?** Emit a structured test-case spec instead (a checklist or Gherkin-style `given/when/then` per flow, with expected results) so the cases are captured for whoever wires up a framework later. Say clearly that these are specs, not executable tests.
 

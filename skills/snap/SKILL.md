@@ -9,16 +9,16 @@ Capture-only: walk every screen and save the images. No interaction QA, no bug a
 
 ## Phase 0 — Discover (reuse preflight, read-only)
 
-Run/reuse `preflight` for targets, run commands, drivers, and the output location. Prefer the repo's native capture scripts / review-mode deep links if it has them.
+Run/reuse `../preflight/SKILL.md` for targets, run commands, drivers, and the output location. Prefer the repo's native capture scripts / review-mode deep links if it has them.
 
 ## Phase 1 — Plan + approval gate (MANDATORY)
 
-Present the shot list — screens/routes × states (logged-out/in, empty/populated) × variants (dark mode, locales) — and the output folder (`../beagle-shared/capture-output.md`). Then stop per the shared gate in `../beagle-shared/approval-gate.md`.
+Present the shot list — screens/routes × states (logged-out/in, empty/populated) × variants (dark mode, locales) — and the output folder (`../beagle-shared/capture-output.md`). Then stop per the shared gate in `../beagle-shared/approval-gate.md` (if that file is missing, still stop and wait for the user's explicit approval).
 
 ## Phase 2 — Launch & capture
 
-Start the app (readiness by evidence; seed if a script exists). Capture every screen × state × variant with the driver's screenshot commands (`../beagle-shared/drivers-web.md` / `../beagle-shared/drivers-mobile.md`). Name files `route[-state][-locale][-appearance].png` so the set is scannable and re-runs diff cleanly.
+Start the app (readiness by evidence; seed only if the approved plan names it). Capture every screen × state × variant with the driver's screenshot commands (`../beagle-shared/drivers-web.md` / `../beagle-shared/drivers-mobile.md`). Name files per `../beagle-shared/capture-output.md`.
 
 ## Phase 3 — Hand over
 
-Write a short index (filename → screen/state/variant) into the output location; note anything that couldn't be reached (검증 불가) with the reason. Offer the images; don't auto-commit. If you'll want to re-capture without an agent later, offer **scriptify** to freeze this into a `.sh`.
+Write `INDEX.md` into the output location: a table `file | route | state | variant/viewport | note`, plus a row per screen you couldn't reach (검증 불가) with the reason. Offer the images; don't auto-commit. If you'll want to re-capture without an agent later, offer **scriptify** to freeze this into a `.sh`.

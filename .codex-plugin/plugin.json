@@ -18,7 +18,6 @@
     "skills"
   ],
   "skills": "./skills/",
-  "hooks": {},
   "interface": {
     "displayName": "TestBeagle",
     "shortDescription": "Plan-gated QA/security/a11y/perf skills that run your app locally and sniff out bugs.",
