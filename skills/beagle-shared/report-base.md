@@ -1,6 +1,10 @@
 # beagle-report — shared report skeleton & anti-slop rules
 
-Every TestBeagle skill writes its report on this skeleton. Reports default to Korean (the maintainer's language); write English only if the user or the repo's docs are English-first. Each skill adds its own finding fields (see its SKILL.md); everything else here is common.
+Every TestBeagle skill writes its report on this skeleton.
+
+**Report language.** Default to Korean (the maintainer's language). Write the report in English instead when the user asks for English, or when the repo and its docs are English-first. If the user asks for a specific language you can write fluently, use that language for the whole report. Name the report's language where it isn't obvious (e.g. an "English version" line linking the default). Translate the prose and tables; never translate code, commands, identifiers, HTTP headers, file paths, or tool output — those stay verbatim as evidence. Do not claim a language you cannot write accurately; if unsure, stay in Korean or English and say so.
+
+Each skill adds its own finding fields (see its SKILL.md); everything else here is common.
 
 ## Anti-slop rules (mandatory — the report is worthless if it reads like AI filler)
 

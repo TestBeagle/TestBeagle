@@ -17,9 +17,11 @@ docker run --rm -p 127.0.0.1:3000:3000 bkimminich/juice-shop   # app on :3000
 
 | Report | What it found | Highlight |
 |--------|---------------|-----------|
-| [bugsweep](./bugsweep-report.md) | Functional QA across 9 routes + a real login flow | Login as `jim` verified via `whoami` API and the app's own challenge banner; no console errors or failed requests on the audited routes |
-| [a11ysweep](./a11ysweep-report.md) | axe-core on 3 routes | 1 critical (form input with no label), landmark/region issues, redundant alt text — each with the exact node |
-| [breachsweep](./breachsweep-report.md) | Non-destructive config-level checks | `/ftp` directory listing exposed; missing CSP/HSTS/Referrer-Policy; permissive CORS. SQLi/XSS/IDOR classes left in **미검증** because confirming them non-destructively wasn't possible |
+| bugsweep — [한국어](./bugsweep-report.md) · [English](./bugsweep-report-en.md) | Functional QA across 9 routes + a real login flow | Login as `jim` verified via `whoami` API and the app's own challenge banner; no console errors or failed requests on the audited routes |
+| a11ysweep — [한국어](./a11ysweep-report.md) · [English](./a11ysweep-report-en.md) | axe-core on 3 routes | 1 critical (form input with no label), landmark/region issues, redundant alt text — each with the exact node |
+| breachsweep — [한국어](./breachsweep-report.md) · [English](./breachsweep-report-en.md) | Non-destructive config-level checks | `/ftp` directory listing exposed; missing CSP/HSTS/Referrer-Policy; permissive CORS. SQLi/XSS/IDOR classes left in **미검증 / Unverified** because confirming them non-destructively wasn't possible |
+
+Reports default to Korean; the agent writes English (or another language you ask for) on request. Both versions above are the same run — identical findings and evidence, different language — so you can see exactly what a localized report reads like.
 
 ## Why breachsweep refused to claim the famous vulnerabilities
 
