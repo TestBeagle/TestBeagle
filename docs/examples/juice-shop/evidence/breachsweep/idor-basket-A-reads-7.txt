@@ -1,0 +1,2 @@
+{"status":"success","data":{"id":7,"coupon":null,"UserId":26,"createdAt":"2026-10-11T14:34:20.428Z","updatedAt":"2026-10-11T14:34:20.428Z","Products":[]}}
+HTTP 200

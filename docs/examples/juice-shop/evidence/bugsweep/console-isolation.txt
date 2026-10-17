@@ -1,0 +1,28 @@
+# Per-route console isolation — bugsweep, Juice Shop 20.2.0 (run 2026-10-11, labels corrected 2026-10-17)
+# Method: agent-browser open #/<route>; wait; console --clear; errors --clear; reload; wait; read console.
+# agent-browser's console buffer is cumulative across hash-route changes, so early batch captures
+# that lacked --clear showed the recycle error on unrelated routes; those files were discarded.
+#
+# Auth state labels (corrected): login stores the token in BOTH localStorage and a cookie
+# (frontend/src/app/login/login.component.ts:102 localStorage.setItem('token', ...), :105 cookieService.put('token', ...)).
+# The run "logged out" by localStorage.clear() only, which leaves the cookie. So:
+#   A = pre-signup session, no account yet (genuinely logged out)
+#   B = after localStorage.clear(): no localStorage token, cookie token still present (mixed;
+#       recycle's whoAmI still showed the account email -> the UI is not logged out)
+#   C = logged in (localStorage + cookie token)
+#
+# Run 1 (state A), transcribed from the run's terminal output — "key.*required" count per route:
+#   login 0 · register 0 · recycle 1 · track-result 0 · 2fa/enter 0 · 403 0 · juicy-nft 0 · contact 0
+#   about 0 · photo-wall 0 · score-board 0 · basket 0 · complain 0 · administration 0 · accounting 0
+#   forgot-password 0
+#
+# ngx-translate "Parameter key is required" on #/recycle:
+#   state A: 1/1 (run 1 above)
+#   state B: 3/3
+#   state C: 0/3
+#   -> trigger follows "no token in localStorage", not server-side auth (inferred).
+# angularx-qrcode "qrdata is empty" on #/privacy-security/two-factor-authentication: state C, 3/3
+# window.ethereum.on TypeError: #/web3-sandbox, #/wallet-web3, #/bee-haven (state B), one root cause
+# GET /api/Deliverys/null 400 + unhandled ERROR: #/order-summary (state B), #/payment/shop (state C)
+# Other routes opened with --clear+reload showed no [error]/[warn]. That is a console result only;
+# what each screen shows is judged from its screenshot (see the report).

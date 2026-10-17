@@ -1,0 +1,8 @@
+Observation: the RS256 JWT issued at login (POST /rest/user/login) carries the full user record in its
+(base64, unencrypted) payload. Decoding the payload of our OWN account A token yielded data keys:
+  id, username, email, password, role, deluxeToken, lastLoginIp, profileImage, totpSecret, isActive, createdAt, updatedAt, deletedAt
+'password' was non-empty (hex string; the app stores MD5 per lib/insecurity.ts:41). Token value: <redacted>.
+'totpSecret' is present as a key; its value was not recorded. Per routes/login.ts:37-48 this login token is
+only issued when totpSecret === '' (2FA-enabled users instead receive a 401 tmpToken), so in this token the
+field is empty. Whether a populated 2FA seed ever reaches a token was NOT verified.
+By contrast GET /api/Users/:id omits password and totpSecret, so the password-hash exposure is specific to the token body.

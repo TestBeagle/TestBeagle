@@ -22,10 +22,10 @@ TestBeagle is a set of portable agent **skills**. Point any of them at a repo yo
 
 ![TestBeagle running against OWASP Juice Shop](docs/demo.gif)
 
-A complete run against [OWASP Juice Shop](https://github.com/juice-shop/juice-shop) — representative routes captured, a real login flow, and three evidence-based reports — is checked in at **[docs/examples/juice-shop](docs/examples/juice-shop/)**. It surfaced a `/ftp` directory-listing exposure and a critical missing-label accessibility issue, and it left SQL injection, XSS, and IDOR in the *unverified* column rather than claim them on an app that's vulnerable by design. **That last part is the whole point: it never counts an unexercised path as a pass.**
+A complete run against [OWASP Juice Shop](https://github.com/juice-shop/juice-shop) — 42 of 47 frontend routes exercised, a real signup and login flow, and three evidence-based reports — is checked in at **[docs/examples/juice-shop](docs/examples/juice-shop/)**. Each finding names the source line that causes it. It demonstrated a basket IDOR with two of its own accounts, found unlabeled basket buttons, and left SQL injection, XSS, and JWT forgery in the *unverified* column rather than claim them on an app that's vulnerable by design. **That last part is the whole point: it never counts an unexercised path as a pass.**
 
 <p align="center">
-  <img src="docs/examples/juice-shop/report-card-en.png" alt="A breachsweep report excerpt: the /ftp HIGH finding with its reproduction command, and the Unverified table leaving SQL injection, XSS, and IDOR unclaimed" width="760">
+  <img src="docs/examples/juice-shop/report-card-en.png" alt="A breachsweep report excerpt: the HIGH basket IDOR finding with its reproduction, cause at routes/basket.ts:19, and the Unverified table leaving SQL injection, XSS, and JWT forgery unclaimed" width="760">
 </p>
 
 Reports come out in **Korean by default, English (or another language) on request** — same run, same findings, different language. See the same breachsweep report in [English](docs/examples/juice-shop/breachsweep-report-en.md) and [한국어](docs/examples/juice-shop/breachsweep-report.md).
