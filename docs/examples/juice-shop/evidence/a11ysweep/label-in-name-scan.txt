@@ -1,0 +1,40 @@
+## /#/search  (visible label -> accessible name)
+"but me wait" -> name "learn more about cookies" <a>
+"me want it" -> name "dismiss cookie message" <a>
+"owasp juice shop" -> name "Back to homepage" <button>
+"your basket 2" -> name "Show the shopping cart" <button>
+"apple juice 1000ml" -> name "Click for more information about the product" <section>
+"apple pomace" -> name "Click for more information about the product" <section>
+"banana juice 1000ml" -> name "Click for more information about the product" <section>
+"basil smoothie" -> name "Click for more information about the product" <section>
+"berry juice 1000ml" -> name "Click for more information about the product" <section>
+"best juice shop salesman artwork" -> name "Click for more information about the product" <section>
+"bragă 500ml" -> name "Click for more information about the product" <section>
+"carrot juice 1000ml" -> name "Click for more information about the product" <section>
+"dragonfruit juice 500ml" -> name "Click for more information about the product" <section>
+"eggfruit juice 500ml" -> name "Click for more information about the product" <section>
+"elderflower cordial 500ml" -> name "Click for more information about the product" <section>
+"fruit press" -> name "Click for more information about the product" <section>
+"grape juice 1000ml" -> name "Click for more information about the product" <section>
+"green smoothie" -> name "Click for more information about the product" <section>
+"juice shop permafrost 2020 edition" -> name "Click for more information about the product" <section>
+## /#/login  (visible label -> accessible name)
+"but me wait" -> name "learn more about cookies" <a>
+"me want it" -> name "dismiss cookie message" <a>
+"owasp juice shop" -> name "Back to homepage" <button>
+"your basket 2" -> name "Show the shopping cart" <button>
+"exit to app log in" -> name "Login" <button#loginButton>
+"remember me" -> name "Checkbox to stay logged in or not logged in" <input#rememberMe-input>
+## /#/register  (visible label -> accessible name)
+"but me wait" -> name "learn more about cookies" <a>
+"me want it" -> name "dismiss cookie message" <a>
+"owasp juice shop" -> name "Back to homepage" <button>
+"your basket 2" -> name "Show the shopping cart" <button>
+"repeat password" -> name "Field to confirm the password" <input#repeatPasswordControl>
+"person add register" -> name "Button to complete the registration" <button#registerButton>
+## /#/contact  (visible label -> accessible name)
+"but me wait" -> name "learn more about cookies" <a>
+"me want it" -> name "dismiss cookie message" <a>
+"owasp juice shop" -> name "Back to homepage" <button>
+"your basket 2" -> name "Show the shopping cart" <button>
+"send submit" -> name "Button to send the review" <button#submitButton>

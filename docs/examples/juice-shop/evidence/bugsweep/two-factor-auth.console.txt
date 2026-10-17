@@ -1,0 +1,1 @@
+[error] [angularx-qrcode] Error generating QR Code: [angularx-qrcode] Field `qrdata` is empty, set 'allowEmptyString="true"' to overwrite this behaviour.

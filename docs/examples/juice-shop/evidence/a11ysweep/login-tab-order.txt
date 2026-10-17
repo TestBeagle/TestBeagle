@@ -1,0 +1,18 @@
+1: "button.mdc-icon-button.mat-mdc-icon-button | \"Open Sidenav\" | outline=none 3px rgb(184, 192, 199) | shadow=none | vis=true 16,12"
+2: "button.mdc-button.mat-mdc-button-base | \"Back to homepage\" | outline=none 3px rgb(242, 245, 247) | shadow=none | vis=true 64,6"
+3: "button.mdc-icon-button.mat-mdc-icon-button | \"Open search\" | outline=none 3px rgb(242, 245, 247) | shadow=none | vis=true 868,12"
+4: "button#navbarAccount.mdc-button.mat-mdc-button-base | \"Show/hide account menu\" | outline=none 3px rgb(242, 245, 247) | shadow=none | vis=
+5: "button.mdc-button.mat-mdc-button-base | \"Show the shopping cart\" | outline=none 3px rgb(242, 245, 247) | shadow=none | vis=true 1044,12"
+6: "button#navbarLanguageButton.mdc-button.mat-mdc-button-base | \"Language selection menu\" | outline=none 3px rgb(242, 245, 247) | shadow=non
+7: "input#email.mat-mdc-input-element.mat-mdc-form-field-input-control | \"Text field for the login email\" | outline=none 3px rgb(232, 236, 23
+8: "input#password.mat-mdc-input-element.mat-mdc-form-field-input-control | \"Text field for the login password\" | outline=none 3px rgb(232, 2
+9: "button.mdc-icon-button.mat-mdc-icon-button | \"Button to display the password\" | outline=none 3px rgb(184, 192, 199) | shadow=none | vis=t
+10: "a.primary-link.forgot-pw | \"Forgot your password?\" | outline=none 3px rgb(112, 224, 0) | shadow=none | vis=true 497,369"
+11: "input#rememberMe-input.mdc-checkbox__native-control | \"Checkbox to stay logged in or not logged in\" | outline=auto 1px rgb(0, 95, 204) | 
+12: "a.primary-link | \"Not yet a customer?\" | outline=none 3px rgb(112, 224, 0) | shadow=none | vis=true 585,557"
+13: "BODY"
+14: "button.mdc-icon-button.mat-mdc-icon-button | \"Open Sidenav\" | outline=none 3px rgb(184, 192, 199) | shadow=none | vis=true 16,12"
+15: "button.mdc-button.mat-mdc-button-base | \"Back to homepage\" | outline=none 3px rgb(242, 245, 247) | shadow=none | vis=true 64,6"
+16: "button.mdc-icon-button.mat-mdc-icon-button | \"Open search\" | outline=none 3px rgb(242, 245, 247) | shadow=none | vis=true 868,12"
+17: "button#navbarAccount.mdc-button.mat-mdc-button-base | \"Show/hide account menu\" | outline=none 3px rgb(242, 245, 247) | shadow=none | vis=
+18: "button.mdc-button.mat-mdc-button-base | \"Show the shopping cart\" | outline=none 3px rgb(242, 245, 247) | shadow=none | vis=true 1044,12"

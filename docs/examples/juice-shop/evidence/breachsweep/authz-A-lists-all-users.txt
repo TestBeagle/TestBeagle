@@ -1,0 +1,2 @@
+total users listed by customer A: 26
+sample: [{'id': 1, 'email': 'admin@juice-sh.op', 'role': 'admin'}, {'id': 2, 'email': 'jim@juice-sh.op', 'role': 'customer'}, {'id': 3, 'email': 'bender@juice-sh.op', 'role': 'customer'}]

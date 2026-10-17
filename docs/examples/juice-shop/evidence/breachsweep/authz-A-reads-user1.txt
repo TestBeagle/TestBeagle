@@ -1,0 +1,2 @@
+{"status":"success","data":{"id":1,"username":"","email":"admin@juice-sh.op","role":"admin","deluxeToken":"","lastLoginIp":"","profileImage":"assets/public/images/uploads/defaultAdmin.png","isActive":true,"createdAt":"2026-10-11T14:31:52.117Z","updatedAt":"2026-10-11T14:31:52.117Z","deletedAt":null}}
+HTTP 200

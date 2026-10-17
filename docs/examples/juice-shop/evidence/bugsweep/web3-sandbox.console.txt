@@ -1,0 +1,1 @@
+[error] ERROR {stack: "TypeError: Cannot read properties of undefined (re…(http://127.0.0.1:3100/chunk-eYAgyLdn.js:2:46481)", message: "Cannot read properties of undefined (reading 'on')"}
