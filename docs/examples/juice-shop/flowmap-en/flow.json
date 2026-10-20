@@ -1,0 +1,2982 @@
+{
+ "meta": {
+  "app": "OWASP Juice Shop",
+  "platform": "web",
+  "device": "Chrome for Testing 390×844 @2x (phone width)",
+  "viewport_px": [
+   780,
+   1688
+  ],
+  "locale": "English (app default)",
+  "theme": "Dark (app default)",
+  "date": "2026-10-20",
+  "driver": "agent-browser 0.37.0 · Juice Shop 20.2.0 (image rev 5658473) local container · tap areas from the hotspots.md web snippet (viewport mode); outside areas, disabled submit buttons, the 4px search field and text field boxes (tapping focuses the input, confirmed) measured from the DOM in the same state and added · evidence: tapped and checked by URL and the opened view (no badge), checked in markup href or source (from code), neither (not verified)",
+  "start": [
+   "01-welcome"
+  ],
+  "lang": "en",
+  "skill": "2",
+  "small_target": {
+   "min": 24,
+   "unit": "CSS px",
+   "px_per_unit": 2
+  }
+ },
+ "screens": [
+  {
+   "id": "01-welcome",
+   "title": "Welcome dialog",
+   "group": "Start",
+   "note": "The dialog shown on first open. The cookie banner sits behind it, and the two buttons at the bottom of the dialog are icons only.",
+   "back": "Tapping the dark area outside closes the dialog. Browser back was not tested in this state.",
+   "backTo": null,
+   "hotspots": [
+    {
+     "rect": [
+      120,
+      874,
+      540,
+      108
+     ],
+     "what": "Open Worldwide Application Security Project (OWASP)",
+     "to": null,
+     "action": "Opens owasp.org (outside the app, not followed).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      120,
+      1169,
+      449,
+      154
+     ],
+     "what": "https://owasp-juice.shop",
+     "to": null,
+     "action": "Opens owasp-juice.shop (outside the app, not followed).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      120,
+      1368,
+      152,
+      80
+     ],
+     "what": "Graduation cap icon (name: school)",
+     "to": "02-tutorial",
+     "action": "Starts the beginner tutorial.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      508,
+      1368,
+      152,
+      80
+     ],
+     "what": "Eye-off icon (Close Welcome Banner)",
+     "to": "03-home",
+     "action": "Closes the dialog and stores a cookie (welcomebanner_status=dismiss) so it does not show again.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      0,
+      0,
+      780,
+      100
+     ],
+     "what": "Outside area (top)",
+     "to": "03-home",
+     "action": "Closes the dialog.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      0,
+      1498,
+      780,
+      190
+     ],
+     "what": "Outside area (bottom)",
+     "to": "03-home",
+     "action": "Closes the dialog.",
+     "evidence": "tap",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "02-tutorial",
+   "title": "Tutorial",
+   "group": "Start",
+   "note": "Started from the graduation cap button on the welcome dialog. A speech bubble covers the top, and the screen behind still takes taps. It was already on the second step when captured.",
+   "back": "× on the speech bubble: ends the tutorial. Browser back was not tested.",
+   "backTo": "03-home",
+   "hotspots": [
+    {
+     "rect": [
+      10,
+      64,
+      45,
+      46
+     ],
+     "what": "× (close tutorial)",
+     "to": "03-home",
+     "action": "Ends the tutorial.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      0,
+      52,
+      764,
+      210
+     ],
+     "what": "Speech bubble",
+     "to": null,
+     "action": "Tapping it changed nothing at this step.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "04-sidenav",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      380,
+      20,
+      96,
+      96
+     ],
+     "what": "Search (Open search)",
+     "to": "05-search",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "09-basket-anon",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      32,
+      284,
+      716,
+      459
+     ],
+     "what": "Product card (Apple Juice)",
+     "to": "07-product",
+     "action": "Opens the product detail dialog.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      64,
+      839,
+      652,
+      80
+     ],
+     "what": "Add to Basket",
+     "to": null,
+     "action": "Adds 1 to the basket and shows the \"Placed … into basket.\" notice.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      32,
+      999,
+      716,
+      459
+     ],
+     "what": "Product card (Apple Pomace)",
+     "to": "07-product",
+     "action": "Opens the product detail dialog (same component as the first card).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      494,
+      1478,
+      189,
+      61
+     ],
+     "what": "But me wait! (learn more about cookies)",
+     "to": null,
+     "action": "Opens a YouTube video (outside the app, not followed).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      223,
+      1571,
+      334,
+      79
+     ],
+     "what": "Me want it! (dismiss cookie message)",
+     "to": null,
+     "action": "Closes the cookie banner.",
+     "evidence": "tap",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "03-home",
+   "title": "Product list",
+   "group": "Start",
+   "note": "The first screen after closing the welcome dialog. The cookie banner covers the bottom. The logo and logout also lead to this list.",
+   "back": "Browser back: goes to the previous page.",
+   "backTo": null,
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "04-sidenav",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      380,
+      20,
+      96,
+      96
+     ],
+     "what": "Search (Open search)",
+     "to": "05-search",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "09-basket-anon",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      32,
+      284,
+      716,
+      459
+     ],
+     "what": "Product card (Apple Juice)",
+     "to": "07-product",
+     "action": "Opens the product detail dialog.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      64,
+      839,
+      652,
+      80
+     ],
+     "what": "Add to Basket",
+     "to": null,
+     "action": "Adds 1 to the basket and shows the \"Placed … into basket.\" notice.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      32,
+      999,
+      716,
+      459
+     ],
+     "what": "Product card (Apple Pomace)",
+     "to": "07-product",
+     "action": "Opens the product detail dialog (same component as the first card).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      494,
+      1478,
+      189,
+      61
+     ],
+     "what": "But me wait! (learn more about cookies)",
+     "to": null,
+     "action": "Opens a YouTube video (outside the app, not followed).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      223,
+      1571,
+      334,
+      79
+     ],
+     "what": "Me want it! (dismiss cookie message)",
+     "to": null,
+     "action": "Closes the cookie banner.",
+     "evidence": "tap",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "04-sidenav",
+   "title": "Menu (logged out)",
+   "group": "Browse",
+   "note": "The left menu opened with ☰. It has no item for the Score Board (the app hides it on purpose).",
+   "back": "Esc: closes the menu. Browser back: goes to the previous page with the menu still open (confirmed).",
+   "backTo": "03-home",
+   "hotspots": [
+    {
+     "rect": [
+      16,
+      208,
+      528,
+      96
+     ],
+     "what": "Login",
+     "to": "10-login",
+     "action": "href #/login (not tapped).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      394,
+      528,
+      96
+     ],
+     "what": "Customer Feedback",
+     "to": "13-contact",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      490,
+      528,
+      96
+     ],
+     "what": "AI Chat",
+     "to": "16-chatbot",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      676,
+      528,
+      96
+     ],
+     "what": "About Us",
+     "to": "14-about",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      772,
+      528,
+      96
+     ],
+     "what": "Photo Wall",
+     "to": "15-photo-wall",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      890,
+      528,
+      96
+     ],
+     "what": "Help getting started",
+     "to": null,
+     "action": "Appears to start the tutorial (judged by its name, not tapped). It is a link with no href.",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      986,
+      528,
+      96
+     ],
+     "what": "GitHub",
+     "to": null,
+     "action": "Opens the GitHub repository (outside the app).",
+     "evidence": "code",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "05-search",
+   "title": "Search (typing)",
+   "group": "Browse",
+   "note": "\"apple\" typed into the search field that opens from the search icon. The field is 4 CSS px wide, so the typed text is not visible.",
+   "back": "✕: closes the search field. Browser back: goes to the previous page.",
+   "backTo": null,
+   "gestures": [
+    [
+     "Enter key",
+     "Searches for the typed text (not counted as a tap).",
+     "06-search-results"
+    ]
+   ],
+   "hotspots": [
+    {
+     "rect": [
+      384,
+      18,
+      8,
+      100
+     ],
+     "what": "Search field",
+     "to": null,
+     "action": "Type the search text. The field is 4 CSS px wide, so the text is not visible.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "04-sidenav",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      388,
+      28,
+      80,
+      80
+     ],
+     "what": "✕ Close search",
+     "to": null,
+     "action": "Closes the search field.",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "09-basket-anon",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      32,
+      284,
+      716,
+      459
+     ],
+     "what": "Product card (Apple Juice)",
+     "to": "07-product",
+     "action": "Opens the product detail dialog.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      64,
+      839,
+      652,
+      80
+     ],
+     "what": "Add to Basket",
+     "to": null,
+     "action": "Adds 1 to the basket and shows the \"Placed … into basket.\" notice.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      32,
+      999,
+      716,
+      459
+     ],
+     "what": "Product card (Apple Pomace)",
+     "to": "07-product",
+     "action": "Opens the product detail dialog (same component as the first card).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      64,
+      1554,
+      652,
+      80
+     ],
+     "what": "Add to Basket (Apple Pomace)",
+     "to": null,
+     "action": "Adds 1 to the basket (same component as the first button).",
+     "evidence": "code",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "06-search-results",
+   "title": "Search results",
+   "group": "Browse",
+   "note": "Results for \"apple\". The search field stays open above the results too.",
+   "back": "Browser back: goes to the previous page.",
+   "backTo": "05-search",
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "04-sidenav",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      388,
+      28,
+      80,
+      80
+     ],
+     "what": "✕ Close search",
+     "to": null,
+     "action": "Closes the search field.",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "09-basket-anon",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      32,
+      284,
+      716,
+      459
+     ],
+     "what": "Product card (Apple Juice)",
+     "to": "07-product",
+     "action": "Opens the product detail dialog.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      64,
+      839,
+      652,
+      80
+     ],
+     "what": "Add to Basket",
+     "to": null,
+     "action": "Adds 1 to the basket and shows the \"Placed … into basket.\" notice.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      32,
+      999,
+      716,
+      459
+     ],
+     "what": "Product card (Apple Pomace)",
+     "to": "07-product",
+     "action": "Opens the product detail dialog (same component as the first card).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      64,
+      1554,
+      652,
+      80
+     ],
+     "what": "Add to Basket (Apple Pomace)",
+     "to": null,
+     "action": "Adds 1 to the basket (same component as the first button).",
+     "evidence": "code",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "07-product",
+   "title": "Product detail dialog",
+   "group": "Browse",
+   "note": "Opens when a product card is tapped. The Close button is not visible in the capture (button at y 1472–1552px, dialog bottom edge at y 1395px, in the 780×1688 screenshot).",
+   "back": "Outside (dark bands above and below) or Esc: closes the dialog. Browser back: goes to the previous page without closing the dialog (confirmed).",
+   "backTo": "03-home",
+   "hotspots": [
+    {
+     "rect": [
+      84,
+      1274,
+      612,
+      96
+     ],
+     "what": "Reviews (2)",
+     "to": null,
+     "action": "Appears to expand the review list (not tapped).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      0,
+      0,
+      780,
+      293
+     ],
+     "what": "Outside area (top)",
+     "to": "03-home",
+     "action": "Closes the dialog.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      0,
+      1395,
+      780,
+      293
+     ],
+     "what": "Outside area (bottom)",
+     "to": "03-home",
+     "action": "Closes the dialog (confirmed).",
+     "evidence": "tap",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "08-language",
+   "title": "Language selection",
+   "group": "Browse",
+   "note": "Opened with the globe button. Only the top 18 languages are visible; the rest are further down the scroll.",
+   "back": "Esc or outside: closes the menu. Browser back: closes the menu and goes to the previous page (confirmed).",
+   "backTo": "03-home",
+   "hotspots": [
+    {
+     "rect": [
+      220,
+      32,
+      496,
+      112
+     ],
+     "what": "Search…",
+     "to": null,
+     "action": "Appears to filter by language name (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      198,
+      560,
+      80
+     ],
+     "what": "Azərbaycanca",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      278,
+      560,
+      80
+     ],
+     "what": "Bahasa Indonesia",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      358,
+      560,
+      80
+     ],
+     "what": "Catalan",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      438,
+      560,
+      80
+     ],
+     "what": "Česky",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      518,
+      560,
+      80
+     ],
+     "what": "Dansk",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      598,
+      560,
+      80
+     ],
+     "what": "Deutsch",
+     "to": null,
+     "action": "Changes the app language right away.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      678,
+      560,
+      80
+     ],
+     "what": "Eesti",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      758,
+      560,
+      80
+     ],
+     "what": "English",
+     "to": null,
+     "action": "Changes the app language right away.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      838,
+      560,
+      80
+     ],
+     "what": "Español",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      918,
+      560,
+      80
+     ],
+     "what": "Français",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      998,
+      560,
+      80
+     ],
+     "what": "Gaeilge",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      1078,
+      560,
+      80
+     ],
+     "what": "Italiano",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      1158,
+      560,
+      80
+     ],
+     "what": "Język Polski",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      1238,
+      560,
+      80
+     ],
+     "what": "Latvijas",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      1318,
+      560,
+      80
+     ],
+     "what": "Magyar",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      1398,
+      560,
+      80
+     ],
+     "what": "Nederlands",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      1478,
+      560,
+      80
+     ],
+     "what": "Norsk",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      1558,
+      560,
+      80
+     ],
+     "what": "Português",
+     "to": null,
+     "action": "Changes the app language right away (same component as checked on Deutsch and English).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      0,
+      0,
+      188,
+      1688
+     ],
+     "what": "Outside area (left)",
+     "to": "03-home",
+     "action": "Closes the menu.",
+     "evidence": "tap",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "09-basket-anon",
+   "title": "Basket (logged out)",
+   "group": "Basket",
+   "note": "Items can be added and viewed without logging in. The −, + and delete buttons are icons only, with empty accessible names.",
+   "back": "Browser back: goes to the previous page.",
+   "backTo": null,
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "04-sidenav",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      388,
+      28,
+      80,
+      80
+     ],
+     "what": "✕ Close search",
+     "to": null,
+     "action": "Closes the search field.",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "09-basket-anon",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      304,
+      872,
+      80,
+      80
+     ],
+     "what": "− (unlabeled)",
+     "to": null,
+     "action": "Decreases the quantity by 1 (source: dec()).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      396,
+      872,
+      80,
+      80
+     ],
+     "what": "+ (unlabeled)",
+     "to": null,
+     "action": "Increases the quantity by 1 (source: inc()).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      350,
+      1120,
+      80,
+      80
+     ],
+     "what": "Trash can (unlabeled)",
+     "to": null,
+     "action": "Removes the item at once with no confirmation (source: purchase-basket.component.ts:137, not tapped).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      196,
+      1370,
+      388,
+      80
+     ],
+     "what": "Checkout",
+     "to": "10-login",
+     "action": "Sends to the login screen (redirectUrl=/basket).",
+     "evidence": "tap",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "10-login",
+   "title": "Login",
+   "group": "Account",
+   "note": "The login screen reached from Checkout in the basket. Log in is disabled until an email and password are entered.",
+   "back": "Browser back: goes to the previous page.",
+   "backTo": "09-basket-anon",
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "04-sidenav",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      388,
+      28,
+      80,
+      80
+     ],
+     "what": "✕ Close search",
+     "to": null,
+     "action": "Closes the search field.",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "09-basket-anon",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      394,
+      572,
+      112
+     ],
+     "what": "Email",
+     "to": null,
+     "action": "Email field.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      564,
+      572,
+      112
+     ],
+     "what": "Password",
+     "to": null,
+     "action": "Password field.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      596,
+      580,
+      80,
+      80
+     ],
+     "what": "Eye icon (show password)",
+     "to": null,
+     "action": "Appears to show or hide the password (not tapped).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      722,
+      572,
+      24
+     ],
+     "what": "Forgot your password?",
+     "to": "12-forgot-password",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      218,
+      898,
+      80,
+      80
+     ],
+     "what": "Remember me",
+     "to": null,
+     "action": "Appears to toggle staying logged in (not tapped).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      218,
+      810,
+      344,
+      80
+     ],
+     "what": "Log in",
+     "to": "18-basket",
+     "action": "Logs in and returns to the basket (confirmed). When entered from the menu, goes to the product list (confirmed). Disabled before input.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      281,
+      1098,
+      218,
+      28
+     ],
+     "what": "Not yet a customer?",
+     "to": "11-register",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "11-register",
+   "title": "Sign up",
+   "group": "Account",
+   "note": "Register is enabled only after every field is filled and a security question is chosen.",
+   "back": "Browser back: goes to the previous page.",
+   "backTo": "10-login",
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "04-sidenav",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      388,
+      28,
+      80,
+      80
+     ],
+     "what": "✕ Close search",
+     "to": null,
+     "action": "Closes the search field.",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "09-basket-anon",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      394,
+      572,
+      112
+     ],
+     "what": "Email",
+     "to": null,
+     "action": "Email field.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      564,
+      572,
+      112
+     ],
+     "what": "Password",
+     "to": null,
+     "action": "Password field.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      770,
+      572,
+      112
+     ],
+     "what": "Repeat Password",
+     "to": null,
+     "action": "Confirm password field.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      920,
+      104,
+      64
+     ],
+     "what": "Show password advice",
+     "to": null,
+     "action": "Appears to toggle the password requirements hint (not tapped).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      1004,
+      572,
+      112
+     ],
+     "what": "Security Question",
+     "to": null,
+     "action": "Opens the security question list (14 items).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      1174,
+      572,
+      112
+     ],
+     "what": "Answer",
+     "to": null,
+     "action": "Answer field.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      218,
+      1388,
+      344,
+      80
+     ],
+     "what": "Register",
+     "to": "10-login",
+     "action": "Signs up and goes to the login screen (confirmed). Disabled before input.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      280,
+      1548,
+      220,
+      28
+     ],
+     "what": "Already a customer?",
+     "to": "10-login",
+     "action": "href #/login (not tapped).",
+     "evidence": "code",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "12-forgot-password",
+   "title": "Forgot password",
+   "group": "Account",
+   "note": "Takes the email, security answer and new password on one screen.",
+   "back": "Browser back: goes to the previous page.",
+   "backTo": "10-login",
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "04-sidenav",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      388,
+      28,
+      80,
+      80
+     ],
+     "what": "✕ Close search",
+     "to": null,
+     "action": "Closes the search field.",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "09-basket-anon",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      394,
+      572,
+      112
+     ],
+     "what": "Email",
+     "to": null,
+     "action": "Email field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      564,
+      572,
+      112
+     ],
+     "what": "Security Question",
+     "to": null,
+     "action": "Security answer field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      734,
+      572,
+      112
+     ],
+     "what": "New Password",
+     "to": null,
+     "action": "New password field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      934,
+      572,
+      112
+     ],
+     "what": "Repeat New Password",
+     "to": null,
+     "action": "Confirm new password field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      1084,
+      104,
+      64
+     ],
+     "what": "Show password advice",
+     "to": null,
+     "action": "Appears to toggle the password requirements hint (not tapped).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      218,
+      1276,
+      344,
+      80
+     ],
+     "what": "Change",
+     "to": null,
+     "action": "Changes the password (not tapped). Disabled before input.",
+     "evidence": "unverified",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "13-contact",
+   "title": "Customer feedback",
+   "group": "Company & support",
+   "note": "The author is fixed to anonymous; it takes a rating and a CAPTCHA answer.",
+   "back": "Browser back: goes to the previous page.",
+   "backTo": null,
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "04-sidenav",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      388,
+      28,
+      80,
+      80
+     ],
+     "what": "✕ Close search",
+     "to": null,
+     "action": "Closes the search field.",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "09-basket-anon",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      452,
+      572,
+      112
+     ],
+     "what": "Author",
+     "to": null,
+     "action": "Author field. Prefilled with anonymous (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      602,
+      572,
+      136
+     ],
+     "what": "Comment",
+     "to": null,
+     "action": "Comment field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      190,
+      812,
+      308,
+      88
+     ],
+     "what": "Rating slider (unlabeled)",
+     "to": null,
+     "action": "Appears to be a slider for choosing the rating (not tapped).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      104,
+      1014,
+      572,
+      112
+     ],
+     "what": "CAPTCHA Result",
+     "to": null,
+     "action": "Math answer field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      218,
+      1228,
+      344,
+      80
+     ],
+     "what": "Submit",
+     "to": null,
+     "action": "Sends the feedback (not tapped). Disabled before input.",
+     "evidence": "unverified",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "14-about",
+   "title": "About us",
+   "group": "Company & support",
+   "note": "Only body text is visible on the first screen. The part further down the scroll was not captured.",
+   "back": "Browser back: goes to the previous page.",
+   "backTo": null,
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "04-sidenav",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      388,
+      28,
+      80,
+      80
+     ],
+     "what": "✕ Close search",
+     "to": null,
+     "action": "Closes the search field.",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "09-basket-anon",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "15-photo-wall",
+   "title": "Photo wall",
+   "group": "Company & support",
+   "note": "The first photo's image is broken, so only its alt text shows.",
+   "back": "Browser back: goes to the previous page.",
+   "backTo": null,
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "04-sidenav",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      388,
+      28,
+      80,
+      80
+     ],
+     "what": "✕ Close search",
+     "to": null,
+     "action": "Closes the search field.",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "09-basket-anon",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      270,
+      947,
+      80,
+      80
+     ],
+     "what": "Tweet",
+     "to": null,
+     "action": "Opens a Tweet share window (outside the app, not followed).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      350,
+      947,
+      80,
+      80
+     ],
+     "what": "BlueSky",
+     "to": null,
+     "action": "Opens a BlueSky share window (outside the app, not followed).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      430,
+      947,
+      80,
+      80
+     ],
+     "what": "Mastodon",
+     "to": null,
+     "action": "Opens a Mastodon share window (outside the app, not followed).",
+     "evidence": "code",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "16-chatbot",
+   "title": "AI chat",
+   "group": "Company & support",
+   "note": "The chatbot screen. The two buttons send preset questions.",
+   "back": "Browser back: goes to the previous page.",
+   "backTo": null,
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "04-sidenav",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      388,
+      28,
+      80,
+      80
+     ],
+     "what": "✕ Close search",
+     "to": null,
+     "action": "Closes the search field.",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "09-basket-anon",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      2,
+      1018,
+      776,
+      112
+     ],
+     "what": "Ask me anything",
+     "to": null,
+     "action": "Question field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      97,
+      1164,
+      336,
+      84
+     ],
+     "what": "Get a suggestion",
+     "to": null,
+     "action": "Asks the chatbot for a recommendation (not tapped).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      453,
+      1164,
+      230,
+      84
+     ],
+     "what": "Get help",
+     "to": null,
+     "action": "Asks the chatbot for help (not tapped).",
+     "evidence": "unverified",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "17-sidenav-loggedin",
+   "title": "Menu (logged in)",
+   "group": "Logged in",
+   "note": "After login, the account, Orders & Payment, Privacy & Security, Logout, Complaint and Deluxe Membership items are added.",
+   "back": "Esc: closes the menu. Browser back: goes to the previous page with the menu still open (confirmed on the logged-out menu).",
+   "backTo": "18-basket",
+   "hotspots": [
+    {
+     "rect": [
+      16,
+      208,
+      528,
+      96
+     ],
+     "what": "Account email",
+     "to": null,
+     "action": "Appears to go to the profile (#/profile) (not tapped).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      304,
+      528,
+      96
+     ],
+     "what": "Orders & Payment",
+     "to": null,
+     "action": "Expands the submenu (not tapped).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      400,
+      528,
+      96
+     ],
+     "what": "Privacy & Security",
+     "to": null,
+     "action": "Expands the submenu (not tapped).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      496,
+      528,
+      96
+     ],
+     "what": "Logout",
+     "to": "03-home",
+     "action": "Logs out and goes to the product list (#/) (confirmed).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      682,
+      528,
+      96
+     ],
+     "what": "Customer Feedback",
+     "to": "13-contact",
+     "action": "",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      778,
+      528,
+      96
+     ],
+     "what": "Complaint",
+     "to": null,
+     "action": "Goes to Complaint (#/complain) (not captured).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      874,
+      528,
+      96
+     ],
+     "what": "AI Chat",
+     "to": "16-chatbot",
+     "action": "",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      1060,
+      528,
+      96
+     ],
+     "what": "About Us",
+     "to": "14-about",
+     "action": "",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      1156,
+      528,
+      96
+     ],
+     "what": "Photo Wall",
+     "to": "15-photo-wall",
+     "action": "",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      1252,
+      528,
+      96
+     ],
+     "what": "Deluxe Membership",
+     "to": null,
+     "action": "Goes to Deluxe Membership (#/deluxe-membership) (not captured).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      1370,
+      528,
+      96
+     ],
+     "what": "Help getting started",
+     "to": null,
+     "action": "Appears to start the tutorial (not tapped).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      16,
+      1466,
+      528,
+      96
+     ],
+     "what": "GitHub",
+     "to": null,
+     "action": "Opens the GitHub repository (outside the app).",
+     "evidence": "code",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "18-basket",
+   "title": "Basket (logged in)",
+   "group": "Logged in",
+   "note": "The 1 added while logged out and the 1 added after login are merged, so the quantity is 2.",
+   "back": "Browser back: goes to the previous page.",
+   "backTo": null,
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "17-sidenav-loggedin",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      388,
+      28,
+      80,
+      80
+     ],
+     "what": "✕ Close search",
+     "to": null,
+     "action": "Closes the search field.",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "18-basket",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      301,
+      950,
+      80,
+      80
+     ],
+     "what": "− (unlabeled)",
+     "to": null,
+     "action": "Decreases the quantity by 1 (source: dec()).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      399,
+      950,
+      80,
+      80
+     ],
+     "what": "+ (unlabeled)",
+     "to": null,
+     "action": "Increases the quantity by 1 (source: inc()).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      350,
+      1198,
+      80,
+      80
+     ],
+     "what": "Trash can (unlabeled)",
+     "to": null,
+     "action": "Removes the item at once with no confirmation (source: purchase-basket.component.ts:137, not tapped).",
+     "evidence": "code",
+     "long": false
+    },
+    {
+     "rect": [
+      196,
+      1448,
+      388,
+      80
+     ],
+     "what": "Checkout",
+     "to": "19-address-select",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "19-address-select",
+   "title": "Select address",
+   "group": "Logged in",
+   "note": "The first checkout step. The account is new, so there are no saved addresses.",
+   "back": "Browser back: goes to the previous page.",
+   "backTo": "18-basket",
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "17-sidenav-loggedin",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      380,
+      20,
+      96,
+      96
+     ],
+     "what": "Search (Open search)",
+     "to": "05-search",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "18-basket",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      188,
+      450,
+      391,
+      80
+     ],
+     "what": "Add New Address",
+     "to": "20-address-create",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    }
+   ]
+  },
+  {
+   "id": "20-address-create",
+   "title": "New address",
+   "group": "Logged in",
+   "note": "Submit is enabled only when all 7 fields are filled. The next checkout steps (delivery, payment, order) were not carried out.",
+   "back": "The Back button and browser back both return to address selection (confirmed).",
+   "backTo": "19-address-select",
+   "hotspots": [
+    {
+     "rect": [
+      32,
+      20,
+      96,
+      96
+     ],
+     "what": "☰ Menu (Open Sidenav)",
+     "to": "17-sidenav-loggedin",
+     "action": "Opens the menu.",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      128,
+      8,
+      128,
+      120
+     ],
+     "what": "Logo (Back to homepage)",
+     "to": "03-home",
+     "action": "Goes to the product list (#/search).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      380,
+      20,
+      96,
+      96
+     ],
+     "what": "Search (Open search)",
+     "to": "05-search",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      492,
+      20,
+      128,
+      96
+     ],
+     "what": "Basket (Show the shopping cart)",
+     "to": "18-basket",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      620,
+      20,
+      128,
+      96
+     ],
+     "what": "Language (Language selection menu)",
+     "to": "08-language",
+     "action": "",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      102,
+      420,
+      576,
+      112
+     ],
+     "what": "Country",
+     "to": null,
+     "action": "Country field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      102,
+      570,
+      576,
+      112
+     ],
+     "what": "Name",
+     "to": null,
+     "action": "Name field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      102,
+      720,
+      576,
+      112
+     ],
+     "what": "Mobile Number",
+     "to": null,
+     "action": "Mobile Number field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      102,
+      870,
+      576,
+      112
+     ],
+     "what": "ZIP Code",
+     "to": null,
+     "action": "ZIP Code field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      102,
+      1020,
+      576,
+      136
+     ],
+     "what": "Address",
+     "to": null,
+     "action": "Address field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      102,
+      1194,
+      576,
+      112
+     ],
+     "what": "City",
+     "to": null,
+     "action": "City field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      102,
+      1344,
+      576,
+      112
+     ],
+     "what": "State",
+     "to": null,
+     "action": "State field (nothing typed).",
+     "evidence": "unverified",
+     "long": false
+    },
+    {
+     "rect": [
+      102,
+      1542,
+      209,
+      80
+     ],
+     "what": "Back",
+     "to": "19-address-select",
+     "action": "Returns to address selection (confirmed).",
+     "evidence": "tap",
+     "long": false
+    },
+    {
+     "rect": [
+      444,
+      1542,
+      234,
+      80
+     ],
+     "what": "Submit",
+     "to": null,
+     "action": "Saves the address (not tapped). Disabled before input.",
+     "evidence": "unverified",
+     "long": false
+    }
+   ]
+  }
+ ],
+ "tasks": [
+  {
+   "name": "Add one product to the basket (logged out)",
+   "taps": 1,
+   "steps": [
+    [
+     "Add to Basket",
+     "03-home"
+    ]
+   ],
+   "note": "The only signs that it was added are the notice at the bottom of the screen and the basket count."
+  },
+  {
+   "name": "Search for a product",
+   "taps": 1,
+   "steps": [
+    [
+     "Search icon",
+     "03-home"
+    ],
+    [
+     "Type search text and Enter (not counted)",
+     "05-search"
+    ],
+    [
+     "Check results",
+     "06-search-results"
+    ]
+   ],
+   "note": "The field is 4 CSS px wide, so the typed text is not visible."
+  },
+  {
+   "name": "Change language",
+   "taps": 2,
+   "steps": [
+    [
+     "Globe button",
+     "03-home"
+    ],
+    [
+     "Pick a language",
+     "08-language"
+    ]
+   ]
+  },
+  {
+   "name": "Sign up",
+   "taps": 6,
+   "steps": [
+    [
+     "☰ Menu",
+     "03-home"
+    ],
+    [
+     "Login",
+     "04-sidenav"
+    ],
+    [
+     "Not yet a customer?",
+     "10-login"
+    ],
+    [
+     "Enter email and password (not counted)",
+     "11-register"
+    ],
+    [
+     "Open security question",
+     "11-register"
+    ],
+    [
+     "Pick a question and enter the answer (picking counts as 1)",
+     "11-register"
+    ],
+    [
+     "Register",
+     "11-register"
+    ]
+   ],
+   "note": "After signing up, the app goes to the login screen and the user must log in again (those taps are counted in the next task)."
+  },
+  {
+   "name": "Add to basket while logged out, then start checkout",
+   "taps": 5,
+   "steps": [
+    [
+     "Basket",
+     "03-home"
+    ],
+    [
+     "Checkout",
+     "09-basket-anon"
+    ],
+    [
+     "Enter email and password (not counted)",
+     "10-login"
+    ],
+    [
+     "Log in",
+     "10-login"
+    ],
+    [
+     "Checkout",
+     "18-basket"
+    ],
+    [
+     "Add New Address",
+     "19-address-select"
+    ]
+   ],
+   "note": "After login the app returns to the basket, and the items added while logged out are merged (confirmed). Steps after address entry were not carried out."
+  },
+  {
+   "name": "Customer feedback, up to submit",
+   "taps": 3,
+   "steps": [
+    [
+     "☰ Menu",
+     "03-home"
+    ],
+    [
+     "Customer Feedback",
+     "04-sidenav"
+    ],
+    [
+     "Pick a rating",
+     "13-contact"
+    ],
+    [
+     "Enter comment and CAPTCHA (not counted)",
+     "13-contact"
+    ]
+   ],
+   "note": "Submit was not tapped, so the submit result was not checked."
+  }
+ ],
+ "findings": [
+  {
+   "sev": "mid",
+   "title": "Browser back with a dialog or menu open goes to the previous page",
+   "body": "With the product detail dialog open, back went to the previous page (About Us) instead of closing the dialog. With the left menu open, back went to the previous page with the menu still open, and the language menu also went to the previous page. On a phone, pressing back to close a dialog loses the screen the user was on. Confirmed (all three cases reproduced with agent-browser back).",
+   "shots": [
+    "07-product",
+    "04-sidenav",
+    "08-language"
+   ]
+  },
+  {
+   "sev": "mid",
+   "title": "At phone width the search field is 4px wide, so typed text is not visible",
+   "body": "At 390px width, tapping the search icon opens the field 4 CSS px wide. After typing \"apple\" the field was still 4px wide and the text was not visible. Pressing Enter does run the search (3 results). Confirmed (measured with getBoundingClientRect).",
+   "shots": [
+    "05-search",
+    "06-search-results"
+   ]
+  },
+  {
+   "sev": "mid",
+   "title": "The Close button on the product detail dialog is cut off below the dialog and not visible",
+   "body": "The detail dialog ends at y 1395px and the Close button is at y 1472–1552px. The Close button is not visible in the capture. Coordinates are in the 780×1688 screenshot. Whether the button appears when scrolling inside the dialog was not checked.",
+   "shots": [
+    "07-product"
+   ]
+  },
+  {
+   "sev": "low",
+   "title": "Basket delete runs at once with no confirmation or undo",
+   "body": "The trash button calls delete(id) directly, with no confirmation dialog or undo notice (purchase-basket.component.ts:137, purchase-basket.component.html:51). Low, because the item can be added again. The −, + and trash buttons are icons only, with empty accessible names (same cause as in the accessibility report a11ysweep-report-en). Confirmed (source checked, not tapped).",
+   "shots": [
+    "09-basket-anon",
+    "18-basket"
+   ]
+  },
+  {
+   "sev": "low",
+   "title": "The two welcome dialog buttons are icons only, and the tutorial button is named \"school\"",
+   "body": "The two buttons on the welcome dialog have no text. The accessible name of the left graduation cap button is \"school\", the icon glyph name, so it does not say that it opens the tutorial; the right eye-off icon closes the dialog. Confirmed (accessible names collected, both buttons tapped).",
+   "shots": [
+    "01-welcome",
+    "02-tutorial"
+   ]
+  },
+  {
+   "sev": "low",
+   "title": "Small tap targets: the tutorial × and the text links on the login screen",
+   "body": "This map's small-target threshold is 24 CSS px (WCAG 2.5.8, meta.small_target). The tutorial close × is 23×23 CSS px; on the login screen \"Forgot your password?\" is 12 CSS px high and \"Not yet a customer?\" is 14 CSS px; on sign-up \"Already a customer?\" is 14 CSS px. All are below the threshold. The only way to sign-up is this link on the login screen. Confirmed (measured).",
+   "shots": [
+    "02-tutorial",
+    "10-login",
+    "11-register"
+   ]
+  }
+ ],
+ "unverified": [
+  {
+   "what": "Screens: profile, Orders & Payment submenu, Privacy & Security submenu, Complaint, Deluxe Membership",
+   "why": "These screens follow from the menu but were not captured this time. For Complaint and Deluxe Membership only the link address was read."
+  },
+  {
+   "what": "Remaining checkout steps (delivery method, payment method, placing the order)",
+   "why": "Saving an address and ordering create data, so they were not carried out."
+  },
+  {
+   "what": "Submit (customer feedback, new address), Change (forgot password), the two chatbot buttons",
+   "why": "They send or save, so they were not tapped. Their actions are described from the labels only."
+  },
+  {
+   "what": "Help getting started menu item",
+   "why": "Not tapped. Whether it is the same as the welcome dialog's tutorial was not checked."
+  },
+  {
+   "what": "Browser back on the welcome dialog and the tutorial",
+   "why": "Not tested."
+  },
+  {
+   "what": "Fields and toggles not tapped or typed into: the fields on forgot password, customer feedback, AI chat and new address, language search, show password, Show password advice, Remember me, expanding Reviews, expanding Orders & Payment and Privacy & Security, close search ✕, profile",
+   "why": "Not used on this walk. Their actions are described from the labels only."
+  },
+  {
+   "what": "Score Board(#/score-board)",
+   "why": "The menu has no link to it, so taps cannot reach it (the app hides it on purpose)."
+  },
+  {
+   "what": "About Us and the language list, further down the scroll",
+   "why": "Only the first screen was captured."
+  }
+ ]
+}

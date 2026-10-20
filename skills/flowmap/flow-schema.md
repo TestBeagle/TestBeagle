@@ -30,9 +30,9 @@
 | `date` | `"2026-10-20"` | capture date |
 | `driver` | `"adb uiautomator dump + screencap"` | how shots and hotspots were taken, and where destinations came from code instead of a tap |
 | `start` | `["01-home"]` | screens a user lands on without a tap: the launch screen, and state variants no tap leads to (empty, offline, error, another build flavor). Every other screen needs an inbound link. |
-| `small_target` | `{"min": 24, "unit": "CSS px", "px_per_unit": 2}` | the one small-target threshold for this map, picked in the plan; `px_per_unit` converts screenshot px (2 for @2x, `density/160` on Android, the screen scale on iOS). The builder badges every hotspot below `min` on either side. |
-| `skill` | `"1"` | the skill version from `build_flowmap.py --version`, recorded in the plan; the builder refuses another |
-| `lang` | `"ko"` | page chrome language: `ko` (default) or `en` |
+| `small_target` | `{"min": 24, "unit": "CSS px", "px_per_unit": 2}` | the one small-target threshold for this map, fixed per platform (SKILL.md Phase 1: 48 dp Android, 44 pt iOS, 24 CSS px web); `px_per_unit` converts screenshot px (2 for @2x, `density/160` on Android, the screen scale on iOS). The builder badges every hotspot below `min` on either side. |
+| `skill` | `"2"` | the skill version from `build_flowmap.py --version`, recorded in the plan; the builder refuses another |
+| `lang` | `"ko"` | the report language, which sets the page chrome: `ko` (default) or `en` (also for any other report language). Content strings are written in it. |
 | `unverified_none` | `"모든 화면과 목적지를 직접 눌러 확인했습니다."` | required only when `unverified` is empty: why nothing is missing |
 
 The builder adds `meta.template` (the template version), per screen `img`, `w` and `h`, and per hotspot `small`; don't write them yourself.
@@ -46,7 +46,7 @@ The builder adds `meta.template` (the template version), per screen `img`, `w` a
  "hotspots": [{"rect": [640, 28, 56, 56], "what": "삭제", "to": "03-delete-dialog", "action": "", "evidence": "tap", "long": false}]}
 ```
 
-- **Screen ids** — one screen per view a user can see and act on: a route or page, a dialog, sheet or menu, and a state of a route that changes its targets (empty, loading, error, logged in, selection mode, a scrolled section with different targets). The same targets with different data are one screen. Name it `NN-name` in walk order (two digits, kebab-case); a variant of `NN` is `NNb-name`, `NNc-name`. Shots from a walk named like `light/NN-name.png` map to the id by dropping the folder; take one theme set, the one in `meta.theme`.
+- **Screen ids** — one screen per view a user can see and act on: a route or page, a dialog, sheet or menu, and a state of a route that changes its targets (empty, loading, error, logged in, selection mode, a scrolled section with different targets). The same targets with different data are one screen: typed text, a filled form, or a picked value is data, so a field before and after typing is one screen, captured in the state the plan names (a search field with the planned query typed). Name it `NN-name` in walk order (two digits, kebab-case), `name` from the app's own name for the view (its title, or the label of the control that opens it; else its route or component), plus the state for a variant (`search-results`, `basket-empty`); a variant of `NN` is `NNb-name`, `NNc-name`. Shots from a walk named like `light/NN-name.png` map to the id by dropping the folder; take one theme set, the one in `meta.theme`.
 - `id`: file-safe, `^[A-Za-z0-9][A-Za-z0-9._~-]*$`, unique. It names the PNG and is the deep link (`index.html#02-note`), so nothing else fits in a URL fragment. A `NN-` or `NNb-` prefix shows as the list number.
 - `title`, `group`, `back` required. Screens are listed in array order, grouped under each change of `group`.
 - `back` says what on-screen back/✕ and system back do here — even "시스템 뒤로: 앱이 닫힙니다." `note`, `backTo` (screen id or `null`), `gestures` are optional. A gesture is `[what, effect]`, `[what, effect, to]`, or `[what, effect, to|null, kind]` with `kind` one of `gesture` (default: swipes, drags, system back, keys), `state` (a control whose destination depends on app state; `what` names the condition, e.g. `"설정 (명화 액자일 때)"`), `auto` (the screen moves by itself; `"기다리기"`), `scroll` (scrolling shows another captured state). The page badges the kind.
@@ -72,7 +72,7 @@ Blue outline = has `to` (click jumps there); orange = `action` only.
 {"name": "메모 삭제", "taps": 3, "steps": [["메모 선택", "01-notes"], ["삭제 아이콘", "02-note"], ["삭제", "03-delete-dialog"]], "note": "…"}
 ```
 
-`taps` counts taps from the start screen until the task is done; text entry and system dialogs (permission prompts, OS pickers) are not counted — say so in a step (`"… (세지 않음)"`). Each step's screen id is where that tap happens, or `null`.
+`taps` counts taps from the start screen until the task is done; text entry and system dialogs (permission prompts, OS pickers) are not counted — say so in a step (`"… (세지 않음)"` / `"… (not counted)"`). Each step's screen id is where that tap happens, or `null`.
 
 ### `findings[]`
 
@@ -93,7 +93,7 @@ Unverified means neither tapped nor read in code (rule 6). This list holds every
 ## Validation rules (what the builder enforces)
 
 - The top level is an object; `tasks`, `findings`, `unverified` and each screen's `gestures` are lists when present (omitted means empty).
-- `meta` has every required key; `viewport_px` and every rect hold finite numbers (no NaN or Infinity anywhere in the file); `lang` is `ko` or `en`; `start` is a non-empty list of screen ids; `small_target` is `{min, unit, px_per_unit}`.
+- `meta` has every required key; `viewport_px` and every rect hold finite numbers (no NaN or Infinity anywhere in the file); `lang` is `ko` or `en`; `start` is a non-empty list of screen ids; `small_target` is `{min, unit, px_per_unit}` with the fixed `min` for its unit (24 CSS px, 44 pt, 48 dp).
 - Screen ids are unique and file-safe; exactly one `shots/<id>.png|.jpg|.jpeg|.webp` exists and is readable.
 - Every screen has a `back` line.
 - Every screen is reachable from `meta.start` by following hotspot `to`, gesture targets and `backTo`. Two screens that only link to each other don't count.

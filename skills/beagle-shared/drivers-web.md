@@ -15,6 +15,8 @@ Driver 1 beats 2 only for flows the repo already scripts; use 2 for everything e
 
 Verified against agent-browser 0.37.0. Full guide ships with the CLI: `agent-browser skills get core` (read it once per session; it is version-matched, this file only pins what TestBeagle relies on). Not installed? Preflight reports it with the fix: `brew install agent-browser` or `npm i -g agent-browser && agent-browser install` (the latter downloads Chrome for Testing — an install, so it needs approval).
 
+**In Codex**, Chrome can't start inside the sandbox (`Chrome exited early … without writing DevToolsActivePort`). Interactive: ask for escalation on the first `agent-browser` launch. Non-interactive (`codex exec`): the caller starts Chrome outside the sandbox (`--remote-debugging-port=<port> --user-data-dir=<tmp dir>`) and names the port in the prompt; connect with `agent-browser --cdp <port> --pin-tab …` and close only your own tab. Without either, stop and report the launch error; don't capture with a fallback that can't do what the plan promised.
+
 ```bash
 # one unique session per run — the unnamed default is shared with every other agent on the machine
 export AGENT_BROWSER_SESSION="beagle-$(date +%s)-$$"

@@ -27,14 +27,15 @@ TEMPLATE_VERSION = "3"
 TEMPLATE_SHA256 = "ebb6b7d51476c4bff78ef6b8f4c4473405c2ff29ddfbf57ea258bddb426ed37d"
 # The skill version: bump it, and re-pin RULES_SHA256, whenever SKILL.md, flow-schema.md or hotspots.md change.
 # A plan records it as meta.skill; a build refuses a flow made under another version.
-SKILL_VERSION = "1"
+SKILL_VERSION = "2"
 RULES = ("SKILL.md", "flow-schema.md", "hotspots.md")
-RULES_SHA256 = "efcd595eb334370231458732cfcb934d7f09c95a3d8f713360764b5a40e41f00"
+RULES_SHA256 = "9a5dde3ca4d6b8bba0c56dd6d4f63c1aa2faac3bfe3f009786de5a63c65dd3d0"
 GESTURE_KINDS = ("gesture", "state", "auto", "scroll")
 ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._~-]*$")  # file-safe and survives as a bare #anchor
 META_TEXT = ("app", "platform", "device", "locale", "theme", "date", "driver")
 SHOT_EXTS = (".png", ".jpg", ".jpeg", ".webp")
 EVIDENCE = ("tap", "code", "unverified")
+SMALL_MIN = {"CSS px": 24, "pt": 44, "dp": 48}  # one threshold per unit (SKILL.md Phase 1), so two runs badge the same targets
 TITLE = {"ko": "{app} 화면 흐름", "en": "{app} screen flow"}
 # Fixed chrome every built page must carry; a page without them did not come from this template.
 FIXED_UI = ("모든 터치 영역 표시", "작업 경로", "발견 사항", "뒤로 가기", "길게 누르기", "← 뒤로", "코드로 확인", "확인 안 함", "상태에 따라",
@@ -120,6 +121,9 @@ def validate(flow, shots_dir):
             and is_num(st.get("px_per_unit")) and st["px_per_unit"] > 0):
         errs.append("meta.small_target: must be {min, unit, px_per_unit}, e.g. {\"min\": 24, \"unit\": \"CSS px\", \"px_per_unit\": 2}")
         st = None
+    elif SMALL_MIN.get(st["unit"]) != st["min"]:
+        errs.append(f"meta.small_target: {st['min']} {st['unit']!r} is not the fixed threshold; use one of "
+                    + ", ".join(f"{m} {u}" for u, m in SMALL_MIN.items()))
     if meta.get("skill") != SKILL_VERSION:
         errs.append(f"meta.skill: the plan recorded skill {meta.get('skill')!r}, but these files are skill {SKILL_VERSION!r}. "
                     "Re-read SKILL.md, flow-schema.md and hotspots.md, re-check flow.json against them, then set meta.skill")
@@ -424,6 +428,12 @@ def selftest():
         for s in data["screens"]:
             assert (s["w"], s["h"]) == image_size(work / s["img"]), s["id"]
 
+        # an English report gets the English page title
+        (work / "flow.json").write_text(json.dumps({**src, "meta": {**src["meta"], "lang": "en"}}, ensure_ascii=False), encoding="utf-8")
+        en = build(work / "flow.json").read_text(encoding="utf-8")
+        assert en.startswith(f"<title>{src['meta']['app']} screen flow</title>"), "lang en did not give the English title"
+        (work / "flow.json").write_text(json.dumps(src, ensure_ascii=False), encoding="utf-8")
+
         # a broken flow must fail and name every problem, not just the first
         def errors_for(mutate):
             bad = json.loads(json.dumps(src))
@@ -469,6 +479,7 @@ def selftest():
         expect(lambda b: next(h for h in b["screens"][0]["hotspots"] if h["to"]).update(evidence="unverified"),
                "an unverified target has no 'to'")
         expect(lambda b: b["screens"][0]["hotspots"][0].update(small="9px"), "set by the builder")
+        expect(lambda b: b["meta"]["small_target"].update(min=44), "not the fixed threshold")
         expect(lambda b: b["meta"].update(skill="0"), "meta.skill: the plan recorded skill '0'")
         expect(lambda b: b["screens"][0].update(gestures=[["밀기", "x", None, "swipe"]]), "kind must be one of")
         ok = json.loads(json.dumps(src))
