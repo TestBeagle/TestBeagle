@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<!-- flowmap template 3 (TestBeagle). Never edit a built page or restyle this file for one run:
+<!-- flowmap template 4 (TestBeagle). Never edit a built page or restyle this file for one run:
      build_flowmap.py pins this file's sha256 and fills the two placeholders. No doctype/html/head/body
      of its own, so the same file publishes as an Artifact and opens standalone. -->
 <style>
@@ -122,7 +122,8 @@ const UI = {
     shots: 'Screens', driver: 'Driver', template: 'template', unverified: 'Unverified', colItem: 'Item', colWhy: 'Reason'
   }
 }[DATA.meta.lang === 'en' ? 'en' : 'ko'];
-const byId = Object.fromEntries(DATA.screens.map(s => [s.id, s]));
+// No prototype, so a hash such as #constructor is not taken for a screen.
+const byId = Object.assign(Object.create(null), Object.fromEntries(DATA.screens.map(s => [s.id, s])));
 let tab = 'screens', cur = DATA.screens[0].id, trail = [cur], showAll = false;
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
