@@ -1,0 +1,32 @@
+# Every merged PR into main gets the next minor release (v0.2.0 -> v0.3.0), tagged on its merge commit,
+# with GitHub's generated notes. Label a PR `no-release` to skip. Plugin manifest versions are not touched.
+name: release
+
+on:
+  pull_request_target:   # base-repo token, so fork PRs release too; PR code is never checked out
+    types: [closed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release   # one at a time, so two quick merges get consecutive versions
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.event.pull_request.merged && !contains(github.event.pull_request.labels.*.name, 'no-release')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tag and release the next minor version
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ github.event.pull_request.merge_commit_sha }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          last=$(gh release view -R "$GITHUB_REPOSITORY" --json tagName -q .tagName)
+          IFS=. read -r major minor _ <<< "${last#v}"
+          next="v${major}.$((minor + 1)).0"
+          gh release create "$next" -R "$GITHUB_REPOSITORY" --target "$SHA" --title "$next" --generate-notes --latest
+          echo "released $next for #$PR at $SHA"
