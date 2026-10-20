@@ -33,7 +33,7 @@ Reports come out in **Korean by default, English (or another language) on reques
 ### Screen-flow map
 
 <p align="center">
-  <img src="docs/flowmap-demo.gif" alt="flowmap page for OWASP Juice Shop: showing all tap areas, hovering the basket icon, clicking through to the basket, login and registration screens, going back, then opening the task-path and findings tabs" width="760">
+  <img src="docs/flowmap-demo.gif" alt="English flowmap page for OWASP Juice Shop: showing all tap areas, hovering the basket icon, clicking through to the basket, login and sign-up screens, going back, then opening the task-path and findings tabs" width="760">
 </p>
 
 **[Live demo](https://testbeagle.github.io/flowmap/juice-shop/)** ([한국어](https://testbeagle.github.io/flowmap/juice-shop/ko/)) · example folders: [English](docs/examples/juice-shop/flowmap-en/), [Korean](docs/examples/juice-shop/flowmap/)

@@ -32,6 +32,10 @@ Screenshots for every covered route are in [`screenshots/`](./screenshots/) (see
 
 ## flowmap — clickable screen-flow map (2026-10-20)
 
+<p align="center"><img src="../../flowmap-demo-ko.gif" alt="한국어 flowmap 페이지: 모든 터치 영역 표시, 장바구니 아이콘에 마우스 올리기, 장바구니·로그인·회원가입 화면으로 이동, 뒤로 가기, 작업 경로와 발견 사항 탭 열기" width="760"></p>
+
+한국어 화면 흐름 지도(`flowmap/`)의 동작입니다. 영어판은 [루트 README](../../../README.md#screen-flow-map)에 있습니다.
+
 [`flowmap/index.html`](./flowmap/index.html) (Korean, [live](https://testbeagle.github.io/flowmap/juice-shop/ko/)) and [`flowmap-en/index.html`](./flowmap-en/index.html) (English, [live](https://testbeagle.github.io/flowmap/juice-shop/)) are one flowmap run on the same image (`bkimminich/juice-shop:v20.2.0`, revision `5658473`), in a fresh container on `127.0.0.1:3100`, stopped afterwards.
 
 - **Driver:** agent-browser 0.37.0 at 390×844, device scale 2. Each shot's tap targets come from the web snippet in `skills/flowmap/hotspots.md`, run in the same state as the shot. Dialog backdrops, disabled submit buttons, and the 4 px search field don't pass its hit test, so they were measured from the DOM in the same state.
