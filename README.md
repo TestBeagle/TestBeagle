@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-166BFC?style=flat-square" alt="License: Apache 2.0"></a>
-  <img src="https://img.shields.io/badge/version-0.1.0-166BFC?style=flat-square" alt="Version 0.1.0">
+  <img src="https://img.shields.io/badge/version-0.2.0-166BFC?style=flat-square" alt="Version 0.2.0">
   <img src="https://img.shields.io/badge/skills-10-166BFC?style=flat-square" alt="10 skills">
   <img src="https://img.shields.io/badge/plan--gated-yes-166BFC?style=flat-square" alt="Plan-gated">
   <img src="https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20~%2F.agents-166BFC?style=flat-square" alt="Runtimes: Claude Code, Codex, ~/.agents">
