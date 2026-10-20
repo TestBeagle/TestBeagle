@@ -23,8 +23,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 TEMPLATE = HERE / "flowmap.html"
 # Bump both together, only when flowmap.html is changed on purpose (and say why in the commit).
-TEMPLATE_VERSION = "3"
-TEMPLATE_SHA256 = "ebb6b7d51476c4bff78ef6b8f4c4473405c2ff29ddfbf57ea258bddb426ed37d"
+TEMPLATE_VERSION = "4"
+TEMPLATE_SHA256 = "f1c22c3010d06f7f2c22c2185c15965116e031e4977ce91b32338b73c24a49ef"
 # The skill version: bump it, and re-pin RULES_SHA256, whenever SKILL.md, flow-schema.md or hotspots.md change.
 # A plan records it as meta.skill; a build refuses a flow made under another version.
 SKILL_VERSION = "2"
