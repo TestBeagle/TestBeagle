@@ -16,11 +16,11 @@
       "01-notes"
     ],
     "small_target": {
-      "min": 44,
+      "min": 24,
       "unit": "CSS px",
       "px_per_unit": 2
     },
-    "skill": "1"
+    "skill": "2"
   },
   "screens": [
     {
@@ -274,9 +274,9 @@
   ],
   "findings": [
     {
-      "sev": "mid",
-      "title": "삭제 아이콘이 28px로 작고 글자가 없음",
-      "body": "편집 화면 오른쪽 위 삭제 버튼은 28×28 CSS px 아이콘뿐입니다. 이 지도의 작은 탭 영역 기준(44 CSS px, meta.small_target)보다 작고, 메모를 지우는 유일한 길입니다.",
+      "sev": "low",
+      "title": "삭제 버튼이 글자 없는 아이콘뿐",
+      "body": "편집 화면 오른쪽 위 삭제 버튼은 28×28 CSS px 아이콘뿐이고, 메모를 지우는 유일한 길입니다. 이 지도의 작은 탭 영역 기준(24 CSS px)은 넘습니다. 확실(직접 측정).",
       "shots": [
         "02-note",
         "03-delete-dialog"

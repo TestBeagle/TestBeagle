@@ -36,11 +36,11 @@ Reports come out in **Korean by default, English (or another language) on reques
   <img src="docs/flowmap-demo.gif" alt="flowmap page for OWASP Juice Shop: showing all tap areas, hovering the basket icon, clicking through to the basket, login and registration screens, going back, then opening the task-path and findings tabs" width="760">
 </p>
 
-**[Live demo](https://testbeagle.github.io/flowmap/juice-shop/)** · [example folder](docs/examples/juice-shop/flowmap/)
+**[Live demo](https://testbeagle.github.io/flowmap/juice-shop/)** ([한국어](https://testbeagle.github.io/flowmap/juice-shop/ko/)) · example folders: [English](docs/examples/juice-shop/flowmap-en/), [Korean](docs/examples/juice-shop/flowmap/)
 
 The map contains 20 captured screen states and 194 marked targets. Blue outlines link to recorded destination screens. Orange outlines show action descriptions. Targets that were neither tapped nor read in code are marked and listed as unverified.
 
-To view it locally, open `docs/examples/juice-shop/flowmap/index.html` in a browser. The folder makes no external requests, so it works from disk or any static host. Every flowmap page comes from the same pinned template; only the data changes.
+The page language follows the report language (Korean by default, English on request). To view it locally, open `docs/examples/juice-shop/flowmap-en/index.html` (or `flowmap/` for Korean) in a browser. The folder makes no external requests, so it works from disk or any static host. Every flowmap page comes from the same pinned template; only the data changes.
 
 **Works with** the richest driver present, and says in the report which one it used: your repo's own Playwright/Cypress → [agent-browser](https://github.com/vercel-labs/agent-browser) → the `chrome-devtools` / `claude-in-chrome` MCP → headless Chrome. No browser MCP required for real interaction.
 
@@ -68,7 +68,7 @@ Every run is **plan-gated**: the agent shows you the route map and waits for app
 - **iOS** targets: Xcode + `xcrun simctl` (macOS).
 - **Android** targets: Android SDK platform-tools (`adb`).
 
-> Codex CLI: agent-browser works in Codex, so the chrome-devtools MCP is optional. Codex's `workspace-write` sandbox has no network and can't write outside the workspace, so launching the app, `agent-browser` (state in `~/.agent-browser`), `curl localhost`, `docker`, and `npx` need sandbox escalation — the plan lists each one before you approve.
+> Codex CLI: agent-browser works in Codex, so the chrome-devtools MCP is optional. Codex's `workspace-write` sandbox has no network and can't write outside the workspace, so launching the app, `agent-browser` (state in `~/.agent-browser`), `curl localhost`, `docker`, and `npx` need sandbox escalation — the plan lists each one before you approve. Under `codex exec` (no one to approve an escalation) Chrome can't start in the sandbox: start it yourself with `--remote-debugging-port=9333 --user-data-dir=<tmp dir>` and tell the agent to use `agent-browser --cdp 9333` (details in `skills/beagle-shared/drivers-web.md`).
 
 ## Install
 
