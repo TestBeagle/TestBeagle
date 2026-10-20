@@ -33,7 +33,7 @@ Write per `../beagle-shared/report-base.md` (Korean default, anti-slop rules enf
 
 ## Phase 5 — Offer a static runner
 
-Offer to freeze the capture flow into a repo-native `.sh` (via `../beagle-shared/emit-runner.md`, the `scriptify` mechanism) so future runs need no agent. Don't auto-commit — offer it.
+Offer to freeze the capture flow into a repo-native `.sh` (via `../beagle-shared/emit-runner.md`, the `scriptify` mechanism) so future runs need no agent. Don't auto-commit — offer it. When the user wants a clickable map of where each tap goes, offer **flowmap** (`../flowmap/SKILL.md`) built from these captures.
 
 ## Hard rules
 

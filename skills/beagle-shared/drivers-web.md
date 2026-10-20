@@ -1,6 +1,6 @@
 # beagle-web-driver — web capture & interaction recipes
 
-Shared by bugsweep, breachsweep, a11ysweep, perfsweep, snap, repro, scriptify. Pick the richest driver the runtime actually has, in this order, and state in the plan which one you're using and what it can't do. Put the driver name and version on the report's 드라이버 line.
+Shared by bugsweep, breachsweep, a11ysweep, perfsweep, snap, repro, scriptify, flowmap. Pick the richest driver the runtime actually has, in this order, and state in the plan which one you're using and what it can't do. Put the driver name and version on the report's 드라이버 line.
 
 | Order | Driver | Interaction | Console / network | Video | Works in |
 |---|---|---|---|---|---|

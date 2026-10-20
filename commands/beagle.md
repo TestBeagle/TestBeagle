@@ -1,6 +1,6 @@
 ---
-description: Start a TestBeagle QA run on this repo — preflight, functional QA, security, a11y, performance, test generation, or a static runner.
-argument-hint: "[preflight|qa|security|a11y|perf|tests|snap|repro|script]"
+description: Start a TestBeagle QA run on this repo — preflight, functional QA, security, a11y, performance, test generation, a static runner, or a clickable screen-flow map.
+argument-hint: "[preflight|qa|security|a11y|perf|tests|snap|repro|script|map]"
 ---
 
 # /beagle
@@ -24,5 +24,6 @@ Route by the argument (case-insensitive):
 - `script`, `runner` → **scriptify**.
 - `snap`, `screenshots`, `shots` → **snap** (screenshot every screen → images, no analysis).
 - `repro`, `video`, `record` → **repro** (record a video reproducing a flow or error).
+- `map`, `flowmap`, `flow` → **flowmap** (clickable screen-flow map: every screen, its tap targets, where each goes).
 
 If the argument doesn't match, run **preflight**, then show what TestBeagle can test on this repo and ask which to run. Reuse the repo's existing tooling; report in Korean by default per `../beagle-shared/report-base.md` (relative to the skill's `SKILL.md`).

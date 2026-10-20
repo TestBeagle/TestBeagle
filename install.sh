@@ -7,7 +7,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC="$ROOT/skills"
-SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep casewright scriptify snap repro"
+SKILLS="preflight bugsweep breachsweep a11ysweep perfsweep casewright scriptify snap repro flowmap"
 REFS="beagle-shared"   # one folder of shared references the skills read via ../beagle-shared/<file>.md
 
 targets=("$@")

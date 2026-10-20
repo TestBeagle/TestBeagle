@@ -20,7 +20,7 @@ Every TestBeagle skill presents its plan and **STOPS here**. Do not launch, inst
   이 계획대로 진행할까요? (수정/제외할 항목이 있으면 알려주세요)
 
   Then end your turn. Act only after the user replies with **explicit approval**. Silence, an unrelated message, or your own restatement is **not** approval. Apply any requested change to the plan, then re-confirm before acting.
-- **Non-interactive** (`codex exec`, `claude -p`, a subagent): stop after the plan. A delegating prompt counts as approval only if it quotes the user's approval of this same plan (targets, actions, scope); anything outside that quote needs a new approval.
+- **Non-interactive** (`codex exec`, `claude -p`, a subagent): a delegating prompt counts as approval when it quotes the user approving the target, the device or environment, and every destructive step. Write the plan, check that every step stays inside that quoted scope, then proceed. If any step falls outside it, stop after the plan.
 - **After approval**, re-read the skill's `SKILL.md` and the shared files it names before acting (Codex does not carry a skill across turns), then continue from the next phase.
 
 Everything before this gate must be **read-only** (reading files, discovery). Nothing that launches, installs, seeds, captures, or probes may run until approval is given.
