@@ -7,7 +7,7 @@
 <p align="center">
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-166BFC?style=flat-square" alt="License: Apache 2.0"></a>
   <img src="https://img.shields.io/badge/version-0.1.0-166BFC?style=flat-square" alt="Version 0.1.0">
-  <img src="https://img.shields.io/badge/skills-9-166BFC?style=flat-square" alt="9 skills">
+  <img src="https://img.shields.io/badge/skills-10-166BFC?style=flat-square" alt="10 skills">
   <img src="https://img.shields.io/badge/plan--gated-yes-166BFC?style=flat-square" alt="Plan-gated">
   <img src="https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20~%2F.agents-166BFC?style=flat-square" alt="Runtimes: Claude Code, Codex, ~/.agents">
 </p>
@@ -30,6 +30,18 @@ A complete run against [OWASP Juice Shop](https://github.com/juice-shop/juice-sh
 
 Reports come out in **Korean by default, English (or another language) on request** — same run, same findings, different language. See the same breachsweep report in [English](docs/examples/juice-shop/breachsweep-report-en.md) and [한국어](docs/examples/juice-shop/breachsweep-report.md).
 
+### Screen-flow map
+
+<p align="center">
+  <img src="docs/flowmap-demo.gif" alt="flowmap page for OWASP Juice Shop: showing all tap areas, hovering the basket icon, clicking through to the basket, login and registration screens, going back, then opening the task-path and findings tabs" width="760">
+</p>
+
+**[Live demo](https://testbeagle.github.io/flowmap/juice-shop/)** · [example folder](docs/examples/juice-shop/flowmap/)
+
+The map contains 20 captured screen states and 194 marked targets. Blue outlines link to recorded destination screens. Orange outlines show action descriptions. Targets that were neither tapped nor read in code are marked and listed as unverified.
+
+To view it locally, open `docs/examples/juice-shop/flowmap/index.html` in a browser. The folder makes no external requests, so it works from disk or any static host. Every flowmap page comes from the same pinned template; only the data changes.
+
 **Works with** the richest driver present, and says in the report which one it used: your repo's own Playwright/Cypress → [agent-browser](https://github.com/vercel-labs/agent-browser) → the `chrome-devtools` / `claude-in-chrome` MCP → headless Chrome. No browser MCP required for real interaction.
 
 ## Skills
@@ -45,6 +57,7 @@ Reports come out in **Korean by default, English (or another language) on reques
 | **scriptify** | Turns a discovered flow into a committed, repo-native static `.sh` runner so it re-runs **without an agent**. | "정적 스크립트로 만들어줘", "make a capture script" |
 | **snap** | Screenshots of every screen saved as image files — capture-only, no analysis. | "스크린샷 다 찍어줘", "capture all screens" |
 | **repro** | Records a video that reproduces a flow or a bug, and saves the clip. | "오류 영상으로 남겨줘", "record a repro video" |
+| **flowmap** | A clickable screen-flow map: every screen with its tap targets marked and linked to the screen each opens, task paths with tap counts, and navigation-ease findings — one self-contained HTML page. | "화면 흐름 지도 만들어줘", "screen flow map" |
 
 Every run is **plan-gated**: the agent shows you the route map and waits for approval before it launches, seeds, or captures anything. In plan mode (Claude Code or Codex) the plan comes through it; otherwise the agent posts it and waits for your explicit OK. Reports default to Korean and land in the repo (e.g. `docs/qa/`), reusing the project's own conventions where they exist.
 
@@ -59,7 +72,7 @@ Every run is **plan-gated**: the agent shows you the route map and waits for app
 
 ## Install
 
-Pick your runtime — all methods install the same 9 skills. Re-running is safe.
+Pick your runtime — all methods install the same 10 skills. Re-running is safe.
 
 ### Claude Code — plugin (recommended)
 
@@ -90,7 +103,7 @@ cd TestBeagle
 # or one runtime: ./install.sh ~/.claude/skills
 ```
 
-It symlinks each skill folder — the 9 skills **and** the shared `beagle-shared` reference folder — into the target dir, so every skill's `../beagle-shared/<file>.md` reference resolves. After a `git pull`, re-run `./install.sh` so new folders get linked and stale links are removed.
+It symlinks each skill folder — the 10 skills **and** the shared `beagle-shared` reference folder — into the target dir, so every skill's `../beagle-shared/<file>.md` reference resolves. After a `git pull`, re-run `./install.sh` so new folders get linked and stale links are removed.
 
 ### `npx skills`
 
@@ -107,7 +120,7 @@ The shared driver/report logic lives in a `beagle-shared` folder, so `--all` car
 
 TestBeagle skills are triggered by **what you say to your coding agent** (Claude Code, Codex, …) while it's open in the repo you want to test. Ask in plain language — English or Korean — and the agent matches your request to a skill and follows it.
 
-In Claude Code you can also type the **`/beagle`** command to start directly: `/beagle` (full QA), or `/beagle security` · `/beagle a11y` · `/beagle perf` · `/beagle tests` · `/beagle snap` · `/beagle repro` · `/beagle script`. In Codex, mention the skill, e.g. `$bugsweep 전수 QA 해줘`, or just describe the task.
+In Claude Code you can also type the **`/beagle`** command to start directly: `/beagle` (full QA), or `/beagle security` · `/beagle a11y` · `/beagle perf` · `/beagle tests` · `/beagle snap` · `/beagle repro` · `/beagle script` · `/beagle map`. In Codex, mention the skill, e.g. `$bugsweep 전수 QA 해줘`, or just describe the task.
 
 | Want to… | Say something like |
 |----------|--------------------|
@@ -120,6 +133,7 @@ In Claude Code you can also type the **`/beagle`** command to start directly: `/
 | Freeze it into a re-runnable script | "정적 스크립트로 만들어줘" · "make a capture script" |
 | Just get screenshots of every screen | "스크린샷 다 찍어줘" · "capture all screens" |
 | Record a video of a bug / flow | "오류 영상으로 남겨줘" · "record a repro video" |
+| See where every tap goes, as a clickable map | "화면 흐름 지도 만들어줘" · "make a clickable screen map" |
 
 **Every run stops for your approval first.** The skill discovers how your app runs, shows you a plan — which screens/routes, what it will capture, what it can't verify, where the report goes — and waits. In plan mode (Claude Code or Codex) it comes through plan mode; otherwise the agent posts the plan and waits for your go-ahead. Nothing launches, installs, seeds, or captures until you approve. Reports are written in Korean by default, into the repo (e.g. `docs/qa/`), reusing the project's own conventions where they exist.
 

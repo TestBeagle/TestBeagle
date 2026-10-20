@@ -39,4 +39,4 @@ Present the screens/routes to audit and the checks per platform, then stop per t
 
 Write per `../beagle-shared/report-base.md` (Korean default, anti-slop). Per finding: WCAG 기준(있으면) · 증상 위치 · 원인 위치(axe target selector → component template: grep a distinctive attribute, class, or text) · 왜(검증: axe rule / 측정값 / 스크린샷) · 수정 제안 · 확신. Unaudited screens → 검증 불가.
 
-Optionally offer a static re-check runner via `../beagle-shared/emit-runner.md`.
+Optionally offer a static re-check runner via `../beagle-shared/emit-runner.md`. When the user wants the clickable map, offer **flowmap** (`../flowmap/SKILL.md`): the tap-target and label measurements become its `small` badges and unlabeled-target findings.

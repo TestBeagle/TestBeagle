@@ -29,3 +29,12 @@ Reports default to Korean; the agent writes English (or another language you ask
 Juice Shop is built to be broken — SQL injection, XSS, and more are there by design. breachsweep reports only what a read-only probe actually proved: the IDOR and user listing were demonstrated with the run's own two accounts, while everything that would need an exploit sits in the 미검증 (unverified) table. Never counting an unexercised path as a pass — or as a finding — is what the whole suite is built around.
 
 Screenshots for every covered route are in [`screenshots/`](./screenshots/) (see its `INDEX.md`).
+
+## flowmap — clickable screen-flow map (2026-10-20)
+
+[`flowmap/index.html`](./flowmap/index.html) ([live](https://testbeagle.github.io/flowmap/juice-shop/)) is a separate flowmap run on the same image (`bkimminich/juice-shop:v20.2.0`, revision `5658473`), in a fresh container on `127.0.0.1:3100`, stopped afterwards.
+
+- **Driver:** agent-browser 0.37.0 at 390×844, device scale 2. Each shot's tap targets come from the web snippet in `skills/flowmap/hotspots.md`, run in the same state as the shot. Dialog backdrops, disabled submit buttons, and the 4 px search field don't pass its hit test, so they were measured from the DOM in the same state.
+- **Destinations:** each target is marked by how it is known: tapped and identified by URL and open dialog/menu, read in code (markup `href`s; the basket −, + and delete handlers in `purchase-basket.component.html` and `purchase-basket.component.ts:137`), or unverified. Feedback and address submission, basket deletion, and external links were not exercised.
+- **Account:** one throwaway account registered through the UI on the local container.
+- **Result:** `flowmap: screens 20 · hotspots 194 (nav 99 / action 95; unverified 43) · tasks 6 · findings 6 · unverified 8 · skill 1 · template 3`. Shots are WebP (quality 80). Text-field targets use the visible field box, which focuses the input when tapped.

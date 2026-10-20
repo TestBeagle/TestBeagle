@@ -1,6 +1,6 @@
 # beagle-mobile-driver — iOS & Android capture recipes
 
-Shared by bugsweep, a11ysweep, perfsweep, scriptify. **When a repo targets both iOS and Android, test both** — never cover one and silently skip the other; if an OS API makes a check possible on one platform only, say so. A single-platform repo is tested on the platform it has.
+Shared by bugsweep, a11ysweep, perfsweep, scriptify, flowmap. **When a repo targets both iOS and Android, test both** — never cover one and silently skip the other. The plan names the platforms; a platform you skip is named in the plan with the reason and listed as unverified (검증 불가) in the report. If an OS API makes a check possible on one platform only, say so. A single-platform repo is tested on the platform it has.
 
 Prefer the repo's own capture scripts / deep-link "review" modes when they exist (discover them in preflight). The commands below are the generic fallback.
 

@@ -21,4 +21,4 @@ Start the app (readiness by evidence; seed only if the approved plan names it). 
 
 ## Phase 3 — Hand over
 
-Write `INDEX.md` into the output location: a table `file | route | state | variant/viewport | note`, plus a row per screen you couldn't reach (검증 불가) with the reason. Offer the images; don't auto-commit. If you'll want to re-capture without an agent later, offer **scriptify** to freeze this into a `.sh`.
+Write `INDEX.md` into the output location: a table `file | route | state | variant/viewport | note`, plus a row per screen you couldn't reach (검증 불가) with the reason. Offer the images; don't auto-commit. If you'll want to re-capture without an agent later, offer **scriptify** to freeze this into a `.sh`. If the user wants to see where each tap goes, offer **flowmap** (`../flowmap/SKILL.md`): it can reuse these shots and add the tap targets.

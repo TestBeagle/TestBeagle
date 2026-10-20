@@ -1,0 +1,240 @@
+<title>/*FLOW_TITLE*/</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- flowmap template 3 (TestBeagle). Never edit a built page or restyle this file for one run:
+     build_flowmap.py pins this file's sha256 and fills the two placeholders. No doctype/html/head/body
+     of its own, so the same file publishes as an Artifact and opens standalone. -->
+<style>
+:root {
+  --bg: #f6f5f2; --panel: #ffffff; --ink: #1d1d1f; --muted: #6b6b70; --line: #dddad3;
+  --accent: #2f6fde; --accent-soft: rgba(47,111,222,.16); --act: #c46a00; --act-soft: rgba(196,106,0,.16);
+  --high: #c62828; --mid: #c46a00; --low: #5f6b7a; --sel: #e8eefb;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #151517; --panel: #1f1f22; --ink: #ececee; --muted: #a0a0a8; --line: #34343a;
+    --accent: #7aa7ff; --accent-soft: rgba(122,167,255,.2); --act: #ffb050; --act-soft: rgba(255,176,80,.2);
+    --high: #ff6b6b; --mid: #ffb050; --low: #a0a8b4; --sel: #26324a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #151517; --panel: #1f1f22; --ink: #ececee; --muted: #a0a0a8; --line: #34343a;
+  --accent: #7aa7ff; --accent-soft: rgba(122,167,255,.2); --act: #ffb050; --act-soft: rgba(255,176,80,.2);
+  --high: #ff6b6b; --mid: #ffb050; --low: #a0a8b4; --sel: #26324a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; word-break: keep-all; }
+header { padding-block: 14px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); border-bottom: 1px solid var(--line); background: var(--panel); display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+header h1 { font-size: 17px; margin: 0; flex: 1 1 auto; }
+nav.tabs { display: flex; gap: 4px; }
+nav.tabs button, .btn { font: inherit; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 6px 12px; cursor: pointer; min-height: 36px; }
+nav.tabs button[aria-selected="true"] { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+.btn:disabled { opacity: .4; cursor: default; }
+main { display: flex; min-height: calc(100vh - 60px); }
+aside { width: 260px; flex: 0 0 260px; border-right: 1px solid var(--line); background: var(--panel); overflow-y: auto; max-height: calc(100vh - 60px); position: sticky; top: env(safe-area-inset-top, 0px); }
+aside h3 { font-size: 12px; color: var(--muted); margin: 14px 14px 4px; font-weight: 600; }
+aside a { display: block; padding: 6px 14px; color: var(--ink); text-decoration: none; font-size: 14px; }
+aside a .n { color: var(--muted); font-size: 12px; margin-right: 6px; font-variant-numeric: tabular-nums; }
+aside a.on { background: var(--sel); font-weight: 600; }
+section.view { flex: 1; padding-block: 16px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); min-width: 0; }
+.crumbs { font-size: 13px; color: var(--muted); margin: 0 0 10px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.crumbs a { color: var(--accent); cursor: pointer; text-decoration: none; }
+.bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.bar label { font-size: 14px; display: flex; gap: 6px; align-items: center; cursor: pointer; }
+.screen { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+.shot { position: relative; width: min(360px, 100%); flex: 0 0 auto; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #000; }
+.shot img { display: block; width: 100%; height: auto; }
+.hs { position: absolute; border: 2px solid transparent; border-radius: 6px; cursor: pointer; }
+.hs.nav:hover, .all .hs.nav { border-color: var(--accent); background: var(--accent-soft); }
+.hs.act:hover, .all .hs.act { border-color: var(--act); background: var(--act-soft); }
+.hs.flash { border-color: var(--accent) !important; background: var(--accent-soft) !important; }
+.tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--panel); font-size: 13px; padding: 6px 9px; border-radius: 6px; max-width: 280px; z-index: 9; display: none; }
+.info { flex: 1 1 320px; min-width: 0; }
+.info h2 { margin: 0 0 4px; font-size: 20px; }
+.info p.note { margin: 0 0 12px; color: var(--muted); }
+.backrow { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; font-size: 14px; }
+table { border-collapse: collapse; width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; font: inherit; font-size: 14px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; color: var(--muted); font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+td a { color: var(--accent); cursor: pointer; }
+.k { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); margin-left: 4px; white-space: nowrap; }
+.small { font-size: 12px; color: var(--muted); }
+.page { max-width: 900px; }
+.task { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
+.task h3 { margin: 0 0 6px; font-size: 16px; display: flex; justify-content: space-between; gap: 8px; }
+.task .taps { color: var(--accent); white-space: nowrap; }
+.task ol { margin: 6px 0 0; padding-left: 20px; }
+.task li a { color: var(--accent); cursor: pointer; }
+.find { background: var(--panel); border: 1px solid var(--line); border-left-width: 4px; border-radius: 10px; padding: 10px 14px; margin-bottom: 10px; }
+.find.high { border-left-color: var(--high); } .find.mid { border-left-color: var(--mid); } .find.low { border-left-color: var(--low); }
+.find h3 { margin: 0 0 4px; font-size: 15px; }
+.sev { font-size: 12px; font-weight: 700; margin-right: 6px; }
+.high .sev { color: var(--high); } .mid .sev { color: var(--mid); } .low .sev { color: var(--low); }
+.find p { margin: 4px 0; }
+.find a { color: var(--accent); cursor: pointer; }
+.page h3.sub { font-size: 15px; margin: 18px 0 8px; }
+@media (max-width: 760px) {
+  main { flex-direction: column; min-width: 0; }
+  aside { width: 100%; min-width: 0; flex: none; max-height: none; position: static; border-right: 0; border-bottom: 1px solid var(--line); }
+  aside .list { display: flex; overflow-x: auto; max-width: 100vw; gap: 2px; padding-block: 6px; padding-left: max(8px, env(safe-area-inset-left, 0px)); padding-right: max(8px, env(safe-area-inset-right, 0px)); }
+  aside h3 { display: none; }
+  aside a { white-space: nowrap; border: 1px solid var(--line); border-radius: 16px; padding: 5px 10px; }
+  section.view { padding-block: 12px; }
+  .shot { width: 100%; max-width: 420px; margin: 0 auto; flex: 1 1 100%; }
+  .info { flex: 1 1 100%; }
+  header h1 span { display: block; }
+}
+</style>
+<header>
+  <h1 id="h1"></h1>
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="screens" aria-selected="true"></button>
+    <button role="tab" data-tab="tasks" aria-selected="false"></button>
+    <button role="tab" data-tab="findings" aria-selected="false"></button>
+  </nav>
+</header>
+<main>
+  <aside id="side"></aside>
+  <section class="view" id="view"></section>
+</main>
+<div class="tip" id="tip"></div>
+<script>
+const DATA = /*FLOW_DATA*/;
+const UI = {
+  ko: {
+    flow: '화면 흐름', tabs: {screens: '화면', tasks: '작업 경로', findings: '발견 사항'},
+    back: '← 뒤로', showAll: '모든 터치 영역 표시', legend: '파란 테두리: 다른 화면으로 이동 · 주황 테두리: 이 화면에서 동작',
+    shotAlt: '스크린샷', backRow: '뒤로 가기', colWhat: '요소', colTo: '이동 화면 또는 동작',
+    long: '길게 누르기', small: '작은 터치 영역', gesture: {gesture: '제스처', state: '상태에 따라', auto: '자동', scroll: '스크롤'}, noAction: '동작 없음', evidence: {code: '코드로 확인', unverified: '확인 안 함'},
+    taps: n => `${n}번`, tasksNote: '탭 수는 시작 화면에서 작업이 끝날 때까지 누르는 횟수입니다. 글자 입력과 시스템 권한 창은 세지 않았습니다.',
+    sev: {high: '높음', mid: '중간', low: '낮음'}, findNote: '앱 코드는 고치지 않았습니다. 화면 이름을 누르면 해당 스크린샷으로 이동합니다.',
+    shots: '화면', driver: '드라이버', template: '템플릿', unverified: '검증 불가', colItem: '항목', colWhy: '이유'
+  },
+  en: {
+    flow: 'screen flow', tabs: {screens: 'Screens', tasks: 'Task paths', findings: 'Findings'},
+    back: '← Back', showAll: 'Show all tap areas', legend: 'Blue outline: goes to another screen · Orange outline: acts on this screen',
+    shotAlt: 'screenshot', backRow: 'Back', colWhat: 'Element', colTo: 'Goes to, or what it does',
+    long: 'long press', small: 'small target', gesture: {gesture: 'gesture', state: 'depends on state', auto: 'automatic', scroll: 'scroll'}, noAction: 'no action', evidence: {code: 'from code', unverified: 'not verified'},
+    taps: n => `${n} ${n === 1 ? 'tap' : 'taps'}`, tasksNote: 'Taps are counted from the start screen until the task is done. Text entry and system permission dialogs are not counted.',
+    sev: {high: 'High', mid: 'Medium', low: 'Low'}, findNote: 'The app code was not changed. Select a screen name to open its screenshot.',
+    shots: 'Screens', driver: 'Driver', template: 'template', unverified: 'Unverified', colItem: 'Item', colWhy: 'Reason'
+  }
+}[DATA.meta.lang === 'en' ? 'en' : 'ko'];
+const byId = Object.fromEntries(DATA.screens.map(s => [s.id, s]));
+let tab = 'screens', cur = DATA.screens[0].id, trail = [cur], showAll = false;
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function link(id, text) { return byId[id] ? `<a data-go="${id}">${esc(text || byId[id].title)}</a>` : esc(text || id); }
+
+function renderHeader() {
+  const m = DATA.meta;
+  document.documentElement.lang = m.lang === 'en' ? 'en' : 'ko';
+  const sub = [m.date, `${m.device} (${m.viewport_px[0]}×${m.viewport_px[1]})`, m.locale, m.theme].filter(Boolean).map(esc).join(' · ');
+  $('#h1').innerHTML = `${esc(m.app)} ${UI.flow} <span class="small">${sub}</span>`;
+  document.querySelectorAll('nav.tabs button').forEach(b => b.textContent = UI.tabs[b.dataset.tab]);
+}
+
+function renderSide() {
+  if (tab !== 'screens') { $('#side').style.display = 'none'; return; }
+  $('#side').style.display = '';
+  let html = '', group = null;
+  html += '<div class="list">';
+  for (const s of DATA.screens) {
+    if (s.group !== group) { group = s.group; html += `<h3>${esc(group)}</h3>`; }
+    const n = (s.id.match(/^(\d+[a-z]?)-/) || [])[1];
+    html += `<a href="#${s.id}" data-go="${s.id}" class="${s.id === cur ? 'on' : ''}">${n ? `<span class="n">${n}</span>` : ''}${esc(s.title)}</a>`;
+  }
+  $('#side').innerHTML = html + '</div>';
+  const on = $('#side a.on'); if (on) on.scrollIntoView({block: 'nearest', inline: 'nearest'});
+}
+
+function hsText(h) {
+  if (h.to) return `${h.what} → ${byId[h.to] ? byId[h.to].title : h.to}${h.action ? ' (' + h.action + ')' : ''}`;
+  return `${h.what}: ${h.action || UI.noAction}`;
+}
+
+function renderScreen() {
+  const s = byId[cur];
+  const crumbs = trail.map((id, i) => i === trail.length - 1 ? `<span>${esc(byId[id].title)}</span>` : `<a data-crumb="${i}">${esc(byId[id].title)}</a>`).join(' › ');
+  const boxes = s.hotspots.map((h, i) => {
+    const [x, y, w, hh] = h.rect;
+    const st = `left:${x / s.w * 100}%;top:${y / s.h * 100}%;width:${w / s.w * 100}%;height:${hh / s.h * 100}%`;
+    return `<div class="hs ${h.to ? 'nav' : 'act'}" style="${st}" data-i="${i}" ${h.to ? `data-go="${h.to}"` : ''}></div>`;
+  }).join('');
+  const rows = s.hotspots.map((h, i) => `<tr data-row="${i}"><td>${esc(h.what)}${h.long ? `<span class="k">${UI.long}</span>` : ''}${h.small ? `<span class="k">${esc(h.small === true ? UI.small : h.small)}</span>` : ''}${UI.evidence[h.evidence] ? `<span class="k">${UI.evidence[h.evidence]}</span>` : ''}</td><td>${h.to ? link(h.to) + (h.action ? `<div class="small">${esc(h.action)}</div>` : '') : esc(h.action || '')}</td></tr>`).join('');
+  const extra = (s.gestures || []).map(g => `<tr><td>${esc(g[0])}<span class="k">${UI.gesture[g[3] || 'gesture']}</span></td><td>${g[2] ? link(g[2]) + `<div class="small">${esc(g[1])}</div>` : esc(g[1])}</td></tr>`).join('');
+  $('#view').innerHTML = `
+    <div class="crumbs">${crumbs}</div>
+    <div class="bar">
+      <button class="btn" id="back" ${trail.length < 2 ? 'disabled' : ''}>${UI.back}</button>
+      <label><input type="checkbox" id="all" ${showAll ? 'checked' : ''}> ${UI.showAll}</label>
+      <span class="small">${UI.legend}</span>
+    </div>
+    <div class="screen">
+      <div class="shot ${showAll ? 'all' : ''}"><img src="${esc(s.img)}" alt="${esc(s.title)} ${UI.shotAlt}" width="${s.w}" height="${s.h}">${boxes}</div>
+      <div class="info">
+        <h2>${esc(s.title)}</h2>
+        <p class="note">${esc(s.note || '')}</p>
+        <div class="backrow"><b>${UI.backRow}</b> · ${s.backTo ? link(s.backTo) + ' ' : ''}${esc(s.back || '')}</div>
+        <table><thead><tr><th>${UI.colWhat}</th><th>${UI.colTo}</th></tr></thead><tbody>${rows}${extra}</tbody></table>
+      </div>
+    </div>`;
+}
+
+function renderTasks() {
+  $('#view').innerHTML = `<div class="page"><h2>${UI.tabs.tasks}</h2><p class="small">${UI.tasksNote}</p>` +
+    DATA.tasks.map(t => `<div class="task"><h3><span>${esc(t.name)}</span><span class="taps">${UI.taps(t.taps)}</span></h3>
+      <ol>${t.steps.map(st => `<li>${st[1] ? link(st[1], byId[st[1]] ? byId[st[1]].title : st[1]) + ': ' : ''}${esc(st[0])}</li>`).join('')}</ol>
+      ${t.note ? `<p class="small">${esc(t.note)}</p>` : ''}</div>`).join('') + '</div>';
+}
+
+function renderFindings() {
+  const un = DATA.unverified || [];
+  $('#view').innerHTML = `<div class="page"><h2>${UI.tabs.findings}</h2><p class="small">${UI.findNote}</p><p class="small">${UI.driver}: ${esc(DATA.meta.driver)} · flowmap ${UI.template} ${esc(DATA.meta.template)}</p>` +
+    DATA.findings.map(f => `<div class="find ${f.sev}"><h3><span class="sev">${UI.sev[f.sev]}</span>${esc(f.title)}</h3><p>${esc(f.body)}</p><p class="small">${UI.shots}: ${f.shots.map(id => link(id)).join(', ')}</p></div>`).join('') +
+    `<h3 class="sub">${UI.unverified}</h3>` +
+    (un.length ? `<table><thead><tr><th>${UI.colItem}</th><th>${UI.colWhy}</th></tr></thead><tbody>${un.map(u => `<tr><td>${esc(u.what)}</td><td>${esc(u.why)}</td></tr>`).join('')}</tbody></table>` : `<p class="small">${esc(DATA.meta.unverified_none)}</p>`) + '</div>';
+}
+
+function render() {
+  document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === tab));
+  renderSide();
+  if (tab === 'screens') { history.replaceState(null, '', '#' + cur); renderScreen(); } else if (tab === 'tasks') renderTasks(); else renderFindings();
+}
+
+function go(id, push = true) {
+  if (!byId[id]) return;
+  tab = 'screens';
+  if (push && id !== cur) { trail.push(id); if (trail.length > 8) trail = trail.slice(-8); }
+  cur = id;
+  render();
+  window.scrollTo({top: 0});
+}
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-go],[data-crumb],[data-tab],#back,#all');
+  if (!t) return;
+  if (t.dataset.tab) { tab = t.dataset.tab; render(); return; }
+  if (t.id === 'back') { if (trail.length > 1) { trail.pop(); cur = trail[trail.length - 1]; render(); } return; }
+  if (t.id === 'all') { showAll = t.checked; $('.shot').classList.toggle('all', showAll); return; }
+  if (t.dataset.crumb) { trail = trail.slice(0, +t.dataset.crumb + 1); cur = trail[trail.length - 1]; render(); return; }
+  if (t.dataset.go) { e.preventDefault(); if (t.closest('aside')) { trail = [t.dataset.go]; go(t.dataset.go, false); } else go(t.dataset.go); }
+});
+document.addEventListener('mouseover', e => {
+  const h = e.target.closest('.hs'), r = e.target.closest('tr[data-row]');
+  document.querySelectorAll('.hs.flash').forEach(x => x.classList.remove('flash'));
+  if (r) { const b = document.querySelector(`.hs[data-i="${r.dataset.row}"]`); if (b) b.classList.add('flash'); }
+  const tip = $('#tip');
+  if (!h) { tip.style.display = 'none'; return; }
+  tip.textContent = hsText(byId[cur].hotspots[+h.dataset.i]);
+  tip.style.display = 'block';
+});
+document.addEventListener('mousemove', e => { const tip = $('#tip'); tip.style.left = Math.min(e.clientX + 12, innerWidth - 290) + 'px'; tip.style.top = (e.clientY + 14) + 'px'; });
+addEventListener('hashchange', () => { const id = location.hash.slice(1); if (byId[id] && (id !== cur || tab !== 'screens')) go(id); });
+const start = location.hash.slice(1);
+if (byId[start]) { cur = start; trail = [start]; }
+renderHeader();
+render();
+</script>
